@@ -74,6 +74,7 @@
   --Grey-400: #767e94;
   --Grey-500: #61697f;
   --Grey-600: #475069;
+  --Grey-600-80: #475069cc;
   --Grey-700: #323b54;
   --Grey-800: #20283e;
   --Grey-800-80: #20283ecc;
@@ -97,6 +98,8 @@
   --Black-65: #000000a6;
   --Black-75: #000000bf;
   --Black-100: #000000;
+  /* transition */
+  --transition: all 0.3s linear;
 }
 @font-face {
   font-family: "Poppins";
