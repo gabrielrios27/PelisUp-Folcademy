@@ -1,0 +1,100 @@
+.titlesHome {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  position: relative;
+  width: 588px;
+  height: 120px;
+  margin: 160px 0 48px;
+}
+.titlesHome__h1 {
+  position: static;
+  width: 247px;
+  height: 80px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 80px;
+  letter-spacing: 0.02em;
+  color: var(--Grey-50);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 0px 16px 0px;
+}
+.titlesHome__h3 {
+  position: static;
+  width: 588px;
+  height: 24px;
+  left: 0px;
+  top: 96px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--Grey-300);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0;
+}
+/* barra de categorias --Todos - Películas - Series-- */
+.categories {
+  padding: 8px;
+  margin-top: 80px;
+  width: 386px;
+  height: 56px;
+  background: var(--Black-20);
+  backdrop-filter: blur(80px);
+  border-radius: 12px;
+}
+.categories__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.categories__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 32px;
+  left: 8px;
+  top: 8px;
+  color: var(--Grey-300);
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+}
+.categories__item--active {
+  background: var(--Primary-400);
+  color: var(--Primary-50);
+}
+.selectedCategorie {
+  margin: 24px 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  color: var(--Grey-400);
+}
+.selectedCategorie__spanQuantity {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

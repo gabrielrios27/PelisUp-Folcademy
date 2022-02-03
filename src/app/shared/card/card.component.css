@@ -1,0 +1,89 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+  width: 282px;
+  background: var(--Grey-800-80);
+  backdrop-filter: blur(80px);
+  border-radius: 12px;
+  border: none;
+}
+.card__img {
+  width: 266px;
+  height: 400px;
+  border-radius: 8px;
+}
+.card__imgContainer {
+  position: relative;
+}
+.ratingButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  left: 8px;
+  top: 10px;
+  background: var(--Black-65);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+}
+.ratingButton__starIco {
+  width: 13, 33px;
+  height: 13, 23px;
+}
+.ratingButton__value {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--Warning-500);
+  margin: 0;
+  padding-top: 2px;
+}
+.card__infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+  margin: 16px 0px 8px;
+}
+.card__movieName {
+  font-style: normal;
+  font-weight: 600; /*visualmente queda mejor con un valor de 500 - visualmente queda igual al prototipo en figma con 500*/
+  font-size: 16px;
+  margin: 0;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--Grey-50);
+}
+.addToList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  height: 24px;
+  margin: 16px 0 0 0;
+}
+.addToList__ico {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+.addToList__text {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  letter-spacing: 0.045em; /* el original de figma es 0,02em - se cambio a 0,045 em por que la medida original visualmente no daba los resultados esperados */
+  color: var(--Primary-400);
+}
+.addToList__text--success {
+  color: var(--Success-400);
+}

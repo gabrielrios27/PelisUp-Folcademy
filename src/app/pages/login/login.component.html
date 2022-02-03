@@ -1,0 +1,43 @@
+<section class="login">
+  <div class="login__imgContainer">
+    <div class="login__imgBackgound"></div>
+    <img src="../../../assets/img/Saly-11.png" alt="" class="login__img" />
+  </div>
+  <form class="form">
+    <h1 class="form__legend">Ingresar</h1>
+    <label class="formInput" for="email">
+      <img class="formInput__ico" src="../../../assets/ico/EmailLeftIcon.svg" />
+      <div class="formInput__containerInput">
+        <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+        <input class="formInput__input" type="email" required id="email" />
+        <span class="formInput__text">Email</span>
+      </div>
+    </label>
+
+    <label class="formInput" for="password">
+      <img
+        class="formInput__ico"
+        src="../../../assets/ico/ContrasenaLeftIcon.svg"
+      />
+      <div class="formInput__containerInput">
+        <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+        <input
+          class="formInput__input"
+          autocomplete="off"
+          type="password"
+          required
+          id="password"
+        />
+        <span class="formInput__text">Contraseña</span>
+      </div>
+      <img
+        class="formInput__ico formInput__ico--eye"
+        id="imgEyePassword"
+        src="../../../assets/ico/eyeRightIcon.svg"
+        (click)="OnClickSeePassword()"
+      />
+    </label>
+
+    <button class="form__button">Ingresar</button>
+  </form>
+</section>
