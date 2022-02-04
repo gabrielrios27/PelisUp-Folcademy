@@ -126,7 +126,7 @@ body {
   background-image: url(./assets/img/Background.png);
   background-size: cover;
   background-position: 0 80px;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 .icons {
   font-family: Icons;

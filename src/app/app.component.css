@@ -4,3 +4,13 @@
   max-width: 1440px;
   margin: auto;
 }
+@media (max-width: 768px) {
+  .pages {
+    padding: 0 90px;
+  }
+}
+@media (max-width: 576px) {
+  .pages {
+    padding: 0 60px;
+  }
+}

@@ -4,7 +4,7 @@
   align-items: center;
   padding: 12px 16px;
   position: static;
-  width: 344px;
+  max-width: 344px;
   height: 64px;
   left: 0;
   background: var(--Black-10);
@@ -67,4 +67,9 @@
 }
 .searcher__input:-webkit-autofill {
   -webkit-text-fill-color: var(--Grey-400) !important;
+}
+@media (max-width: 576px) {
+  .searcher__containerInput {
+    width: 220px;
+  }
 }
