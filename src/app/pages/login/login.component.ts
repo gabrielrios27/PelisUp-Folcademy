@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
       imgEyePassword.src = '../../../assets/ico/eyeRightIcon-Light.svg';
     } else {
       passwordInput.type = 'password';
-      imgEyePassword.src = '../../../assets/ico/eyeRightIcon.svg';
+      imgEyePassword.src = '../../../assets/ico/eye-slash.svg';
     }
   }
   ngOnInit(): void {}

@@ -56,12 +56,17 @@
   margin: 24px 0px;
 }
 .formInput__ico {
-  position: static;
+  font-style: normal;
+  padding: 0px 0px 0px 16px; /*se suma 2px al height y se le da un padding bottom de 2px para corregir alineacion, mas centrada con respecto al input*/
+  font-size: 33px;
+  color: var(--Grey-400);
+  margin-right: 16px;
+}
+.formInput__ico--eye {
   width: 56px;
   height: 56px;
   padding: 16px;
-}
-.formInput__ico--eye {
+  top: 20px;
   position: absolute;
   top: 2.5px;
   right: 0px;

@@ -11,16 +11,15 @@
   border: 1px solid var(--Grey-700);
   box-sizing: border-box;
   border-radius: 12px;
-  flex: none;
-  order: 0;
-  flex-grow: 1;
   margin: 24px 0px;
 }
 .searcher__ico {
-  position: static;
   width: 24px;
-  height: 24px;
-  margin: 0px 16px 0px 0px;
+  height: 26px;
+  padding-bottom: 2px; /*se suma 2px al height y se le da un padding bottom de 2px para corregir alineacion, mas centrada con respecto al input*/
+  font-size: 35px;
+  color: var(--Grey-400);
+  margin-right: 16px;
 }
 .searcher__containerInput {
   position: relative;

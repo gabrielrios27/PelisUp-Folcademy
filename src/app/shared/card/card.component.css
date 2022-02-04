@@ -45,8 +45,11 @@
   border-radius: 8px;
 }
 .ratingButton__starIco {
-  width: 13, 33px;
-  height: 13, 23px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 16px;
+  padding-bottom: 2px; /*para corregir alineacion con respecto al numero rating, más centrada*/
+  color: var(--Warning-500);
 }
 .ratingButton__value {
   font-style: normal;
@@ -83,8 +86,14 @@
   margin: 16px 0 0 0;
 }
 .addToList__ico {
-  width: 24px;
-  height: 24px;
+  /* width: 24px;
+  height: 24px; */
+  font-size: 34px;
+  line-height: 24px;
+  font-weight: 600;
+  font-style: normal;
+  padding-bottom: 4px;
+  color: var(--Primary-400);
   margin-right: 8px;
 }
 .addToList__text {
@@ -98,4 +107,5 @@
 }
 .addToList__text--success {
   color: var(--Success-400);
+  font-weight: 400;
 }

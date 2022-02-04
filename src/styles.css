@@ -99,11 +99,17 @@
   --Black-75: #000000bf;
   --Black-100: #000000;
   /* transition */
-  --transition: all 0.3s linear;
+  --transition: all 0.2s linear;
 }
 @font-face {
   font-family: "Poppins";
   src: url("assets/Fonts/Poppins-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Icons";
+  src: url("assets/Fonts/Icons_web-Regular.otf") format("openType");
   font-style: normal;
   font-weight: normal;
 }
@@ -121,4 +127,7 @@ body {
   background-size: cover;
   background-position: 0 80px;
   background-repeat: no-repeat;
+}
+.icons {
+  font-family: Icons;
 }

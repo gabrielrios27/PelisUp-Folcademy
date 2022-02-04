@@ -1,5 +1,5 @@
 nav {
-  position: static;
+  position: relative;
   width: 382px;
   height: 48px;
 }
@@ -35,4 +35,6 @@ nav {
 }
 .navList__flecha {
   margin: 0px 0px 0px 8px;
+  font-size: 20px;
+  line-height: 24px;
 }
