@@ -99,7 +99,7 @@
   --Black-75: #000000bf;
   --Black-100: #000000;
   /* transition */
-  --transition: all 0.2s linear;
+  --transition: all 0.2s ease-in-out;
 }
 @font-face {
   font-family: "Poppins";

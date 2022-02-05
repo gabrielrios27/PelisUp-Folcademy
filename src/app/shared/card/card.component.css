@@ -17,6 +17,12 @@
 .card:hover {
   background: var(--Grey-600-80);
 }
+.card:hover .card__movieName {
+  color: var(--Warning-500);
+}
+.card__a {
+  text-decoration: none;
+}
 .card__img {
   width: 266px;
   height: 400px;
@@ -36,7 +42,7 @@
   align-items: center;
   padding: 4px 8px;
   position: absolute;
-  width: 60px;
+
   height: 40px;
   left: 8px;
   top: 10px;
@@ -45,6 +51,7 @@
   border-radius: 8px;
 }
 .ratingButton__starIco {
+  margin-right: 4px;
   font-size: 22px;
   font-weight: 600;
   line-height: 16px;
@@ -75,6 +82,7 @@
   line-height: 24px;
   letter-spacing: 0.02em;
   color: var(--Grey-50);
+  transition: var(--transition);
 }
 .addToList {
   display: flex;

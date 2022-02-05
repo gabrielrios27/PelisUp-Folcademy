@@ -1,32 +1,34 @@
 <div class="card">
-  <div class="card__imgContainer">
-    <img
-      src="../../../assets/img/{{ img }}"
-      alt="Portada de la pelicula {{ name }}"
-      class="card__img"
-    />
-    <div class="ratingButton">
-      <span class="icons ratingButton__starIco">G</span>
-      <p class="ratingButton__value">{{ rating }}</p>
+  <a href="" class="card__a">
+    <div class="card__imgContainer">
+      <img
+        src="../../../assets/img/{{ img }}"
+        alt="Portada de la pelicula {{ name }}"
+        class="card__img"
+      />
+      <div class="ratingButton">
+        <span class="icons ratingButton__starIco">G</span>
+        <p class="ratingButton__value">{{ rating }}</p>
+      </div>
     </div>
-  </div>
-  <div class="card__infoContainer">
-    <p class="card__movieName">{{ name }}</p>
+    <div class="card__infoContainer">
+      <p class="card__movieName">{{ name }}</p>
 
-    <!-- ''''''agregar a mi lista''''''' -->
+      <!-- ''''''agregar a mi lista''''''' -->
 
-    <!-- <div class="addToList">
+      <!-- <div class="addToList">
       <span class="icons addToList__ico">C</span>
       <p class="addToList__text">Agregar a mi lista</p>
     </div> -->
 
-    <!-- '''''success - agregado a mi lista'''''' -->
+      <!-- '''''success - agregado a mi lista'''''' -->
 
-    <!-- <div class="addToList">
+      <!-- <div class="addToList">
       <i class="icons addToList__ico addToList__text--success">B</i>
       <p class="addToList__text addToList__text--success">
         Agregado a mi lista
       </p>
     </div> -->
-  </div>
+    </div>
+  </a>
 </div>
