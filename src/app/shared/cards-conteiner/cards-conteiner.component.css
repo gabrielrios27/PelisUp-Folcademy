@@ -1,0 +1,11 @@
+.cardsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 23px;
+}
+@media (max-width: 992px) {
+  .cardsContainer {
+    justify-content: space-evenly;
+  }
+}

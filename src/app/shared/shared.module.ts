@@ -4,6 +4,7 @@ import { SearcherComponent } from './searcher/searcher.component';
 import { CardComponent } from './card/card.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CardsConteinerComponent } from './cards-conteiner/cards-conteiner.component';
 
 @NgModule({
   declarations: [
@@ -11,14 +12,16 @@ import { NavbarComponent } from './navbar/navbar.component';
     CardComponent,
     HeaderComponent,
     NavbarComponent,
+    CardsConteinerComponent,
   ],
-  imports: [],
+  imports: [CommonModule],
   exports: [
     CommonModule,
     SearcherComponent,
     CardComponent,
     HeaderComponent,
     NavbarComponent,
+    CardsConteinerComponent,
   ],
 })
 export class SharedModule {}

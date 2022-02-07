@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  selectedCategorie: string = '';
   constructor() {}
   OnClickCategorie(event: any) {
     let categorie = document.querySelectorAll('.categories__item');
@@ -17,5 +18,14 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
     document.querySelectorAll('.categories__item');
+  }
+  OnClickAll() {
+    this.selectedCategorie = '';
+  }
+  OnClickMovies() {
+    this.selectedCategorie = 'pelicula';
+  }
+  OnClickShows() {
+    this.selectedCategorie = 'serie';
   }
 }

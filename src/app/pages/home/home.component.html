@@ -8,14 +8,20 @@
     <ul class="categories__list">
       <li
         class="categories__item categories__item--active"
-        (click)="OnClickCategorie($event)"
+        (click)="OnClickCategorie($event); OnClickAll()"
       >
         Todos
       </li>
-      <li class="categories__item" (click)="OnClickCategorie($event)">
+      <li
+        class="categories__item"
+        (click)="OnClickCategorie($event); OnClickMovies()"
+      >
         Películas
       </li>
-      <li class="categories__item" (click)="OnClickCategorie($event)">
+      <li
+        class="categories__item"
+        (click)="OnClickCategorie($event); OnClickShows()"
+      >
         Series
       </li>
     </ul>
@@ -23,7 +29,7 @@
   <h3 class="selectedCategorie">
     Todos <span class="selectedCategorie__spanQuantity">(120)</span>
   </h3>
-  <div class="cardContainer">
+  <!-- <div class="cardContainer">
     <app-card img="BlackWidow.jpg" name="Black Widow" [rating]="6.8"></app-card>
     <app-card img="ShangChi.jpg" name="ShangChi" [rating]="7.9"></app-card>
     <app-card img="Loki.jpg" name="Loki" [rating]="8.4"></app-card>
@@ -44,5 +50,8 @@
       name="Two And a Half Men"
       [rating]="7"
     ></app-card>
-  </div>
+  </div> -->
+  <app-cards-conteiner
+    filterCategorie="{{ selectedCategorie }}"
+  ></app-cards-conteiner>
 </section>
