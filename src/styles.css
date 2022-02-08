@@ -100,6 +100,8 @@
   --Black-100: #000000;
   /* transition */
   --transition: all 0.2s ease-in-out;
+  /*box-shadow*/
+  --box-shadow: 0 0 5px #8e95a93d;
 }
 @font-face {
   font-family: "Poppins";

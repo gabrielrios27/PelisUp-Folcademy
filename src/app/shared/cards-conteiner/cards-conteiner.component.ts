@@ -64,7 +64,8 @@ export class CardsConteinerComponent implements OnInit {
       this.arrayToShow = this.arrayPelisUp;
     }
   }
-  OnChangeCategorie() {
+  OnChangeCategorie(filter: string = '') {
+    this.filterCategorie = filter;
     if (
       this.filterCategorie === 'pelicula' ||
       this.filterCategorie === 'serie'

@@ -16,6 +16,7 @@
 }
 .card:hover {
   background: var(--Grey-600-80);
+  box-shadow: var(--box-shadow);
 }
 .card:hover .card__movieName {
   color: var(--Warning-500);
