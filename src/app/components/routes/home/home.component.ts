@@ -1,6 +1,6 @@
 import { HtmlTagDefinition } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { CardsConteinerComponent } from 'src/app/shared/cards-conteiner/cards-conteiner.component';
+import { CardsConteinerComponent } from '../../shared/cards-conteiner/cards-conteiner.component';
 
 @Component({
   selector: 'app-home',
