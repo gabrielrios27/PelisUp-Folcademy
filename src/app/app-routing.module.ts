@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/routes/home/home.component';
 import { LoginComponent } from './components/routes/login/login.component';
+import { PeliculasComponent } from './components/routes/peliculas/peliculas.component';
 import { SeriesComponent } from './components/routes/series/series.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'inicio',
     component: HomeComponent,
   },
   {
@@ -16,6 +17,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'peliculas',
+    component: PeliculasComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'inicio',
   },
 ];
 

@@ -5,10 +5,16 @@ import { LayoutModule } from '../layout/layout.module';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SeriesComponent } from './series/series.component';
+import { PeliculasComponent } from './peliculas/peliculas.component';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, SharedModule, LayoutModule],
-  exports: [HomeComponent, LoginComponent, SeriesComponent],
+  declarations: [
+    PeliculasComponent,
+    HomeComponent,
+    LoginComponent,
+    SeriesComponent,
+  ],
+  imports: [CommonModule, SharedModule],
+  exports: [HomeComponent, LoginComponent, SeriesComponent, PeliculasComponent],
 })
 export class RoutesModule {}
