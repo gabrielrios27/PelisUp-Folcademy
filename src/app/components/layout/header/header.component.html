@@ -1,8 +1,13 @@
-<header>
-  <div class="headercontainer">
-    <a href="/"
-      ><img src="../../../assets/ico/IconOnlyTrue.svg" class="header__img"
-    /></a>
+<header class="header">
+  <div class="header__container">
+    <a routerLink="inicio" class="header__homeLink">
+      <img src="../../../assets/ico/IconOnlyTrue.svg" class="header__img" />
+      <div class="header__nameConteiner">
+        <p class="header__name">
+          Pelis <span class="header__nameSpan">UP!</span>
+        </p>
+      </div>
+    </a>
     <app-navbar></app-navbar>
   </div>
 </header>

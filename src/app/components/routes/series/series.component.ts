@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./series.component.css'],
 })
 export class SeriesComponent implements OnInit {
-  quantity: number = 120;
+  quantity: number = 50;
 
   constructor() {}
 
