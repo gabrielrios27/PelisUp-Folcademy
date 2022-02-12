@@ -102,7 +102,7 @@
   --transition: all 0.2s ease-in-out;
   --transition-headerName: all 0.4s ease-in-out;
   /*box-shadow*/
-  --box-shadow: 0 0 5px #8e95a93d;
+  --box-shadow: 0 0 5px #61697f50;
 }
 @font-face {
   font-family: "Poppins";
