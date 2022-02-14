@@ -26,3 +26,21 @@
 .footer__myName {
   font-size: 12px;
 }
+@media (max-width: 768px) {
+  .footer__conteiner {
+    padding: 0px 90px;
+  }
+}
+@media (max-width: 576px) {
+  .footer__conteiner {
+    padding: 0px 60px;
+  }
+  .footer__folcName,
+  .footer__myName {
+    font-size: 11px;
+  }
+  .footer__folcLogo {
+    height: 15px;
+    margin-right: 3px;
+  }
+}
