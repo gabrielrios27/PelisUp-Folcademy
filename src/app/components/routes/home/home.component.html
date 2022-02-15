@@ -7,28 +7,49 @@
   <div class="categories">
     <ul class="categories__list">
       <li
-        class="categories__item categories__item--active"
-        (click)="OnClickCategorie($event); OnClickAll()"
+        [ngClass]="
+          filter == 'todos' ? 'categories__item--active' : 'categories__item'
+        "
+        (click)="OnClickAll()"
       >
         Todos
       </li>
       <li
-        class="categories__item"
-        (click)="OnClickCategorie($event); OnClickMovies()"
+        [ngClass]="
+          filter == 'pelicula' ? 'categories__item--active' : 'categories__item'
+        "
+        (click)="OnClickMovies()"
       >
         Películas
       </li>
       <li
-        class="categories__item"
-        (click)="OnClickCategorie($event); OnClickShows()"
+        [ngClass]="
+          filter == 'serie' ? 'categories__item--active' : 'categories__item'
+        "
+        (click)="OnClickShows()"
       >
         Series
       </li>
     </ul>
+    <!-- categories__item--active -->
   </div>
   <h3 class="selectedCategorie">
     {{ selectedCategorie }}
     <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
   </h3>
-  <app-cards-conteiner></app-cards-conteiner>
+  <!-- <app-cards-conteiner></app-cards-conteiner> -->
+  <div class="cardsConteiner" *ngFor="let film of movies_series">
+    <app-card
+      *ngIf="filter == film.category"
+      img="{{ film.image }}"
+      name="{{ film.name }}"
+      [rating]="film.rating"
+    ></app-card>
+    <app-card
+      *ngIf="filter == 'todos'"
+      img="{{ film.image }}"
+      name="{{ film.name }}"
+      [rating]="film.rating"
+    ></app-card>
+  </div>
 </section>
