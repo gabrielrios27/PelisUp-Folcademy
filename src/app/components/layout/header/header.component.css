@@ -29,6 +29,8 @@
   position: relative;
   width: 175px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 .header__homeLink:hover .header__name {
   left: 0px;
@@ -56,6 +58,12 @@
 }
 .header__nameSpan {
   color: var(--Secondary-500);
+}
+app-navbar {
+  display: block;
+}
+app-burger-button {
+  display: none;
 }
 @media (max-width: 768px) {
   .header__container {

@@ -1,0 +1,40 @@
+.burgerButton {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.burgerButton__lines {
+  position: relative;
+  width: 43px;
+  height: 3px;
+  display: inline-block;
+  background-color: var(--Grey-200);
+  border-radius: 8px;
+}
+.burgerButton__lines::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 43px;
+  height: 3px;
+  display: inline-block;
+  background-color: var(--Grey-200);
+  border-radius: 8px;
+}
+.burgerButton__lines::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  width: 43px;
+  height: 3px;
+  display: inline-block;
+  background-color: var(--Grey-200);
+  border-radius: 8px;
+}
+.burgerButton__list {
+  display: none;
+}
