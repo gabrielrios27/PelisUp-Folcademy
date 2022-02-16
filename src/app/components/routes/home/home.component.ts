@@ -144,6 +144,32 @@ export class HomeComponent implements OnInit {
     //   category: 'serie',
     // },
   ];
+
+  movies_series_toSearch: MoviesSeries[] = [];
+
+  movies_series_toShow: MoviesSeries[] = [];
+
+  toSearch: string = '';
+  flag: boolean = false;
+
+  SearchInParent(e: string) {
+    console.log('desde padre: ' + e);
+    this.toSearch = e.toUpperCase();
+    this.movies_series_toShow = this.movies_series;
+    this.movies_series_toSearch = [];
+    let toSearchLenght = this.toSearch.length;
+    for (let film of this.movies_series) {
+      let filmPart = film.name.toUpperCase().substring(0, toSearchLenght);
+      if (filmPart == this.toSearch) {
+        this.movies_series_toSearch.push(film);
+      }
+    }
+    if (e !== '') {
+      this.movies_series_toShow = this.movies_series_toSearch;
+    } else {
+      this.movies_series_toShow = this.movies_series;
+    }
+  }
   constructor() {}
 
   // OnClickCategorie(event: any) {

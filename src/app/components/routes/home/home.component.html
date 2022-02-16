@@ -3,7 +3,10 @@
     <h1 class="titlesHome__h1">PelisUP!</h1>
     <h3 class="titlesHome__h3">Plataforma para ver películas y series 😉</h3>
   </div>
-  <app-searcher categorie="películas y series"></app-searcher>
+  <app-searcher
+    categorie="películas y series"
+    (buscar)="SearchInParent($event)"
+  ></app-searcher>
   <div class="categories">
     <ul class="categories__list">
       <li
@@ -37,7 +40,7 @@
     <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
   </h3>
   <div class="cardsConteiner">
-    <ng-container *ngFor="let film of movies_series">
+    <ng-container *ngFor="let film of movies_series_toShow">
       <app-card
         *ngIf="filter == film.category"
         img="{{ film.image }}"
