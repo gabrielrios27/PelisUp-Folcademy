@@ -2,11 +2,14 @@
   <p class="titles__appName">PelisUp!</p>
   <h1 class="titles__categorieName">Series</h1>
 </div>
-<app-searcher categorie="Series"></app-searcher>
+<app-searcher
+  categorie="Series"
+  (buscar)="SearchInParent($event)"
+></app-searcher>
 
 <p class="quantity">{{ quantity }} items</p>
 <div class="cardsConteiner">
-  <ng-container *ngFor="let film of movies_series">
+  <ng-container *ngFor="let film of movies_series_toShow">
     <app-card
       *ngIf="filter == film.category"
       img="{{ film.image }}"

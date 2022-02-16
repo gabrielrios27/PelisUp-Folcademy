@@ -8,10 +8,9 @@ import { MoviesSeries } from 'src/interfaces/NewUser';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  selectedCategorie: string = 'Todos';
-  quantity: number = 120;
-
+  selectedCategorie: string = 'Todos'; /*lo que se escribe en el HTML*/
   filter: string = 'todos';
+
   movies_series: MoviesSeries[] = [
     {
       id: 0,
@@ -144,62 +143,83 @@ export class HomeComponent implements OnInit {
     //   category: 'serie',
     // },
   ];
-
   movies_series_toSearch: MoviesSeries[] = [];
-
-  movies_series_toShow: MoviesSeries[] = [];
+  movies_series_toShow: MoviesSeries[] = this.movies_series;
 
   toSearch: string = '';
-  flag: boolean = false;
+  quantity: number = this.movies_series_toShow.length;
 
+  /*para buscar la informacion del input dentro de las cards mostradas en el home*/
   SearchInParent(e: string) {
-    console.log('desde padre: ' + e);
+    /*informacion a buscar, que viene desde el componente searcher*/
     this.toSearch = e.toUpperCase();
-    this.movies_series_toShow = this.movies_series;
+
+    /*vacío el arreglo en donde guardaremos las peliculas que coincidan con la busqueda */
     this.movies_series_toSearch = [];
-    let toSearchLenght = this.toSearch.length;
+
     for (let film of this.movies_series) {
-      let filmPart = film.name.toUpperCase().substring(0, toSearchLenght);
-      if (filmPart == this.toSearch) {
+      if (film.name.toUpperCase().includes(this.toSearch)) {
+        /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
         this.movies_series_toSearch.push(film);
       }
     }
     if (e !== '') {
+      /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
       this.movies_series_toShow = this.movies_series_toSearch;
     } else {
+      /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
       this.movies_series_toShow = this.movies_series;
+    }
+    /*con lo siguiente se calcula la cantidad de peliculas o series mostradas*/
+    if (this.filter == 'todos') {
+      this.quantity = this.movies_series_toShow.length;
+    } else if (this.filter == 'pelicula') {
+      let count: number = 0;
+      for (let film of this.movies_series_toShow) {
+        if (film.category == 'pelicula') {
+          count++;
+        }
+      }
+      this.quantity = count;
+    } else if (this.filter == 'serie') {
+      let count: number = 0;
+      for (let film of this.movies_series_toShow) {
+        if (film.category == 'serie') {
+          count++;
+        }
+      }
+      this.quantity = count;
     }
   }
   constructor() {}
 
-  // OnClickCategorie(event: any) {
-  //   let categorie = document.querySelectorAll('.categories__item');
-  //   categorie.forEach((element) => {
-  //     element.classList.remove('categories__item--active');
-  //   });
-  //   event.target.classList.add('categories__item--active');
-  // }
-
-  // @ViewChild(CardsConteinerComponent)
-  // hijo: CardsConteinerComponent = new CardsConteinerComponent();
-
-  ngOnInit(): void {
-    document.querySelectorAll('.categories__item');
-  }
+  ngOnInit(): void {}
 
   OnClickAll() {
-    this.quantity = 120;
     this.filter = 'todos';
     this.selectedCategorie = 'Todos';
+    this.quantity = this.movies_series_toShow.length;
   }
   OnClickMovies() {
-    this.quantity = 70;
     this.filter = 'pelicula';
     this.selectedCategorie = 'Peliculas';
+    let count: number = 0;
+    for (let film of this.movies_series_toShow) {
+      if (film.category == 'pelicula') {
+        count++;
+      }
+    }
+    this.quantity = count;
   }
   OnClickShows() {
-    this.quantity = 50;
     this.filter = 'serie';
     this.selectedCategorie = 'Series';
+    let count: number = 0;
+    for (let film of this.movies_series_toShow) {
+      if (film.category == 'serie') {
+        count++;
+      }
+    }
+    this.quantity = count;
   }
 }

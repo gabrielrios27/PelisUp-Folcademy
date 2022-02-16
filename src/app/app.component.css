@@ -3,6 +3,7 @@
   width: 100%;
   max-width: 1440px;
   margin: auto;
+  min-height: 100vh;
 }
 @media (max-width: 768px) {
   .pages {

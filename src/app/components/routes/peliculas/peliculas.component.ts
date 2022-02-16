@@ -7,7 +7,6 @@ import { MoviesSeries } from 'src/interfaces/NewUser';
   styleUrls: ['./peliculas.component.css'],
 })
 export class PeliculasComponent implements OnInit {
-  quantity: number = 70;
   filter: string = 'pelicula';
   movies_series: MoviesSeries[] = [
     {
@@ -141,7 +140,50 @@ export class PeliculasComponent implements OnInit {
     //   category: 'serie',
     // },
   ];
+  movies_series_toSearch: MoviesSeries[] = [];
+  movies_series_toShow: MoviesSeries[] = this.movies_series;
+
+  toSearch: string = '';
+  quantity: number = 0;
+  /*con la siguiente funcion se calcula la cantidad de peliculas o series mostradas y se actualiza en pantalla*/
+  CountQuantity() {
+    let count: number = 0;
+    for (let film of this.movies_series_toShow) {
+      if (film.category == 'pelicula') {
+        count++;
+      }
+    }
+    this.quantity = count;
+  }
+
+  /*para buscar la informacion del input dentro de las cards mostradas en el home*/
+  SearchInParent(e: string) {
+    /*informacion a buscar, que viene desde el componente searcher*/
+    this.toSearch = e.toUpperCase();
+
+    /*vacío el arreglo en donde guardaremos las peliculas que coincidan con la busqueda */
+    this.movies_series_toSearch = [];
+
+    for (let film of this.movies_series) {
+      if (film.name.toUpperCase().includes(this.toSearch)) {
+        /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
+        this.movies_series_toSearch.push(film);
+      }
+    }
+    if (e !== '') {
+      /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
+      this.movies_series_toShow = this.movies_series_toSearch;
+    } else {
+      /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
+      this.movies_series_toShow = this.movies_series;
+    }
+    /*con lo siguiente se calcula la cantidad de peliculas o series mostradas*/
+
+    this.CountQuantity();
+  }
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.CountQuantity();
+  }
 }
