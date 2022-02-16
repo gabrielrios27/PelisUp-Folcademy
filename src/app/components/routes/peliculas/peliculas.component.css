@@ -25,3 +25,14 @@
   line-height: 24px;
   color: var(--Grey-400);
 }
+.cardsConteiner {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  column-gap: 24px;
+}
+@media (max-width: 992px) {
+  .cardsConteiner {
+    justify-content: space-evenly;
+  }
+}

@@ -5,4 +5,14 @@
 <app-searcher categorie="Películas"></app-searcher>
 
 <p class="quantity">{{ quantity }} items</p>
-<app-cards-conteiner filterCategorie="pelicula"></app-cards-conteiner>
+<!-- <app-cards-conteiner filterCategorie="pelicula"></app-cards-conteiner> -->
+<div class="cardsConteiner">
+  <ng-container *ngFor="let film of movies_series">
+    <app-card
+      *ngIf="filter == film.category"
+      img="{{ film.image }}"
+      name="{{ film.name }}"
+      [rating]="film.rating"
+    ></app-card>
+  </ng-container>
+</div>

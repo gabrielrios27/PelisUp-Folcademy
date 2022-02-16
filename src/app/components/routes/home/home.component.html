@@ -31,25 +31,25 @@
         Series
       </li>
     </ul>
-    <!-- categories__item--active -->
   </div>
   <h3 class="selectedCategorie">
     {{ selectedCategorie }}
     <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
   </h3>
-  <!-- <app-cards-conteiner></app-cards-conteiner> -->
-  <div class="cardsConteiner" *ngFor="let film of movies_series">
-    <app-card
-      *ngIf="filter == film.category"
-      img="{{ film.image }}"
-      name="{{ film.name }}"
-      [rating]="film.rating"
-    ></app-card>
-    <app-card
-      *ngIf="filter == 'todos'"
-      img="{{ film.image }}"
-      name="{{ film.name }}"
-      [rating]="film.rating"
-    ></app-card>
+  <div class="cardsConteiner">
+    <ng-container *ngFor="let film of movies_series">
+      <app-card
+        *ngIf="filter == film.category"
+        img="{{ film.image }}"
+        name="{{ film.name }}"
+        [rating]="film.rating"
+      ></app-card>
+      <app-card
+        *ngIf="filter == 'todos'"
+        img="{{ film.image }}"
+        name="{{ film.name }}"
+        [rating]="film.rating"
+      ></app-card>
+    </ng-container>
   </div>
 </section>

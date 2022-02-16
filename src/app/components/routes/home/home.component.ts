@@ -1,6 +1,6 @@
 import { HtmlTagDefinition } from '@angular/compiler';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { CardsConteinerComponent } from '../../shared/cards-conteiner/cards-conteiner.component';
+import { MoviesSeries } from 'src/interfaces/NewUser';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   quantity: number = 120;
 
   filter: string = 'todos';
-  movies_series: any[] = [
+  movies_series: MoviesSeries[] = [
     {
       id: 0,
       name: 'El libro de Boba Fett (2021)',
@@ -164,13 +164,16 @@ export class HomeComponent implements OnInit {
   OnClickAll() {
     this.quantity = 120;
     this.filter = 'todos';
+    this.selectedCategorie = 'Todos';
   }
   OnClickMovies() {
     this.quantity = 70;
     this.filter = 'pelicula';
+    this.selectedCategorie = 'Peliculas';
   }
   OnClickShows() {
     this.quantity = 50;
     this.filter = 'serie';
+    this.selectedCategorie = 'Series';
   }
 }
