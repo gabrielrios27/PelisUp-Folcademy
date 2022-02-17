@@ -145,9 +145,13 @@ export class HomeComponent implements OnInit {
   ];
   movies_series_toSearch: MoviesSeries[] = [];
   movies_series_toShow: MoviesSeries[] = this.movies_series;
+  movies_series_previusSerch: MoviesSeries[] = [];
 
   toSearch: string = '';
+  toSearchPrevius: string = '';
   quantity: number = this.movies_series_toShow.length;
+  countNoMatch: number = 0;
+  twoParts: Boolean = false;
 
   /*para buscar la informacion del input dentro de las cards mostradas en el home*/
   SearchInParent(e: string) {
@@ -165,7 +169,7 @@ export class HomeComponent implements OnInit {
     }
     if (e !== '') {
       /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
-      this.movies_series_toShow = this.movies_series_toSearch;
+      this.HoldBackSearch();
     } else {
       /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
       this.movies_series_toShow = this.movies_series;
@@ -205,5 +209,29 @@ export class HomeComponent implements OnInit {
       }
     }
     this.quantity = count;
+  }
+  /*HoldBackSearch: es una funcion para seguir mostrando la busqueda anterior si no hay coincidencias por al menos dos entradas mas, lugo muestra 0 coincidencias  */
+  HoldBackSearch() {
+    if (this.movies_series_toSearch.length == 0 || this.twoParts) {
+      this.twoParts = true;
+      let toSearchPreviusLenght = this.toSearchPrevius.length;
+      let toSearchOne: string = this.toSearchPrevius;
+      let toSearchTwo: string = this.toSearch.substring(toSearchPreviusLenght);
+
+      for (let film of this.movies_series) {
+        if (
+          film.name.toUpperCase().includes(toSearchOne) &&
+          film.name.toUpperCase().includes(toSearchTwo)
+        ) {
+          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
+          this.movies_series_toSearch.push(film);
+        }
+      }
+      this.movies_series_toShow = this.movies_series_toSearch;
+    } else {
+      this.twoParts = false;
+      this.movies_series_toShow = this.movies_series_toSearch;
+      this.toSearchPrevius = this.toSearch;
+    }
   }
 }
