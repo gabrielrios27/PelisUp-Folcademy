@@ -146,10 +146,10 @@ export class SeriesComponent implements OnInit {
   toSearch: string = '';
   quantity: number = 0;
   /*con la siguiente funcion se calcula la cantidad de peliculas o series mostradas y se actualiza en pantalla*/
-  CountQuantity() {
+  CountQuantity(filter: string) {
     let count: number = 0;
     for (let film of this.movies_series_toShow) {
-      if (film.category == 'pelicula') {
+      if (film.category == filter) {
         count++;
       }
     }
@@ -178,11 +178,11 @@ export class SeriesComponent implements OnInit {
       this.movies_series_toShow = this.movies_series;
     }
 
-    this.CountQuantity();
+    this.CountQuantity(this.filter);
   }
   constructor() {}
 
   ngOnInit(): void {
-    this.CountQuantity();
+    this.CountQuantity(this.filter);
   }
 }

@@ -170,25 +170,11 @@ export class HomeComponent implements OnInit {
       /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
       this.movies_series_toShow = this.movies_series;
     }
-    /*con lo siguiente se calcula la cantidad de peliculas o series mostradas*/
+    /*se calcula la cantidad de peliculas o series mostradas*/
     if (this.filter == 'todos') {
       this.quantity = this.movies_series_toShow.length;
-    } else if (this.filter == 'pelicula') {
-      let count: number = 0;
-      for (let film of this.movies_series_toShow) {
-        if (film.category == 'pelicula') {
-          count++;
-        }
-      }
-      this.quantity = count;
-    } else if (this.filter == 'serie') {
-      let count: number = 0;
-      for (let film of this.movies_series_toShow) {
-        if (film.category == 'serie') {
-          count++;
-        }
-      }
-      this.quantity = count;
+    } else {
+      this.CountQuantity(this.filter);
     }
   }
   constructor() {}
@@ -202,21 +188,19 @@ export class HomeComponent implements OnInit {
   }
   OnClickMovies() {
     this.filter = 'pelicula';
-    this.selectedCategorie = 'Peliculas';
-    let count: number = 0;
-    for (let film of this.movies_series_toShow) {
-      if (film.category == 'pelicula') {
-        count++;
-      }
-    }
-    this.quantity = count;
+    this.selectedCategorie = 'Películas';
+    this.CountQuantity(this.filter);
   }
   OnClickShows() {
     this.filter = 'serie';
     this.selectedCategorie = 'Series';
+    this.CountQuantity(this.filter);
+  }
+  /*CountQuantity: dependiendo del filtro con lo siguiente se calcula la cantidad de peliculas o series mostradas*/
+  CountQuantity(filter: string) {
     let count: number = 0;
     for (let film of this.movies_series_toShow) {
-      if (film.category == 'serie') {
+      if (film.category == filter) {
         count++;
       }
     }
