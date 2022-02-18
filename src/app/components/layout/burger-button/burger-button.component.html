@@ -15,8 +15,19 @@
     </span>
   </span>
 </div>
-<ul class="burgerButton__list">
-  <li class="burgerButton__items"><a routerLink="peliculas">Películas</a></li>
-  <li class="burgerButton__items"><a routerLink="series">Series</a></li>
-  <li class="burgerButton__items"><a routerLink="login">Ingresar</a></li>
+<ul
+  class="burgerButton__list"
+  [ngClass]="
+    btnFlag ? 'burgerButton__list--active' : 'burgerButton__list--desactive'
+  "
+>
+  <li class="burgerButton__items">
+    <a class="burgerButton__link" routerLink="peliculas">Películas</a>
+  </li>
+  <li class="burgerButton__items">
+    <a class="burgerButton__link" routerLink="series">Series</a>
+  </li>
+  <li class="burgerButton__items">
+    <a class="burgerButton__link" routerLink="login">Ingresar</a>
+  </li>
 </ul>
