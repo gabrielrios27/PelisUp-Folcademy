@@ -14,27 +14,28 @@
   display: inline-block;
   background-color: var(--Grey-200);
   border-radius: 8px;
+  transition: var(--transition);
 }
-.burgerButton__lines::before {
-  content: "";
+.burgerButton__lines--top {
   position: absolute;
   top: -10px;
-  width: 43px;
-  height: 3px;
-  display: inline-block;
-  background-color: var(--Grey-200);
-  border-radius: 8px;
 }
-.burgerButton__lines::after {
-  content: "";
+.burgerButton__lines--bottom {
   position: absolute;
   bottom: -10px;
-  width: 43px;
-  height: 3px;
-  display: inline-block;
-  background-color: var(--Grey-200);
-  border-radius: 8px;
 }
 .burgerButton__list {
   display: none;
+}
+/* estilos para cuando se hace click en el btn hamburguesa */
+.burgerButton__lines--active {
+  transform: rotate(45deg);
+}
+.burgerButton__lines--topActive {
+  top: 0;
+  transform: rotate(90deg);
+}
+.burgerButton__lines--bottomActive {
+  bottom: 3px;
+  transform: rotate(90deg);
 }

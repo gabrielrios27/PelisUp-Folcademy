@@ -1,5 +1,19 @@
-<div class="burgerButton">
-  <span class="burgerButton__lines"></span>
+<div class="burgerButton" (click)="ToogleBtnFlag()">
+  <span
+    class="burgerButton__lines"
+    [ngClass]="btnFlag ? 'burgerButton__lines--active' : ''"
+  >
+    <span
+      class="burgerButton__lines burgerButton__lines--top"
+      [ngClass]="btnFlag ? 'burgerButton__lines--topActive' : ''"
+    >
+    </span>
+    <span
+      class="burgerButton__lines burgerButton__lines--bottom"
+      [ngClass]="btnFlag ? 'burgerButton__lines--bottomActive' : ''"
+    >
+    </span>
+  </span>
 </div>
 <ul class="burgerButton__list">
   <li class="burgerButton__items"><a routerLink="peliculas">Películas</a></li>

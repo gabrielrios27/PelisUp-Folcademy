@@ -69,6 +69,12 @@ app-burger-button {
   .header__container {
     padding: 16px 90px;
   }
+  app-navbar {
+    display: none;
+  }
+  app-burger-button {
+    display: block;
+  }
 }
 @media (max-width: 576px) {
   .header__container {
