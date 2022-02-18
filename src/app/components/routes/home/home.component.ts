@@ -150,7 +150,6 @@ export class HomeComponent implements OnInit {
   toSearch: string = '';
   toSearchPrevius: string = '';
   quantity: number = this.movies_series_toShow.length;
-  countNoMatch: number = 0;
   twoParts: Boolean = false;
 
   /*para buscar la informacion del input dentro de las cards mostradas en el home*/
@@ -165,11 +164,12 @@ export class HomeComponent implements OnInit {
       if (film.name.toUpperCase().includes(this.toSearch)) {
         /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
         this.movies_series_toSearch.push(film);
+        this.twoParts = false;
       }
     }
     if (e !== '') {
       /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
-      this.HoldBackSearch();
+      this.TwoPartsSearch();
     } else {
       /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
       this.movies_series_toShow = this.movies_series;
@@ -210,8 +210,8 @@ export class HomeComponent implements OnInit {
     }
     this.quantity = count;
   }
-  /*HoldBackSearch: es una funcion para seguir mostrando la busqueda anterior si no hay coincidencias por al menos dos entradas mas, lugo muestra 0 coincidencias  */
-  HoldBackSearch() {
+  /*TwoPartsSearch: cuando no hay coincidencias con lo escrito en el input entonces este valor(del input,toSearch) se divide en dos desde la ultima coincidencia y se buscan ambas partes en el arreglo de peliculas y series */
+  TwoPartsSearch() {
     if (this.movies_series_toSearch.length == 0 || this.twoParts) {
       this.twoParts = true;
       let toSearchPreviusLenght = this.toSearchPrevius.length;
@@ -223,7 +223,7 @@ export class HomeComponent implements OnInit {
           film.name.toUpperCase().includes(toSearchOne) &&
           film.name.toUpperCase().includes(toSearchTwo)
         ) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
+          /*si la pelicula incluye las cadenas de texto a buscar entonces se guarda en el arreglo */
           this.movies_series_toSearch.push(film);
         }
       }
@@ -231,7 +231,8 @@ export class HomeComponent implements OnInit {
     } else {
       this.twoParts = false;
       this.movies_series_toShow = this.movies_series_toSearch;
-      this.toSearchPrevius = this.toSearch;
+      this.toSearchPrevius =
+        this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
     }
   }
 }
