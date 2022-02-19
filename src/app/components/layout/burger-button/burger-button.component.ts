@@ -12,5 +12,6 @@ export class BurgerButtonComponent implements OnInit {
   ngOnInit(): void {}
   ToogleBtnFlag() {
     this.btnFlag = !this.btnFlag;
+    console.log('toggle: ' + this.btnFlag);
   }
 }

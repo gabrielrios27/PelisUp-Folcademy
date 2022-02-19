@@ -1,3 +1,4 @@
+<!-- boton hamburguesa - lineas -->
 <div class="burgerButton" (click)="ToogleBtnFlag()">
   <span
     class="burgerButton__lines"
@@ -15,6 +16,7 @@
     </span>
   </span>
 </div>
+<!-- lista de anlaces desplegados en pantalla completa al dar click en el boton hamburguesa -->
 <ul
   class="burgerButton__list"
   [ngClass]="
@@ -22,12 +24,39 @@
   "
 >
   <li class="burgerButton__items">
-    <a class="burgerButton__link" routerLink="peliculas">Películas</a>
+    <a
+      class="burgerButton__link"
+      (click)="ToogleBtnFlag()"
+      routerLink="peliculas"
+      >Películas</a
+    >
   </li>
   <li class="burgerButton__items">
-    <a class="burgerButton__link" routerLink="series">Series</a>
+    <a class="burgerButton__link" (click)="ToogleBtnFlag()" routerLink="series"
+      >Series</a
+    >
   </li>
   <li class="burgerButton__items">
-    <a class="burgerButton__link" routerLink="login">Ingresar</a>
+    <a class="burgerButton__link" (click)="ToogleBtnFlag()" routerLink="login"
+      >Ingresar</a
+    >
   </li>
 </ul>
+<!-- fondo purpura del listado de enlaces - aparece con clip-path -->
+<div
+  class="burgerButton__backgroundPurple"
+  [ngClass]="
+    btnFlag
+      ? 'burgerButton__backgroundPurple--active'
+      : 'burgerButton__backgroundPurple--desactive'
+  "
+></div>
+<!-- fondo celeste del listado de enlaces - aparece con clip-path -->
+<div
+  class="burgerButton__backgroundBlue"
+  [ngClass]="
+    btnFlag
+      ? 'burgerButton__backgroundBlue--active'
+      : 'burgerButton__backgroundBlue--desactive'
+  "
+></div>
