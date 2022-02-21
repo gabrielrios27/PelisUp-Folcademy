@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { SeriesComponent } from './series/series.component';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { Lost404Component } from './lost404/lost404.component';
+import { DetailPageComponent } from './detail-page/detail-page.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { Lost404Component } from './lost404/lost404.component';
     LoginComponent,
     SeriesComponent,
     Lost404Component,
+    DetailPageComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [HomeComponent, LoginComponent, SeriesComponent, PeliculasComponent],

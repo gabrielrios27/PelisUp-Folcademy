@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailPageComponent } from './components/routes/detail-page/detail-page.component';
 import { HomeComponent } from './components/routes/home/home.component';
 import { LoginComponent } from './components/routes/login/login.component';
 import { Lost404Component } from './components/routes/lost404/lost404.component';
@@ -26,6 +27,18 @@ const routes: Routes = [
   {
     path: 'peliculas',
     component: PeliculasComponent,
+  },
+  {
+    path: 'inicio/:name',
+    component: DetailPageComponent,
+  },
+  {
+    path: 'peliculas/:name',
+    component: DetailPageComponent,
+  },
+  {
+    path: 'series/:name',
+    component: DetailPageComponent,
   },
   {
     path: '**',
