@@ -29,6 +29,10 @@ const routes: Routes = [
     component: PeliculasComponent,
   },
   {
+    path: ':name',
+    component: DetailPageComponent,
+  },
+  {
     path: 'inicio/:name',
     component: DetailPageComponent,
   },
