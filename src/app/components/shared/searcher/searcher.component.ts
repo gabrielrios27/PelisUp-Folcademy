@@ -15,7 +15,6 @@ export class SearcherComponent implements OnInit {
 
   ngOnInit(): void {}
   Search(toSearch: string) {
-    console.log(toSearch);
     this.buscar.emit(toSearch);
   }
 }

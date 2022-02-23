@@ -11,7 +11,7 @@
     <ul class="categories__list">
       <li
         [ngClass]="
-          filter == 'todos' ? 'categories__item--active' : 'categories__item'
+          filter == 'Todos' ? 'categories__item--active' : 'categories__item'
         "
         (click)="OnClickAll()"
       >
@@ -19,7 +19,9 @@
       </li>
       <li
         [ngClass]="
-          filter == 'pelicula' ? 'categories__item--active' : 'categories__item'
+          filter == 'Películas'
+            ? 'categories__item--active'
+            : 'categories__item'
         "
         (click)="OnClickMovies()"
       >
@@ -27,7 +29,7 @@
       </li>
       <li
         [ngClass]="
-          filter == 'serie' ? 'categories__item--active' : 'categories__item'
+          filter == 'Series' ? 'categories__item--active' : 'categories__item'
         "
         (click)="OnClickShows()"
       >
@@ -36,22 +38,15 @@
     </ul>
   </div>
   <h3 class="selectedCategorie">
-    {{ selectedCategorie }}
+    {{ filter }}
     <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
   </h3>
   <div class="cardsConteiner">
-    <ng-container *ngFor="let film of movies_series_toShow">
+    <ng-container *ngFor="let film of moviesSeriesApi_toShow">
       <app-card
-        *ngIf="filter == film.category"
-        img="{{ film.image }}"
-        name="{{ film.name }}"
-        [rating]="film.rating"
-      ></app-card>
-      <app-card
-        *ngIf="filter == 'todos'"
-        img="{{ film.image }}"
-        name="{{ film.name }}"
-        [rating]="film.rating"
+        img="{{ film.poster_path }}"
+        name="{{ film.name || film.title }}"
+        [rating]="film.vote_average"
       ></app-card>
     </ng-container>
   </div>
