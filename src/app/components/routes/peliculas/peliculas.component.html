@@ -10,12 +10,10 @@
 <p class="quantity">{{ quantity }} items</p>
 <!-- <app-cards-conteiner filterCategorie="pelicula"></app-cards-conteiner> -->
 <div class="cardsConteiner">
-  <ng-container *ngFor="let film of movies_series_toShow">
-    <app-card
-      *ngIf="filter == film.category"
-      img="{{ film.image }}"
-      name="{{ film.name }}"
-      [rating]="film.rating"
-    ></app-card>
-  </ng-container>
+  <app-card
+    *ngFor="let film of moviesSeriesApi_toShow"
+    img="{{ film.poster_path }}"
+    name="{{ film.name || film.title }}"
+    [rating]="film.vote_average"
+  ></app-card>
 </div>

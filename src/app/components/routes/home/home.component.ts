@@ -32,12 +32,14 @@ export class HomeComponent implements OnInit {
     this._moviesService.getTrending().subscribe({
       next: (data: MoviesSeriesActors) => {
         let moviesSeriesActorsApi = data.results;
+        this.moviesSeriesApi = [];
         for (let film of moviesSeriesActorsApi) {
           if (film.media_type !== 'person') {
             this.moviesSeriesApi.push(film);
           }
         }
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+        console.log(this.moviesSeriesApi);
       },
       error: (err) => {
         console.log(err);

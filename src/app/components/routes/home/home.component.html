@@ -42,12 +42,11 @@
     <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
   </h3>
   <div class="cardsConteiner">
-    <ng-container *ngFor="let film of moviesSeriesApi_toShow">
-      <app-card
-        img="{{ film.poster_path }}"
-        name="{{ film.name || film.title }}"
-        [rating]="film.vote_average"
-      ></app-card>
-    </ng-container>
+    <app-card
+      *ngFor="let film of moviesSeriesApi_toShow"
+      img="{{ film.poster_path }}"
+      name="{{ film.name || film.title }}"
+      [rating]="film.vote_average"
+    ></app-card>
   </div>
 </section>

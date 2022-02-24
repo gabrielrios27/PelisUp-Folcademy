@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MoviesSeriesActors } from 'src/interfaces/NewUser';
 @Injectable({
@@ -12,35 +12,27 @@ export class MoviesService {
   constructor(private _http: HttpClient) {}
 
   getTrending(): Observable<MoviesSeriesActors> {
-    let headers = new HttpHeaders();
+    let params = new HttpParams().set('api_key', this.api_key);
+
     return this._http.get<MoviesSeriesActors>(
-      this.baseUrl +
-        '/trending/all/week?api_key=0167913abe154169ea9d85e3e8a3e7da&language=en',
+      this.baseUrl + '/trending/all/week',
       {
-        headers: headers,
+        params: params,
       }
     );
   }
   getMovies(): Observable<MoviesSeriesActors> {
-    let headers = new HttpHeaders();
+    let params = new HttpParams().set('api_key', this.api_key);
 
-    return this._http.get<MoviesSeriesActors>(
-      this.baseUrl +
-        '/movie/popular?api_key=0167913abe154169ea9d85e3e8a3e7da&language=en',
-      {
-        headers: headers,
-      }
-    );
+    return this._http.get<MoviesSeriesActors>(this.baseUrl + '/movie/popular', {
+      params: params,
+    });
   }
   getSeries(): Observable<MoviesSeriesActors> {
-    let headers = new HttpHeaders();
+    let params = new HttpParams().set('api_key', this.api_key);
 
-    return this._http.get<MoviesSeriesActors>(
-      this.baseUrl +
-        '/tv/popular?api_key=0167913abe154169ea9d85e3e8a3e7da&language=en',
-      {
-        headers: headers,
-      }
-    );
+    return this._http.get<MoviesSeriesActors>(this.baseUrl + '/tv/popular', {
+      params: params,
+    });
   }
 }
