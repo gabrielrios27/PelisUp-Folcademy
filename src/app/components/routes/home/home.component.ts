@@ -7,7 +7,6 @@ import { MoviesSeriesActors, Result } from 'src/interfaces/NewUser';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [MoviesService],
 })
 export class HomeComponent implements OnInit {
   moviesSeriesApi: Result[] = [];

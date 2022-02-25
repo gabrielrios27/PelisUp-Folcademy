@@ -47,6 +47,8 @@
       img="{{ film.poster_path }}"
       name="{{ film.name || film.title }}"
       [rating]="film.vote_average"
+      [id]="film.id"
+      [mediaType]="film.media_type"
     ></app-card>
   </div>
 </section>

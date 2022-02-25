@@ -10,6 +10,7 @@ import { LayoutModule } from './components/layout/layout.module';
 import { SharedModule } from './components/shared/shared.module';
 import { RoutesModule } from './components/routes/routes.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MoviesService } from './services/user/movies.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     RoutesModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [MoviesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
