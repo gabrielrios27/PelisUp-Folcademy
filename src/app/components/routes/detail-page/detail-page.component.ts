@@ -19,16 +19,31 @@ export class DetailPageComponent implements OnInit {
     private _moviesService: MoviesService,
     private rutaActiva: ActivatedRoute
   ) {
-    this.idFilm = this._moviesService.getIdFilmToShowDetails();
-    this.mediaType = this._moviesService.getMediaTypeFilmToShowDetails();
+    this.idFilm = 0;
+    this.mediaType = MediaType.Movie;
     this.movieToShow = {} as Movie;
     this.serieToShow = {} as Serie;
   }
 
   ngOnInit(): void {
-    console.log(this.rutaActiva.snapshot.paramMap.get('id'));
-    let infoFilm = this.rutaActiva.snapshot.paramMap.get('id');
-    console.log(infoFilm);
+    let idToShow;
+    this.rutaActiva.paramMap.subscribe((params: ParamMap) => {
+      idToShow = params.get('id');
+    });
+    this.idFilm = Number(idToShow);
+    console.log(this.idFilm);
+    let mediaToShow;
+    this.rutaActiva.paramMap.subscribe((params: ParamMap) => {
+      mediaToShow = params.get('mediaType');
+    });
+
+    if (mediaToShow == 'movie') {
+      this.mediaType = MediaType.Movie;
+    } else if (mediaToShow == 'tv') {
+      this.mediaType = MediaType.Tv;
+    }
+    this._moviesService.setIdFilmToShowDetails(this.idFilm, this.mediaType);
+
     this.getFilmIdToShow(this.mediaType);
   }
   getFilmIdToShow(media_type: MediaType) {

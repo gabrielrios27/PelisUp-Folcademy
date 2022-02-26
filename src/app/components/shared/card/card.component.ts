@@ -12,13 +12,9 @@ export class CardComponent implements OnInit {
   @Input() name: string = 'Black Widow';
   @Input() rating: number = 6.8;
   @Input() id: number = 0;
-  @Input() mediaType: MediaType = MediaType.Movie;
+  @Input() mediaType: MediaType = MediaType.Tv;
 
   constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {}
-
-  setId() {
-    this._moviesService.setIdFilmToShowDetails(this.id, this.mediaType);
-  }
 }

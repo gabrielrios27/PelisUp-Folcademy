@@ -29,7 +29,7 @@ const routes: Routes = [
     component: PeliculasComponent,
   },
   {
-    path: './:mediaType/:id',
+    path: ':mediaType/:id',
     component: DetailPageComponent,
   },
   {
@@ -48,6 +48,7 @@ const routes: Routes = [
     path: '**',
     component: Lost404Component,
   },
+  // RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
 ];
 
 @NgModule({

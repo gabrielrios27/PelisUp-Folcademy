@@ -42,13 +42,25 @@
     <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
   </h3>
   <div class="cardsConteiner">
-    <app-card
-      *ngFor="let film of moviesSeriesApi_toShow"
-      img="{{ film.poster_path }}"
-      name="{{ film.name || film.title }}"
-      [rating]="film.vote_average"
-      [id]="film.id"
-      [mediaType]="film.media_type"
-    ></app-card>
+    <ng-container *ngIf="filter == 'Todos'">
+      <app-card
+        *ngFor="let film of moviesSeriesApi_toShow"
+        img="{{ film.poster_path }}"
+        name="{{ film.name || film.title }}"
+        [rating]="film.vote_average"
+        [id]="film.id"
+        [mediaType]="film.media_type"
+      ></app-card>
+    </ng-container>
+    <ng-container *ngIf="filter == 'Películas' || filter == 'Series'">
+      <app-card
+        *ngFor="let film of moviesSeriesApi_toShow"
+        img="{{ film.poster_path }}"
+        name="{{ film.name || film.title }}"
+        [rating]="film.vote_average"
+        [id]="film.id"
+        [mediaType]="mediaType"
+      ></app-card>
+    </ng-container>
   </div>
 </section>
