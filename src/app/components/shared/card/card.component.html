@@ -1,5 +1,9 @@
 <div class="card">
-  <a (click)="setId()" routerLink="['{{ name }}']" class="card__a">
+  <a
+    (click)="setId()"
+    routerLink="['/{{ mediaType }}','{{ id }}']"
+    class="card__a"
+  >
     <div class="card__imgContainer">
       <img
         src="https://image.tmdb.org/t/p/w500{{ img }}"

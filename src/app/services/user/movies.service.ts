@@ -17,9 +17,7 @@ export class MoviesService {
   idFilmToShowDetails: number = 0;
   mediaType: MediaType = MediaType.Movie;
 
-  constructor(private _http: HttpClient) {
-    // this.idFilmToShowDetails = this.getIdFilmToShowDetails();
-  }
+  constructor(private _http: HttpClient) {}
 
   getTrending(): Observable<MoviesSeriesActors> {
     let params = new HttpParams().set('api_key', this.api_key);
@@ -69,7 +67,7 @@ export class MoviesService {
     let params = new HttpParams().set('api_key', this.api_key);
 
     return this._http.get<Serie>(
-      this.baseUrl + '/movie/' + this.idFilmToShowDetails,
+      this.baseUrl + '/tv/' + this.idFilmToShowDetails,
       {
         params: params,
       }

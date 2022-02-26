@@ -29,19 +29,19 @@ const routes: Routes = [
     component: PeliculasComponent,
   },
   {
-    path: ':name',
+    path: './:mediaType/:id',
     component: DetailPageComponent,
   },
   {
-    path: 'inicio/:name',
+    path: 'inicio/:mediaType/:id',
     component: DetailPageComponent,
   },
   {
-    path: 'peliculas/:name',
+    path: 'peliculas/:mediaType/:id',
     component: DetailPageComponent,
   },
   {
-    path: 'series/:name',
+    path: 'series/:mediaType/:id',
     component: DetailPageComponent,
   },
   {

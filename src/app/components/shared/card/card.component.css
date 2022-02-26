@@ -56,7 +56,7 @@
   font-size: 22px;
   font-weight: 600;
   line-height: 16px;
-  padding-bottom: 2px; /*para corregir alineacion con respecto al numero rating, más centrada*/
+  padding-bottom: 2px;
   color: var(--Warning-500);
 }
 .ratingButton__value {
