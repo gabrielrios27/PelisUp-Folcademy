@@ -1,14 +1,11 @@
 <section>
-  <div class="cover">
-    <div class="cover__imgContainer">
-      <img
-        src="https://image.tmdb.org/t/p/original{{
-          movieToShow.backdrop_path || serieToShow.backdrop_path
-        }}"
-        alt="portada de la pelicula {{ movieToShow.title || serieToShow.name }}"
-        class="cover__img"
-      />
-    </div>
+  <div
+    class="cover"
+    [ngStyle]="{
+      'background-image':
+        'url(https://image.tmdb.org/t/p/original' + backDropPath + ')'
+    }"
+  >
     <div class="cover__gradientBackground"></div>
     <div class="cover__nameContainer">
       <p class="cover__route">

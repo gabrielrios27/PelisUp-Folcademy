@@ -15,6 +15,9 @@ export class DetailPageComponent implements OnInit {
   mediaType: MediaType;
   movieToShow: Movie;
   serieToShow: Serie;
+
+  backDropPath: string = '';
+
   constructor(
     private _moviesService: MoviesService,
     private rutaActiva: ActivatedRoute
@@ -58,6 +61,7 @@ export class DetailPageComponent implements OnInit {
         complete: () => {
           console.log('Request id movies complete');
           console.log(this.movieToShow);
+          this.backDropPath = this.movieToShow.backdrop_path;
         },
       });
     } else if (media_type == MediaType.Tv) {
@@ -71,6 +75,7 @@ export class DetailPageComponent implements OnInit {
         complete: () => {
           console.log('Request id serie complete');
           console.log(this.serieToShow);
+          this.backDropPath = this.serieToShow.backdrop_path;
         },
       });
     }

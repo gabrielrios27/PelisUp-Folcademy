@@ -1,19 +1,10 @@
 .cover {
   width: 100%;
-  height: 480px;
+  height: calc((100vw - 240px) * 40 / 100);
   position: relative;
   margin-top: 120px;
-}
-.cover__imgContainer {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
   border-radius: 40px;
-}
-.cover__img {
-  width: 100%;
-  object-position: center;
-  border-radius: 40px;
+  background-size: cover;
 }
 .cover__gradientBackground {
   position: absolute;
@@ -35,10 +26,11 @@
   position: absolute;
   width: 100%;
   max-width: 560px;
-  height: 144px;
+  height: auto;
   left: 78px;
   bottom: -72px;
   background: rgba(32, 40, 62, 0.8);
+  -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   border-radius: 24px;
 }
@@ -110,6 +102,7 @@
   padding: 4px 8px;
   height: 32px;
   background: var(--Black-65);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border-radius: 8px;
   color: var(--Warning-500);
@@ -161,4 +154,19 @@
   line-height: 32px;
   color: var(--Grey-100);
   margin-bottom: 24px;
+}
+@media (max-width: 1200px) {
+  .info__img {
+    width: 240px;
+    height: 360px;
+    border-radius: 12px;
+    margin-right: 60px;
+  }
+  .cover__nameContainer {
+    padding: 30px;
+    max-width: 530px;
+    left: 60px;
+    bottom: -67px;
+    border-radius: 18px;
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
+  MediaType,
   MoviesSeries,
   MoviesSeriesActors,
   Result,
@@ -23,6 +24,8 @@ export class SeriesComponent implements OnInit {
   toSearchPrevius: string = '';
   quantity: number = 0;
   twoParts: Boolean = false;
+
+  mediaType: MediaType = MediaType.Tv;
 
   constructor(private _moviesService: MoviesService) {}
 

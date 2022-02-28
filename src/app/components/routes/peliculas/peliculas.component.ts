@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
+  MediaType,
   MoviesSeries,
   MoviesSeriesActors,
   Result,
@@ -24,6 +25,8 @@ export class PeliculasComponent implements OnInit {
   quantity: number = 0;
   twoParts: Boolean = false;
 
+  mediaType: MediaType = MediaType.Movie;
+
   constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {
@@ -35,6 +38,7 @@ export class PeliculasComponent implements OnInit {
       next: (data: MoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+        console.log(this.moviesSeriesApi);
       },
       error: (err) => {
         console.log(err);
