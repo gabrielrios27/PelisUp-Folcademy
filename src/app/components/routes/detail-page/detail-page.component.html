@@ -7,17 +7,17 @@
     }"
   >
     <div class="cover__gradientBackground"></div>
-    <div class="cover__nameContainer">
-      <p class="cover__route">
-        <a href="" class="cover__routeLink">PelisUp!</a>
-        <span class="cover__slash"> / </span>
-        <a *ngIf="mediaType == 'movie'" href="" class="cover__routeLink"
-          >Películas</a
-        >
-        <a *ngIf="mediaType == 'tv'" href="" class="cover__routeLink">Series</a>
-      </p>
-      <h3 class="cover__name">{{ movieToShow.title || serieToShow.name }}</h3>
-    </div>
+  </div>
+  <div class="cover__nameContainer">
+    <p class="cover__route">
+      <a href="" class="cover__routeLink">PelisUp!</a>
+      <span class="cover__slash"> / </span>
+      <a *ngIf="mediaType == 'movie'" href="" class="cover__routeLink"
+        >Películas</a
+      >
+      <a *ngIf="mediaType == 'tv'" href="" class="cover__routeLink">Series</a>
+    </p>
+    <h3 class="cover__name">{{ movieToShow.title || serieToShow.name }}</h3>
   </div>
   <div class="info">
     <img
@@ -30,6 +30,12 @@
     <div class="info__details">
       <h4 class="info__tagline">
         {{ movieToShow.tagline || serieToShow.tagline }}
+      </h4>
+      <h4 class="info__tagline" *ngIf="movieToShow.tagline == ''">
+        {{ movieToShow.title }}
+      </h4>
+      <h4 class="info__tagline" *ngIf="serieToShow.tagline == ''">
+        {{ serieToShow.name }}
       </h4>
       <p class="info__overview">
         {{ movieToShow.overview || serieToShow.overview }}

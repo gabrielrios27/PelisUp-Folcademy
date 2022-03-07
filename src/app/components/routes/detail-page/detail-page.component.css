@@ -23,12 +23,12 @@
 }
 .cover__nameContainer {
   padding: 40px;
-  position: absolute;
-  width: 100%;
+  position: relative;
+  width: 76.65%; /*para que en pantallas menores a 940px de ancho este contenedor quede centrado a su padre(que tiene la imagen de fondo que esta justo arriba) */
   max-width: 560px;
   height: auto;
   left: 78px;
-  bottom: -72px;
+  bottom: 72px;
   background: rgba(32, 40, 62, 0.8);
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
@@ -62,17 +62,28 @@
   margin-top: 8px;
 }
 .info {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 152px;
-  margin-bottom: 80px;
+  margin-top: 80px;
+  margin-bottom: 8px;
+  bottom: 72px;
 }
 .info__img {
   width: 480px;
   height: 720px;
   border-radius: 24px;
   margin-right: 80px;
+}
+.info__imgW576 {
+  display: none;
+  width: 30%;
+  height: auto;
+  object-fit: contain;
+  object-position: top;
+  border-radius: 12px;
+  margin-right: 0px;
 }
 .info__details {
   display: flex;
@@ -81,17 +92,20 @@
   width: 480px;
 }
 .info__tagline {
+  display: block;
   font-weight: bold;
   font-size: 24px;
   line-height: 32px;
   letter-spacing: 0.015em;
   color: var(--Grey-50);
+  margin-bottom: 24px;
 }
+
 .info__overview {
   font-size: 20px;
   line-height: 32px;
   color: var(--Grey-300);
-  margin: 24px 0px;
+  margin-bottom: 24px;
 }
 .info__rating {
   display: flex;
@@ -130,9 +144,11 @@
 .info__serie {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 }
 .info__seriePart1 {
   width: 50%;
+  min-width: 190px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -157,8 +173,10 @@
 }
 @media (max-width: 1200px) {
   .info__img {
-    width: 240px;
-    height: 360px;
+    width: 30%;
+    height: auto;
+    object-fit: contain;
+    object-position: top;
     border-radius: 12px;
     margin-right: 60px;
   }
@@ -166,7 +184,41 @@
     padding: 30px;
     max-width: 530px;
     left: 60px;
-    bottom: -67px;
+    /* bottom: -67px; */
     border-radius: 18px;
+  }
+}
+@media (max-width: 768px) {
+  .cover,
+  .cover__gradientBackground {
+    border-radius: 18px;
+    height: calc((100vw - 180px) * 40 / 100);
+  }
+  .cover__nameContainer {
+    padding: 20px;
+    left: 0px;
+    width: 100%;
+    bottom: 0;
+    top: 95%;
+    border-radius: 12px;
+  }
+  .info {
+    bottom: 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .info__img {
+    display: none;
+  }
+  .cover__name {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+@media (max-width: 576px) {
+  .cover,
+  .cover__gradientBackground {
+    border-radius: 18px;
+    height: calc((100vw - 120px) * 50 / 100);
   }
 }
