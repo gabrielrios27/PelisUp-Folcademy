@@ -20,7 +20,9 @@ export class MoviesService {
   constructor(private _http: HttpClient) {}
 
   getTrending(): Observable<MoviesSeriesActors> {
-    let params = new HttpParams().set('api_key', this.api_key);
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es');
 
     return this._http.get<MoviesSeriesActors>(
       this.baseUrl + '/trending/all/week',
@@ -30,14 +32,18 @@ export class MoviesService {
     );
   }
   getMovies(): Observable<MoviesSeriesActors> {
-    let params = new HttpParams().set('api_key', this.api_key);
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es');
 
     return this._http.get<MoviesSeriesActors>(this.baseUrl + '/movie/popular', {
       params: params,
     });
   }
   getSeries(): Observable<MoviesSeriesActors> {
-    let params = new HttpParams().set('api_key', this.api_key);
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es');
 
     return this._http.get<MoviesSeriesActors>(this.baseUrl + '/tv/popular', {
       params: params,
@@ -54,7 +60,9 @@ export class MoviesService {
     return this.mediaType;
   }
   getMovieById(): Observable<Movie> {
-    let params = new HttpParams().set('api_key', this.api_key);
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es');
 
     return this._http.get<Movie>(
       this.baseUrl + '/movie/' + this.idFilmToShowDetails,
@@ -64,7 +72,9 @@ export class MoviesService {
     );
   }
   getSerieById(): Observable<Serie> {
-    let params = new HttpParams().set('api_key', this.api_key);
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es');
 
     return this._http.get<Serie>(
       this.baseUrl + '/tv/' + this.idFilmToShowDetails,
