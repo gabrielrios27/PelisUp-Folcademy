@@ -28,14 +28,9 @@
       class="info__img"
     />
     <div class="info__details">
-      <h4 class="info__tagline">
+      <!-- si el tagline viene vacio el h4 no se renderiza y no deja un espacio en blanco  -->
+      <h4 class="info__tagline" *ngIf="tagline">
         {{ movieToShow.tagline || serieToShow.tagline }}
-      </h4>
-      <h4 class="info__tagline" *ngIf="movieToShow.tagline == ''">
-        {{ movieToShow.title }}
-      </h4>
-      <h4 class="info__tagline" *ngIf="serieToShow.tagline == ''">
-        {{ serieToShow.name }}
       </h4>
       <p class="info__overview">
         {{ movieToShow.overview || serieToShow.overview }}
@@ -51,7 +46,7 @@
           <p class="info__type">Fecha de Lanzamiento</p>
           <p class="info__value">{{ movieToShow.release_date }}</p>
           <p class="info__type">Duración</p>
-          <p class="info__value">{{ movieToShow.runtime }}</p>
+          <p class="info__value">{{ movieToShow.runtime }} min</p>
         </div>
         <div class="info__serie" *ngIf="mediaType == 'tv'">
           <div class="info__seriePart1">
@@ -62,7 +57,7 @@
             <p class="info__type">N° de Temporadas</p>
             <p class="info__value">{{ serieToShow.number_of_seasons }}</p>
             <p class="info__type">Duración por episodio</p>
-            <p class="info__value">{{ serieToShow.episode_run_time }}</p>
+            <p class="info__value">{{ serieToShow.episode_run_time }} min</p>
           </div>
           <div class="info__seriePart2">
             <p class="info__type">Estado</p>

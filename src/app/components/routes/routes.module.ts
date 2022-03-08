@@ -8,6 +8,7 @@ import { SeriesComponent } from './series/series.component';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { Lost404Component } from './lost404/lost404.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,15 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
     SeriesComponent,
     Lost404Component,
     DetailPageComponent,
+    DashboardComponent,
   ],
   imports: [CommonModule, SharedModule],
-  exports: [HomeComponent, LoginComponent, SeriesComponent, PeliculasComponent],
+  exports: [
+    HomeComponent,
+    LoginComponent,
+    SeriesComponent,
+    PeliculasComponent,
+    DashboardComponent,
+  ],
 })
 export class RoutesModule {}

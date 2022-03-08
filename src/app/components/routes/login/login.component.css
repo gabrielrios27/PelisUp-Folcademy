@@ -32,7 +32,7 @@
   max-width: 486px;
   position: relative;
   height: 360px;
-  top: 220px;
+  top: 124px;
 }
 .form__legend {
   width: 100%;
@@ -153,6 +153,47 @@
   border: 2px solid var(--Primary-400);
   border-radius: 12px;
   margin: 0px 0px;
+}
+.form__divider {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 26px 0px;
+}
+.form__line {
+  width: 44.85%;
+  height: 5px;
+  background: var(--Grey-800);
+  border-radius: 2px;
+}
+.form__letterO {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.02em;
+  color: var(--Grey-100);
+}
+.form__buttonGoogle {
+  height: 60px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--Black-100);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 15px;
+  width: 100%;
+  max-width: 486px;
+  background: #ffffff;
+  border: 2px solid #b3b3b3;
+  border-radius: 12px;
+  margin: 0px 0px;
+}
+.form__btnGoogleImg {
+  width: 40px;
+  margin-right: 15px;
 }
 @media (max-width: 1200px) {
   .login__imgContainer {

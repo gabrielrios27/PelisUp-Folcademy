@@ -17,6 +17,7 @@ export class DetailPageComponent implements OnInit {
   serieToShow: Serie;
 
   backDropPath: string = '';
+  tagline: boolean = false;
 
   constructor(
     private _moviesService: MoviesService,
@@ -61,7 +62,11 @@ export class DetailPageComponent implements OnInit {
         complete: () => {
           console.log('Request id movies complete');
           console.log(this.movieToShow);
+          if (this.movieToShow.tagline != '') {
+            this.tagline = true;
+          }
           this.backDropPath = this.movieToShow.backdrop_path;
+          console.log(this.tagline);
         },
       });
     } else if (media_type == MediaType.Tv) {
@@ -75,7 +80,12 @@ export class DetailPageComponent implements OnInit {
         complete: () => {
           console.log('Request id serie complete');
           console.log(this.serieToShow);
+          if (this.serieToShow.tagline != '') {
+            this.tagline = true;
+          }
+
           this.backDropPath = this.serieToShow.backdrop_path;
+          console.log(this.tagline);
         },
       });
     }
