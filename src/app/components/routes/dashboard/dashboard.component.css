@@ -15,7 +15,7 @@
 }
 .dashboard__films {
   width: 49%;
-  min-width: 190px;
+  min-width: 188px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,4 +40,17 @@
   color: var(--Grey-400);
 }
 @media (max-width: 576px) {
+  .dashboard__container {
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+  }
+  .dashboard__welcome {
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+  }
+  .dashboard__films {
+    width: 100%;
+  }
 }

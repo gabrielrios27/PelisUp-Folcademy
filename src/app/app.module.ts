@@ -12,6 +12,10 @@ import { RoutesModule } from './components/routes/routes.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './services/user/movies.service';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,6 +28,8 @@ import { MoviesService } from './services/user/movies.service';
     LayoutModule,
     RoutesModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
   providers: [MoviesService],
   bootstrap: [AppComponent],
