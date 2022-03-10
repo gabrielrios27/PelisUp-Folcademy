@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +12,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  // email = new FormControl('');
+  // password = new FormControl('');
+
+  miFormulario: FormGroup = this.fb.group({
+    email: [, [Validators.required, Validators.email]],
+    password: [, [Validators.required, Validators.min(6)]],
+  });
+
+  constructor(private fb: FormBuilder) {}
+  ngOnInit(): void {}
+
   OnClickSeePassword() {
     const passwordInput: any = document.getElementById('password');
     const imgEyePassword: any = document.getElementById('imgEyePassword');
@@ -18,5 +34,13 @@ export class LoginComponent implements OnInit {
       imgEyePassword.src = '../../../assets/ico/eye-slash.svg';
     }
   }
-  ngOnInit(): void {}
+  save() {
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();
+      return;
+    }
+
+    console.log(this.miFormulario.value);
+    this.miFormulario.reset();
+  }
 }

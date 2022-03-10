@@ -3,13 +3,24 @@
     <div class="login__imgBackgound"></div>
     <img src="../../../assets/img/Saly-11.png" alt="" class="login__img" />
   </div>
-  <form class="form">
+  <form
+    class="form"
+    (ngSubmit)="save()"
+    autocomplete="off"
+    [formGroup]="miFormulario"
+  >
     <h1 class="form__legend">Ingresar</h1>
     <label class="formInput" for="email">
       <i class="icons formInput__ico">F</i>
       <div class="formInput__containerInput">
         <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
-        <input class="formInput__input" type="text" required id="email" />
+        <input
+          class="formInput__input"
+          formControlName="email"
+          type="text"
+          required
+          id="email"
+        />
         <span class="formInput__text">Email</span>
       </div>
     </label>
@@ -20,6 +31,7 @@
         <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
         <input
           class="formInput__input"
+          formControlName="password"
           autocomplete="off"
           type="password"
           required

@@ -9,6 +9,7 @@ import { PeliculasComponent } from './peliculas/peliculas.component';
 import { Lost404Component } from './lost404/lost404.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DetailPageComponent,
     DashboardComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, ReactiveFormsModule],
   exports: [
     HomeComponent,
     LoginComponent,

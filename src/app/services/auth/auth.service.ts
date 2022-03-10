@@ -25,4 +25,16 @@ export class AuthService {
       return null;
     }
   }
+  LogIn() {
+    console.log();
+  }
+  LogInWithGoogle() {
+    console.log();
+  }
+  GetUserLogged() {
+    console.log();
+  }
+  LogOut() {
+    console.log();
+  }
 }
