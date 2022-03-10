@@ -3,63 +3,65 @@
     <div class="login__imgBackgound"></div>
     <img src="../../../assets/img/Saly-11.png" alt="" class="login__img" />
   </div>
-  <form
-    class="form"
-    (ngSubmit)="save()"
-    autocomplete="off"
-    [formGroup]="miFormulario"
-  >
-    <h1 class="form__legend">Ingresar</h1>
-    <label class="formInput" for="email">
-      <i class="icons formInput__ico">F</i>
-      <div class="formInput__containerInput">
-        <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
-        <input
-          class="formInput__input"
-          formControlName="email"
-          type="text"
-          required
-          id="email"
+  <div class="formContainer">
+    <form
+      class="form"
+      (ngSubmit)="logInUser()"
+      autocomplete="off"
+      [formGroup]="miFormulario"
+    >
+      <h1 class="form__legend">Ingresar</h1>
+      <label class="formInput" for="email">
+        <i class="icons formInput__ico">F</i>
+        <div class="formInput__containerInput">
+          <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+          <input
+            class="formInput__input"
+            formControlName="email"
+            type="text"
+            required
+            id="email"
+          />
+          <span class="formInput__text">Email</span>
+        </div>
+      </label>
+
+      <label class="formInput" for="password">
+        <i class="icons formInput__ico">0</i>
+        <div class="formInput__containerInput">
+          <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+          <input
+            class="formInput__input"
+            formControlName="password"
+            autocomplete="off"
+            type="password"
+            required
+            id="password"
+          />
+          <span class="formInput__text">Contraseña</span>
+        </div>
+
+        <img
+          class="formInput__ico--eye"
+          id="imgEyePassword"
+          src="../../../assets/ico/eye-slash.svg"
+          (click)="OnClickSeePassword()"
         />
-        <span class="formInput__text">Email</span>
+      </label>
+
+      <button class="form__button" type="submit">Ingresar</button>
+      <div class="form__divider">
+        <div class="form__line"></div>
+        <h3 class="form__letterO">ó</h3>
+        <div class="form__line"></div>
       </div>
-    </label>
-
-    <label class="formInput" for="password">
-      <i class="icons formInput__ico">0</i>
-      <div class="formInput__containerInput">
-        <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
-        <input
-          class="formInput__input"
-          formControlName="password"
-          autocomplete="off"
-          type="password"
-          required
-          id="password"
-        />
-        <span class="formInput__text">Contraseña</span>
-      </div>
-
-      <img
-        class="formInput__ico--eye"
-        id="imgEyePassword"
-        src="../../../assets/ico/eye-slash.svg"
-        (click)="OnClickSeePassword()"
-      />
-    </label>
-
-    <button class="form__button">Ingresar</button>
-    <div class="form__divider">
-      <div class="form__line"></div>
-      <h3 class="form__letterO">ó</h3>
-      <div class="form__line"></div>
-    </div>
-    <button class="form__buttonGoogle">
+    </form>
+    <button class="form__buttonGoogle" (click)="logInWithGoogleUser()">
       <img
         src="../../../../assets/ico/googleIcon.jpg"
         alt=" icono de Google"
         class="form__btnGoogleImg"
       />Continuar con Google
     </button>
-  </form>
+  </div>
 </section>

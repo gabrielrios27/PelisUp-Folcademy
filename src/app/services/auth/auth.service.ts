@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,15 @@ export class AuthService {
       return null;
     }
   }
-  async loginWithGoogle(email: string, password: string) {
+  async register(email: string, password: string) {
+    try {
+      return await this.afauth.createUserWithEmailAndPassword(email, password);
+    } catch (err) {
+      console.log('error en el login: ', err);
+      return null;
+    }
+  }
+  async loginWithGoogle() {
     try {
       return await this.afauth.signInWithPopup(
         new firebase.auth.GoogleAuthProvider()
@@ -25,16 +33,10 @@ export class AuthService {
       return null;
     }
   }
-  LogIn() {
-    console.log();
+  getUserLogged() {
+    return this.afauth.authState;
   }
-  LogInWithGoogle() {
-    console.log();
-  }
-  GetUserLogged() {
-    console.log();
-  }
-  LogOut() {
-    console.log();
+  logOut() {
+    this.afauth.signOut();
   }
 }

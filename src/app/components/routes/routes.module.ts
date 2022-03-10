@@ -10,6 +10,11 @@ import { Lost404Component } from './lost404/lost404.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     DetailPageComponent,
     DashboardComponent,
   ],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+  ],
   exports: [
     HomeComponent,
     LoginComponent,
@@ -29,5 +40,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     PeliculasComponent,
     DashboardComponent,
   ],
+  providers: [AuthService],
 })
 export class RoutesModule {}

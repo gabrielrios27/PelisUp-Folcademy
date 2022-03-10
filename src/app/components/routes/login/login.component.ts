@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,12 @@ import {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // email = new FormControl('');
-  // password = new FormControl('');
-
   miFormulario: FormGroup = this.fb.group({
     email: [, [Validators.required, Validators.email]],
     password: [, [Validators.required, Validators.min(6)]],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit(): void {}
 
   OnClickSeePassword() {
@@ -34,13 +32,21 @@ export class LoginComponent implements OnInit {
       imgEyePassword.src = '../../../assets/ico/eye-slash.svg';
     }
   }
-  save() {
+  logInUser() {
     if (this.miFormulario.invalid) {
       this.miFormulario.markAllAsTouched();
       return;
     }
-
+    const { email, password } = this.miFormulario.value;
+    this.authService.login(email, password).then((res) => {
+      console.log(res);
+    });
     console.log(this.miFormulario.value);
-    this.miFormulario.reset();
+    // this.miFormulario.reset();
+  }
+  logInWithGoogleUser() {
+    this.authService.loginWithGoogle().then((res) => {
+      console.log(res);
+    });
   }
 }
