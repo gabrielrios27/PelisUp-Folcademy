@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   });
 
   invalidForm: boolean = false;
+  errCode: string = '';
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit(): void {}
@@ -47,8 +48,9 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).then((res) => {
       console.log(res);
+      this.errCode = this.authService.errCode;
+      console.log('el error es: ' + this.errCode);
     });
-    console.log(this.miFormulario);
     // this.miFormulario.reset();
   }
   logInWithGoogleUser() {

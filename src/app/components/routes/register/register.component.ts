@@ -18,6 +18,9 @@ export class RegisterComponent implements OnInit {
     password: [, [Validators.required, Validators.min(6)]],
   });
 
+  invalidForm: boolean = false;
+  errCode: string = '';
+
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit(): void {}
 
@@ -34,14 +37,16 @@ export class RegisterComponent implements OnInit {
   }
   registerUser() {
     if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
+      this.invalidForm = true;
       return;
     }
+    this.invalidForm = false;
     const { email, password } = this.miFormulario.value;
     this.authService.register(email, password).then((res) => {
       console.log(res);
+      this.errCode = this.authService.errCode;
+      console.log('el error es: ' + this.errCode);
     });
-    console.log(this.miFormulario.value);
     // this.miFormulario.reset();
   }
 }

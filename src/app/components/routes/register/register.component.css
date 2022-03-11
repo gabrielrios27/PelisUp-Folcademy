@@ -63,7 +63,7 @@
   flex: none;
   order: 0;
   flex-grow: 1;
-  margin: 24px 0px;
+  margin-top: 24px;
 }
 .formInput__ico {
   font-style: normal;
@@ -109,9 +109,6 @@
   position: absolute;
   left: 0px;
   top: 12px;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   color: var(--Grey-600);
@@ -144,12 +141,21 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 0px 0px;
+  margin-top: 24px;
   padding: 16px 32px;
   background: var(--Primary-400);
   border: 2px solid var(--Primary-400);
   border-radius: 12px;
   cursor: pointer;
+}
+.form__err {
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--Warning-600);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  margin-left: 12px;
 }
 .form__noRegister {
   font-weight: 500;
@@ -163,6 +169,7 @@
   color: var(--Secondary-400);
   text-decoration: none;
 }
+
 @media (max-width: 1200px) {
   .login__imgContainer {
     display: none;

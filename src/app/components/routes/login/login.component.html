@@ -28,9 +28,10 @@
       <div
         class="form__errContainer"
         *ngIf="
-          miFormulario.get('email')?.errors &&
-          miFormulario.get('email')?.dirty &&
-          invalidForm
+          (miFormulario.get('email')?.errors &&
+            miFormulario.get('email')?.dirty &&
+            invalidForm) ||
+          errCode !== ''
         "
       >
         <p
@@ -44,6 +45,9 @@
           *ngIf="miFormulario.get('email')?.hasError('email')"
         >
           El valor ingresado debe ser un Email
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/user-not-found'">
+          El email ingresado no se encuentra registrado.
         </p>
       </div>
       <label class="formInput" for="password">
@@ -71,9 +75,10 @@
       <div
         class="form__errContainer"
         *ngIf="
-          miFormulario.get('password')?.errors &&
-          miFormulario.get('password')?.dirty &&
-          invalidForm
+          (miFormulario.get('password')?.errors &&
+            miFormulario.get('password')?.dirty &&
+            invalidForm) ||
+          errCode !== ''
         "
       >
         <p
@@ -87,6 +92,9 @@
           *ngIf="miFormulario.get('password')?.hasError('minlength')"
         >
           La contraseña debe tener al menos 6 caracteres
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/wrong-password'">
+          La contraseña es incorrecta.
         </p>
       </div>
       <button class="form__button" type="submit">Ingresar</button>

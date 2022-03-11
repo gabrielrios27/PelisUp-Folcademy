@@ -6,20 +6,24 @@ import firebase from 'firebase/compat/app';
   providedIn: 'root',
 })
 export class AuthService {
+  errCode: string = '';
   constructor(private afauth: AngularFireAuth) {}
   async login(email: string, password: string) {
+    this.errCode = '';
     try {
       return await this.afauth.signInWithEmailAndPassword(email, password);
-    } catch (err) {
-      console.log('error en el login: ', err);
+    } catch (err: any) {
+      console.log(err.code);
+      this.errCode = err.code;
       return null;
     }
   }
   async register(email: string, password: string) {
     try {
       return await this.afauth.createUserWithEmailAndPassword(email, password);
-    } catch (err) {
+    } catch (err: any) {
       console.log('error en el login: ', err);
+      this.errCode = err.code;
       return null;
     }
   }

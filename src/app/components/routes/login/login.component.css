@@ -63,7 +63,7 @@
   flex: none;
   order: 0;
   flex-grow: 1;
-  margin: 24px 0px;
+  margin-top: 24px;
 }
 .formInput__ico {
   font-style: normal;
@@ -141,7 +141,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 0px 0px;
+  margin-top: 24px;
   padding: 16px 32px;
   background: var(--Primary-400);
   border: 2px solid var(--Primary-400);
@@ -154,6 +154,8 @@
   color: var(--Warning-600);
   pointer-events: none;
   transition: all 0.3s ease;
+  margin-top: 8px;
+  margin-left: 12px;
 }
 .form__noRegister {
   font-weight: 500;
