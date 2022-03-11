@@ -25,7 +25,27 @@
           <span class="formInput__text">Email</span>
         </div>
       </label>
-
+      <div
+        class="form__errContainer"
+        *ngIf="
+          miFormulario.get('email')?.errors &&
+          miFormulario.get('email')?.dirty &&
+          invalidForm
+        "
+      >
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('email')?.hasError('required')"
+        >
+          Debe completar este campo
+        </p>
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('email')?.hasError('email')"
+        >
+          El valor ingresado debe ser un Email
+        </p>
+      </div>
       <label class="formInput" for="password">
         <i class="icons formInput__ico">0</i>
         <div class="formInput__containerInput">
@@ -48,8 +68,32 @@
           (click)="OnClickSeePassword()"
         />
       </label>
-
+      <div
+        class="form__errContainer"
+        *ngIf="
+          miFormulario.get('password')?.errors &&
+          miFormulario.get('password')?.dirty &&
+          invalidForm
+        "
+      >
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('password')?.hasError('required')"
+        >
+          Debe completar este campo
+        </p>
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('password')?.hasError('minlength')"
+        >
+          La contraseña debe tener al menos 6 caracteres
+        </p>
+      </div>
       <button class="form__button" type="submit">Ingresar</button>
+      <p class="form__noRegister">
+        ¿No tienes Cuenta?
+        <a routerLink="register" class="form__linkToRegister">Registrarse</a>
+      </p>
       <div class="form__divider">
         <div class="form__line"></div>
         <h3 class="form__letterO">ó</h3>

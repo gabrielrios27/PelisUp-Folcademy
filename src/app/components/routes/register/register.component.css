@@ -109,6 +109,9 @@
   position: absolute;
   left: 0px;
   top: 12px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   color: var(--Grey-600);
@@ -148,13 +151,6 @@
   border-radius: 12px;
   cursor: pointer;
 }
-.form__err {
-  font-size: 14px;
-  line-height: 16px;
-  color: var(--Warning-600);
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
 .form__noRegister {
   font-weight: 500;
   font-size: 16px;
@@ -166,48 +162,6 @@
 .form__linkToRegister {
   color: var(--Secondary-400);
   text-decoration: none;
-}
-.form__divider {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 26px 0px;
-}
-.form__line {
-  width: 44.85%;
-  height: 5px;
-  background: var(--Grey-800);
-  border-radius: 2px;
-}
-.form__letterO {
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 40px;
-  letter-spacing: 0.02em;
-  color: var(--Grey-100);
-}
-.form__buttonGoogle {
-  width: 100%;
-  max-width: 486px;
-  height: 60px;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--Black-100);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 15px;
-  margin: 0px 0px;
-  background: #ffffff;
-  border: 2px solid #b3b3b3;
-  border-radius: 12px;
-  cursor: pointer;
-}
-.form__btnGoogleImg {
-  width: 40px;
-  margin-right: 15px;
 }
 @media (max-width: 1200px) {
   .login__imgContainer {

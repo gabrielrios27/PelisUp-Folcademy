@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { environment } from 'src/environments/environment';
     Lost404Component,
     DetailPageComponent,
     DashboardComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,

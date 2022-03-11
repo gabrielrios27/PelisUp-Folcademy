@@ -6,6 +6,7 @@ import { HomeComponent } from './components/routes/home/home.component';
 import { LoginComponent } from './components/routes/login/login.component';
 import { Lost404Component } from './components/routes/lost404/lost404.component';
 import { PeliculasComponent } from './components/routes/peliculas/peliculas.component';
+import { RegisterComponent } from './components/routes/register/register.component';
 import { SeriesComponent } from './components/routes/series/series.component';
 
 const routes: Routes = [
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'login/register',
+    component: RegisterComponent,
+  },
+
   {
     path: 'dashboard',
     component: DashboardComponent,

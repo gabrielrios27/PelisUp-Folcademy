@@ -1,4 +1,3 @@
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -9,17 +8,15 @@ import {
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
-    email: [, [Validators.email]],
-    password: [, [Validators.minLength(6)]],
+    email: [, [Validators.required, Validators.email]],
+    password: [, [Validators.required, Validators.min(6)]],
   });
-
-  invalidForm: boolean = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
   ngOnInit(): void {}
@@ -35,25 +32,16 @@ export class LoginComponent implements OnInit {
       imgEyePassword.src = '../../../assets/ico/eye-slash.svg';
     }
   }
-
-  logInUser() {
+  registerUser() {
     if (this.miFormulario.invalid) {
-      this.invalidForm = true;
-      console.log(this.miFormulario.get('password')?.hasError('minlength'));
-      console.log(this.miFormulario);
+      this.miFormulario.markAllAsTouched();
       return;
     }
-    this.invalidForm = false;
     const { email, password } = this.miFormulario.value;
-    this.authService.login(email, password).then((res) => {
+    this.authService.register(email, password).then((res) => {
       console.log(res);
     });
-    console.log(this.miFormulario);
+    console.log(this.miFormulario.value);
     // this.miFormulario.reset();
-  }
-  logInWithGoogleUser() {
-    this.authService.loginWithGoogle().then((res) => {
-      console.log(res);
-    });
   }
 }
