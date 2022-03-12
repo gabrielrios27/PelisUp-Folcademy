@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,15 +14,20 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  miFormulario: FormGroup = this.fb.group({
-    email: [, [Validators.required, Validators.email]],
-    password: [, [Validators.required, Validators.min(6)]],
+  miRegistro: FormGroup = this.fb.group({
+    email: [, [Validators.email]],
+    password: [, [Validators.minLength(6)]],
   });
 
   invalidForm: boolean = false;
   errCode: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {}
 
   OnClickSeePassword() {
@@ -36,17 +42,20 @@ export class RegisterComponent implements OnInit {
     }
   }
   registerUser() {
-    if (this.miFormulario.invalid) {
+    console.log(this.miRegistro);
+    if (this.miRegistro.invalid) {
       this.invalidForm = true;
       return;
     }
     this.invalidForm = false;
-    const { email, password } = this.miFormulario.value;
+    const { email, password } = this.miRegistro.value;
     this.authService.register(email, password).then((res) => {
       console.log(res);
       this.errCode = this.authService.errCode;
-      console.log('el error es: ' + this.errCode);
+      if (res) {
+        this.router.navigate(['../dashboard']);
+      }
     });
-    // this.miFormulario.reset();
+    // this.miRegistro.reset();
   }
 }

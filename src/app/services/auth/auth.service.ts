@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { first, lastValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   errCode: string = '';
+  user: any = null;
   constructor(private afauth: AngularFireAuth) {}
   async login(email: string, password: string) {
     this.errCode = '';
+    this.logOut();
     try {
       return await this.afauth.signInWithEmailAndPassword(email, password);
     } catch (err: any) {
@@ -19,6 +22,8 @@ export class AuthService {
     }
   }
   async register(email: string, password: string) {
+    this.logOut();
+    this.errCode = '';
     try {
       return await this.afauth.createUserWithEmailAndPassword(email, password);
     } catch (err: any) {
@@ -28,6 +33,7 @@ export class AuthService {
     }
   }
   async loginWithGoogle() {
+    this.logOut();
     try {
       return await this.afauth.signInWithPopup(
         new firebase.auth.GoogleAuthProvider()
@@ -38,7 +44,9 @@ export class AuthService {
     }
   }
   getUserLogged() {
-    return this.afauth.authState;
+    this.user = lastValueFrom(this.afauth.authState.pipe(first()));
+    return this.user;
+    // this.afauth.authState.pipe(first()).toPromise();  --- toPromise deprecated por eso se usa la lastValueFrom
   }
   logOut() {
     this.afauth.signOut();

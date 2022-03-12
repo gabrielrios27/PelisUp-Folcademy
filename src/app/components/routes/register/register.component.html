@@ -8,7 +8,7 @@
       class="form"
       (ngSubmit)="registerUser()"
       autocomplete="off"
-      [formGroup]="miFormulario"
+      [formGroup]="miRegistro"
     >
       <h1 class="form__legend">Registrarse</h1>
       <label class="formInput" for="email">
@@ -19,6 +19,7 @@
             class="formInput__input"
             formControlName="email"
             type="text"
+            autocomplete="off"
             required
             id="email"
           />
@@ -28,26 +29,26 @@
       <div
         class="form__errContainer"
         *ngIf="
-          (miFormulario.get('email')?.errors &&
-            miFormulario.get('email')?.dirty &&
+          (miRegistro.get('email')?.errors &&
+            miRegistro.get('email')?.dirty &&
             invalidForm) ||
           errCode !== ''
         "
       >
         <p
           class="form__err"
-          *ngIf="miFormulario.get('email')?.hasError('required')"
+          *ngIf="miRegistro.get('email')?.hasError('required')"
         >
           Debe completar este campo
         </p>
-        <p
-          class="form__err"
-          *ngIf="miFormulario.get('email')?.hasError('email')"
-        >
+        <p class="form__err" *ngIf="miRegistro.get('email')?.hasError('email')">
           El valor ingresado debe ser un Email
         </p>
         <p class="form__err" *ngIf="errCode === 'auth/email-already-in-use'">
           El email ingresado ya se encuentra registrado.
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/invalid-email'">
+          El email es invalido.
         </p>
       </div>
       <label class="formInput" for="password">
@@ -75,20 +76,20 @@
       <div
         class="form__errContainer"
         *ngIf="
-          miFormulario.get('password')?.errors &&
-          miFormulario.get('password')?.dirty &&
+          miRegistro.get('password')?.errors &&
+          miRegistro.get('password')?.dirty &&
           invalidForm
         "
       >
         <p
           class="form__err"
-          *ngIf="miFormulario.get('password')?.hasError('required')"
+          *ngIf="miRegistro.get('password')?.hasError('required')"
         >
           Debe completar este campo
         </p>
         <p
           class="form__err"
-          *ngIf="miFormulario.get('password')?.hasError('minlength')"
+          *ngIf="miRegistro.get('password')?.hasError('minlength')"
         >
           La contraseña debe tener al menos 6 caracteres
         </p>

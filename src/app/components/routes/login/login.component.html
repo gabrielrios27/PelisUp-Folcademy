@@ -19,6 +19,7 @@
             class="formInput__input"
             formControlName="email"
             type="text"
+            autocomplete="off"
             required
             id="email"
           />
@@ -48,6 +49,9 @@
         </p>
         <p class="form__err" *ngIf="errCode === 'auth/user-not-found'">
           El email ingresado no se encuentra registrado.
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/invalid-email'">
+          El email es invalido.
         </p>
       </div>
       <label class="formInput" for="password">

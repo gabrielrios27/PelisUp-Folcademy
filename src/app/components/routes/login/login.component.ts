@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +22,11 @@ export class LoginComponent implements OnInit {
   invalidForm: boolean = false;
   errCode: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
   ngOnInit(): void {}
 
   OnClickSeePassword() {
@@ -48,14 +52,21 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).then((res) => {
       console.log(res);
+
+      if (res) {
+        this.router.navigate(['../dashboard']);
+      }
       this.errCode = this.authService.errCode;
-      console.log('el error es: ' + this.errCode);
     });
+
     // this.miFormulario.reset();
   }
   logInWithGoogleUser() {
     this.authService.loginWithGoogle().then((res) => {
       console.log(res);
+      if (res) {
+        this.router.navigate(['../dashboard']);
+      }
     });
   }
 }
