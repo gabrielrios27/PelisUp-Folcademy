@@ -44,8 +44,6 @@ export class LoginComponent implements OnInit {
   logInUser() {
     if (this.miFormulario.invalid) {
       this.invalidForm = true;
-      console.log(this.miFormulario.get('password')?.hasError('minlength'));
-      console.log(this.miFormulario);
       return;
     }
     this.invalidForm = false;

@@ -43,12 +43,16 @@ export class AuthService {
       return null;
     }
   }
-  getUserLogged() {
+  getUserLogged(): Observable<any> {
     this.user = lastValueFrom(this.afauth.authState.pipe(first()));
+    console.log(this.user);
+
     return this.user;
     // this.afauth.authState.pipe(first()).toPromise();  --- toPromise deprecated por eso se usa la lastValueFrom
   }
   logOut() {
     this.afauth.signOut();
+    this.getUserLogged();
+    this.user = null;
   }
 }
