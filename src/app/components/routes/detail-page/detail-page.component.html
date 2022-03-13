@@ -10,12 +10,20 @@
   </div>
   <div class="cover__nameContainer">
     <p class="cover__route">
-      <a href="" class="cover__routeLink">PelisUp!</a>
+      <a routerLink="../../" class="cover__routeLink">PelisUp!</a>
       <span class="cover__slash"> / </span>
-      <a *ngIf="mediaType == 'movie'" href="" class="cover__routeLink"
+      <a
+        *ngIf="mediaType == 'movie'"
+        routerLink="../../peliculas"
+        class="cover__routeLink"
         >Películas</a
       >
-      <a *ngIf="mediaType == 'tv'" href="" class="cover__routeLink">Series</a>
+      <a
+        *ngIf="mediaType == 'tv'"
+        routerLink="../../series"
+        class="cover__routeLink"
+        >Series</a
+      >
     </p>
     <h3 class="cover__name">{{ movieToShow.title || serieToShow.name }}</h3>
   </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  user: any = this.authService.getUserLogged();
+  user: Observable<any> = this.authService.afauth.user;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
+
   logOut() {
+    console.log(this.user);
     this.authService.logOut();
-    this.user = null;
+    this.removeLocalStorage();
+    console.log(this.user);
+  }
+
+  removeLocalStorage() {
+    localStorage.removeItem('Usuario');
   }
 }

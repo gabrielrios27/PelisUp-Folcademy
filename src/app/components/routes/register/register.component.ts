@@ -53,9 +53,15 @@ export class RegisterComponent implements OnInit {
       console.log(res);
       this.errCode = this.authService.errCode;
       if (res) {
+        /*si el logeo es exitoso navego hacia el dashboard*/
         this.router.navigate(['../dashboard']);
+        this.setLocalStorage(res); /* seteo el usuario en el localstorage*/
+        this.miRegistro.reset();
       }
     });
     // this.miRegistro.reset();
+  }
+  setLocalStorage(data: any) {
+    localStorage.setItem('Usuario', JSON.stringify(data));
   }
 }

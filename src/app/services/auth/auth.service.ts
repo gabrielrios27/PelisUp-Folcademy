@@ -8,8 +8,11 @@ import { first, lastValueFrom, Observable } from 'rxjs';
 })
 export class AuthService {
   errCode: string = '';
-  user: any = null;
-  constructor(private afauth: AngularFireAuth) {}
+  user: any;
+
+  /*afauth se deja publico porque lo uso en el navbar */
+  constructor(public afauth: AngularFireAuth) {}
+
   async login(email: string, password: string) {
     this.errCode = '';
     this.logOut();
@@ -46,9 +49,7 @@ export class AuthService {
   getUserLogged(): Observable<any> {
     this.user = lastValueFrom(this.afauth.authState.pipe(first()));
     console.log(this.user);
-
     return this.user;
-    // this.afauth.authState.pipe(first()).toPromise();  --- toPromise deprecated por eso se usa la lastValueFrom
   }
   logOut() {
     this.afauth.signOut();

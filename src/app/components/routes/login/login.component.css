@@ -124,7 +124,6 @@
 .formInput__input:-webkit-autofill:hover,
 .formInput__input:-webkit-autofill:focus,
 .formInput__input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #0f1627 inset !important;
   box-shadow: 0 0 0 30px #0f1627 inset !important;
 }
 /* letra del autocompletado de chrome Grey-400 */
@@ -202,8 +201,8 @@
   align-items: center;
   padding: 0px 15px;
   margin: 0px 0px;
-  background: #ffffff;
-  border: 2px solid #b3b3b3;
+  background: #f9f9f9;
+  border: 2px solid #eeeeee;
   border-radius: 12px;
   cursor: pointer;
 }

@@ -50,9 +50,11 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).then((res) => {
       console.log(res);
-
       if (res) {
+        /*si el logeo es exitoso navego hacia el dashboard*/
         this.router.navigate(['../dashboard']);
+        this.setLocalStorage(res); /* seteo el usuario en el localstorage*/
+        this.miFormulario.reset();
       }
       this.errCode = this.authService.errCode;
     });
@@ -63,8 +65,14 @@ export class LoginComponent implements OnInit {
     this.authService.loginWithGoogle().then((res) => {
       console.log(res);
       if (res) {
+        /*si el logeo es exitoso navego hacia el dashboard*/
         this.router.navigate(['../dashboard']);
+        this.setLocalStorage(res); /* seteo el usuario en el localstorage*/
+        this.miFormulario.reset();
       }
     });
+  }
+  setLocalStorage(data: any) {
+    localStorage.setItem('Usuario', JSON.stringify(data));
   }
 }
