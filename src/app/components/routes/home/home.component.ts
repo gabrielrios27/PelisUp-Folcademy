@@ -25,17 +25,10 @@ export class HomeComponent implements OnInit {
 
   mediaType: MediaType = MediaType.Movie;
 
-  flagBtnDark: Observable<boolean> = this.authSvc.getLocalStorageBtnDark();
-  flagBtnDarkJSON: string | null = null;
-
-  constructor(
-    private _moviesService: MoviesService,
-    private authSvc: AuthService
-  ) {}
+  constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.OnClickAll();
-    // this.getLocStgDarkFlag();
   }
 
   getTrending() {
@@ -190,12 +183,4 @@ export class HomeComponent implements OnInit {
         this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
     }
   }
-  // getLocStgDarkFlag() {
-  //   this.flagBtnDarkJSON = localStorage.getItem('darkMode');
-  //   if (this.flagBtnDarkJSON) {
-  //     this.flagBtnDark = JSON.parse(this.flagBtnDarkJSON);
-  //   } else {
-  //     this.flagBtnDark = false;
-  //   }
-  // }
 }

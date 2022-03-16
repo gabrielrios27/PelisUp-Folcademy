@@ -10,8 +10,6 @@ export class AuthService {
   errCode: string = '';
   user: any;
 
-  public flagBtnDark: Observable<boolean> = this.getLocalStorageBtnDark();
-  flagBtnDarkJSON: string | null = null;
   /*afauth se deja publico porque lo uso en el navbar */
   constructor(public afauth: AngularFireAuth) {}
 
@@ -57,16 +55,5 @@ export class AuthService {
     this.afauth.signOut();
     this.getUserLogged();
     this.user = null;
-  }
-
-  getLocalStorageBtnDark(): Observable<boolean> {
-    let flagBtnDark$;
-    this.flagBtnDarkJSON = localStorage.getItem('darkMode');
-    if (this.flagBtnDarkJSON) {
-      flagBtnDark$ = observableOf(JSON.parse(this.flagBtnDarkJSON));
-    } else {
-      flagBtnDark$ = observableOf(false);
-    }
-    return flagBtnDark$;
   }
 }
