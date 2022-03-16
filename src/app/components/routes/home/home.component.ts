@@ -1,5 +1,7 @@
 import { HtmlTagDefinition } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import { MediaType, MoviesSeriesActors, Result } from 'src/interfaces/NewUser';
 
@@ -22,10 +24,18 @@ export class HomeComponent implements OnInit {
   twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
-  constructor(private _moviesService: MoviesService) {}
+
+  flagBtnDark: Observable<boolean> = this.authSvc.getLocalStorageBtnDark();
+  flagBtnDarkJSON: string | null = null;
+
+  constructor(
+    private _moviesService: MoviesService,
+    private authSvc: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.OnClickAll();
+    // this.getLocStgDarkFlag();
   }
 
   getTrending() {
@@ -180,4 +190,12 @@ export class HomeComponent implements OnInit {
         this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
     }
   }
+  // getLocStgDarkFlag() {
+  //   this.flagBtnDarkJSON = localStorage.getItem('darkMode');
+  //   if (this.flagBtnDarkJSON) {
+  //     this.flagBtnDark = JSON.parse(this.flagBtnDarkJSON);
+  //   } else {
+  //     this.flagBtnDark = false;
+  //   }
+  // }
 }

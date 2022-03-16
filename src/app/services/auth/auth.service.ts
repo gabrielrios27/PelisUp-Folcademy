@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { first, lastValueFrom, Observable } from 'rxjs';
+import { first, lastValueFrom, Observable, of as observableOf } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,8 @@ export class AuthService {
   errCode: string = '';
   user: any;
 
+  public flagBtnDark: Observable<boolean> = this.getLocalStorageBtnDark();
+  flagBtnDarkJSON: string | null = null;
   /*afauth se deja publico porque lo uso en el navbar */
   constructor(public afauth: AngularFireAuth) {}
 
@@ -55,5 +57,16 @@ export class AuthService {
     this.afauth.signOut();
     this.getUserLogged();
     this.user = null;
+  }
+
+  getLocalStorageBtnDark(): Observable<boolean> {
+    let flagBtnDark$;
+    this.flagBtnDarkJSON = localStorage.getItem('darkMode');
+    if (this.flagBtnDarkJSON) {
+      flagBtnDark$ = observableOf(JSON.parse(this.flagBtnDarkJSON));
+    } else {
+      flagBtnDark$ = observableOf(false);
+    }
+    return flagBtnDark$;
   }
 }

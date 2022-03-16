@@ -10,9 +10,13 @@ import { Observable } from 'rxjs';
 export class NavbarComponent implements OnInit {
   user: Observable<any> = this.authService.afauth.user;
 
+  flagBtnDark: boolean = false;
+  flagBtnDarkJSON: string | null = null;
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getLocalStorage();
+  }
 
   logOut() {
     console.log(this.user);
@@ -23,5 +27,23 @@ export class NavbarComponent implements OnInit {
 
   removeLocalStorage() {
     localStorage.removeItem('Usuario');
+  }
+  toggleBtnDark() {
+    this.flagBtnDark = !this.flagBtnDark;
+    this.setLocalStorage(this.flagBtnDark);
+    this.authService.getLocalStorageBtnDark();
+
+    console.log(this.flagBtnDark);
+    console.log(this.authService.flagBtnDark);
+  }
+  setLocalStorage(data: boolean) {
+    localStorage.setItem('darkMode', JSON.stringify(data));
+  }
+  getLocalStorage() {
+    /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
+    this.flagBtnDarkJSON = localStorage.getItem('darkMode');
+    if (this.flagBtnDarkJSON) {
+      this.flagBtnDark = JSON.parse(this.flagBtnDarkJSON);
+    }
   }
 }
