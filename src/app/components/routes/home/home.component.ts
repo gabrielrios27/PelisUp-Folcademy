@@ -1,9 +1,12 @@
-import { HtmlTagDefinition } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth/auth.service';
+
 import { MoviesService } from 'src/app/services/user/movies.service';
-import { MediaType, MoviesSeriesActors, Result } from 'src/interfaces/NewUser';
+import {
+  MediaType,
+  PageMoviesSeriesActors,
+  MoviesSeriesActors,
+} from 'src/interfaces/NewUser';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +14,9 @@ import { MediaType, MoviesSeriesActors, Result } from 'src/interfaces/NewUser';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  moviesSeriesApi: Result[] = [];
-  moviesSeriesApi_toSearch: Result[] = [];
-  moviesSeriesApi_toShow: Result[] = [];
+  moviesSeriesApi: MoviesSeriesActors[] = [];
+  moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
+  moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
 
   selectedCategorie: string = 'Todos'; /*lo que se escribe en el HTML*/
   filter: string = 'Todos';
@@ -33,10 +36,10 @@ export class HomeComponent implements OnInit {
 
   getTrending() {
     this._moviesService.getTrending().subscribe({
-      next: (data: MoviesSeriesActors) => {
-        let moviesSeriesActorsApi = data.results;
+      next: (data: PageMoviesSeriesActors) => {
+        let MoviesSeriesActorsApi = data.results;
         this.moviesSeriesApi = [];
-        for (let film of moviesSeriesActorsApi) {
+        for (let film of MoviesSeriesActorsApi) {
           if (film.media_type !== 'person') {
             this.moviesSeriesApi.push(film);
           }
@@ -56,7 +59,7 @@ export class HomeComponent implements OnInit {
   }
   getMovies() {
     this._moviesService.getMovies().subscribe({
-      next: (data: MoviesSeriesActors) => {
+      next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         console.log(this.moviesSeriesApi);
@@ -73,7 +76,7 @@ export class HomeComponent implements OnInit {
   }
   getSeries() {
     this._moviesService.getSeries().subscribe({
-      next: (data: MoviesSeriesActors) => {
+      next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         console.log(this.moviesSeriesApi);

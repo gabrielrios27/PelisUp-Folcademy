@@ -111,7 +111,7 @@
   font-size: 16px;
   line-height: 24px;
   margin: 0;
-  letter-spacing: 0.045em; /* el original de figma es 0,02em - se cambio a 0,045 em por que la medida original visualmente no daba los resultados esperados */
+  letter-spacing: 0.045em; /* el original de figma es 0,02em - se cambio a 0,045 em por que la medida original visualmente no daba los MoviesSeriesActorsados esperados */
   color: var(--Primary-400);
 }
 .addToList__text--success {

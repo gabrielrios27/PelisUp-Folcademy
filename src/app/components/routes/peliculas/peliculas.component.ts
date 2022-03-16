@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
-  MoviesSeries,
+  PageMoviesSeriesActors,
   MoviesSeriesActors,
-  Result,
 } from 'src/interfaces/NewUser';
 
 @Component({
@@ -13,9 +12,9 @@ import {
   styleUrls: ['./peliculas.component.css'],
 })
 export class PeliculasComponent implements OnInit {
-  moviesSeriesApi: Result[] = [];
-  moviesSeriesApi_toSearch: Result[] = [];
-  moviesSeriesApi_toShow: Result[] = [];
+  moviesSeriesApi: MoviesSeriesActors[] = [];
+  moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
+  moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
 
   selectedCategorie: string = 'Películas'; /*lo que se escribe en el HTML*/
   filter: string = 'Películas';
@@ -35,7 +34,7 @@ export class PeliculasComponent implements OnInit {
 
   getMovies() {
     this._moviesService.getMovies().subscribe({
-      next: (data: MoviesSeriesActors) => {
+      next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         console.log(this.moviesSeriesApi);

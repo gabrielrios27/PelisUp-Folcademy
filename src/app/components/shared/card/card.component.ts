@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/services/user/movies.service';
-import { MediaType } from 'src/interfaces/NewUser';
+import { MediaType, MoviesSeriesActorsBase } from 'src/interfaces/NewUser';
 
 @Component({
   selector: 'app-card',
@@ -14,7 +14,28 @@ export class CardComponent implements OnInit {
   @Input() id: number = 0;
   @Input() mediaType: MediaType = MediaType.Tv;
 
-  constructor(private _moviesService: MoviesService) {}
+  dataFilm: MoviesSeriesActorsBase;
+
+  constructor(private _moviesService: MoviesService) {
+    if (this.mediaType === 'tv') {
+      this.dataFilm = {
+        poster_path: this.img,
+        title: this.name,
+        id: this.id,
+        vote_average: this.rating,
+      };
+    } else {
+      this.dataFilm = {
+        poster_path: this.img,
+        id: this.id,
+        vote_average: this.rating,
+        name: this.name,
+      };
+    }
+  }
 
   ngOnInit(): void {}
+  addToFirestoreFromCard() {
+    this._moviesService.addToFirestore(this.dataFilm, this.mediaType);
+  }
 }

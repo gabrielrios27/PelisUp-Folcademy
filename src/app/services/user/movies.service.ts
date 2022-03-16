@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { first, lastValueFrom, Observable } from 'rxjs';
 import {
   Movie,
-  MoviesSeriesActors,
+  PageMoviesSeriesActors,
   Serie,
   MediaType,
+  MoviesSeriesActorsBase,
 } from 'src/interfaces/NewUser';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,37 +19,43 @@ export class MoviesService {
   idFilmToShowDetails: number = 0;
   mediaType: MediaType = MediaType.Movie;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
-  getTrending(): Observable<MoviesSeriesActors> {
+  getTrending(): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
       .set('language', 'es');
 
-    return this._http.get<MoviesSeriesActors>(
+    return this._http.get<PageMoviesSeriesActors>(
       this.baseUrl + '/trending/all/week',
       {
         params: params,
       }
     );
   }
-  getMovies(): Observable<MoviesSeriesActors> {
+  getMovies(): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
       .set('language', 'es');
 
-    return this._http.get<MoviesSeriesActors>(this.baseUrl + '/movie/popular', {
-      params: params,
-    });
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/movie/popular',
+      {
+        params: params,
+      }
+    );
   }
-  getSeries(): Observable<MoviesSeriesActors> {
+  getSeries(): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
       .set('language', 'es');
 
-    return this._http.get<MoviesSeriesActors>(this.baseUrl + '/tv/popular', {
-      params: params,
-    });
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/tv/popular',
+      {
+        params: params,
+      }
+    );
   }
   setIdFilmToShowDetails(id: number, media_type: MediaType) {
     this.idFilmToShowDetails = id;
@@ -82,5 +90,36 @@ export class MoviesService {
         params: params,
       }
     );
+  }
+  addToFirestore(dataFilm: MoviesSeriesActorsBase, mediaType: MediaType) {
+    this.firestore
+      .collection('peliculas')
+      .add({
+        title: 'hola mundo',
+      })
+      .then((ref) => {
+        console.log('se añadio pelicula con id: ', ref.id);
+      });
+  }
+  getFromFirestore() {
+    this.firestore
+      .collection('peliculas')
+      .get()
+      .toPromise()
+      .then((results: any) => {
+        const data = results.docs.map((doc: any) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log('datos en la coleccion peliculas: ', data);
+      });
+  }
+  deleteFromFirestore() {
+    this.firestore
+      .collection('peliculas')
+      .doc('otra pelicula')
+      .delete()
+      .then(() => console.log('elemento borrado'))
+      .catch((error) => console.log('Error eliminando el documento ', error));
   }
 }

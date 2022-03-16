@@ -1,41 +1,35 @@
-export interface MoviesSeries {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  rating: number;
-  category: string;
-}
-
-export interface MoviesSeriesActors {
+export interface PageMoviesSeriesActors {
   page: number;
-  results: Result[];
+  results: MoviesSeriesActors[];
   total_pages: number;
   total_results: number;
 }
 
-export interface Result {
+export interface MoviesSeriesActors extends MoviesSeriesActorsBase {
   original_language: OriginalLanguage;
   original_title?: string;
-  poster_path: string;
-  title?: string;
   overview: string;
-  release_date?: Date;
-  id: number;
   vote_count: number;
   adult?: boolean;
   backdrop_path: string;
-  vote_average: number;
   genre_ids: number[];
   video?: boolean;
   popularity: number;
   media_type: MediaType;
-  name?: string;
   original_name?: string;
   origin_country?: string[];
   first_air_date?: Date;
 }
-
+export interface MoviesSeriesActorsBase {
+  poster_path: string;
+  title?: string;
+  id: number;
+  vote_average: number;
+  name?: string;
+}
+export interface MoviesSeriesActorsUser extends MoviesSeriesActorsBase {
+  idUser: string;
+}
 export enum MediaType {
   Movie = 'movie',
   Tv = 'tv',

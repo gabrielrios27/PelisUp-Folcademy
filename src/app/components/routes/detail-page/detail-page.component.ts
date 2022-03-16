@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MoviesService } from 'src/app/services/user/movies.service';
-import { MediaType, Movie, MoviesSeries, Serie } from 'src/interfaces/NewUser';
+import { MediaType, Movie, Serie } from 'src/interfaces/NewUser';
 import { SeriesComponent } from '../series/series.component';
 
 @Component({
