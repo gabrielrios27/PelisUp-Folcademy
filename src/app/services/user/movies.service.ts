@@ -93,36 +93,39 @@ export class MoviesService {
       }
     );
   }
-  addToFirestore(dataFilm: MoviesSeriesActorsBase, mediaType: MediaType) {
-    this.firestore
-      .collection('peliculas')
-      .add({
-        title: 'hola mundo',
-      })
-      .then((ref) => {
-        console.log('se añadio pelicula con id: ', ref.id);
-      });
+  addUserToFirestore(userId: MoviesSeriesActorsUser): Promise<any> {
+    return this.firestore.collection('usuarios').add(userId);
   }
-  getFromFirestore(): MoviesSeriesActorsUser {
-    this.firestore
-      .collection('peliculas')
-      .get()
-      .toPromise()
-      .then((results: any) => {
-        this.data = results.docs.map((doc: any) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        console.log('datos en la coleccion peliculas: ', this.data);
-      });
-    return this.data;
+  addFilmToFirestore(
+    userId: MoviesSeriesActorsUser,
+    item: MoviesSeriesActorsBase,
+    mediaType: MediaType
+  ): Promise<any> {
+    return this.firestore
+      .collection('usuarios')
+      .doc(`${userId}`)
+      .collection(`${mediaType}`)
+      .add(item);
   }
-  deleteFromFirestore() {
-    this.firestore
-      .collection('peliculas')
-      .doc('otra pelicula')
-      .delete()
-      .then(() => console.log('elemento borrado'))
-      .catch((error) => console.log('Error eliminando el documento ', error));
+  getFromFirestore(
+    userId: MoviesSeriesActorsUser,
+    mediaType: MediaType
+  ): Observable<any> {
+    return this.firestore
+      .collection('usuarios')
+      .doc(`${userId}`)
+      .collection(`${mediaType}`)
+      .snapshotChanges();
+  }
+
+  deleteFromFirestore(
+    idUser: string,
+    id: string,
+    mediaType: MediaType
+  ): Promise<any> {
+    return this.firestore
+      .collection(`usuarios/${idUser}/${mediaType}`)
+      .doc(id)
+      .delete();
   }
 }

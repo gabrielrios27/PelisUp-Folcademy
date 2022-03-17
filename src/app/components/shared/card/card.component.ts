@@ -39,6 +39,6 @@ export class CardComponent implements OnInit {
     console.log(this.isLoged);
   }
   addToFirestoreFromCard() {
-    this._moviesService.addToFirestore(this.dataFilm, this.mediaType);
+    // this._moviesService.addFilmToFirestore(this.dataFilm, this.mediaType);
   }
 }
