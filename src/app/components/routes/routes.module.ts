@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AddNewItemComponent } from './add-new-item/add-new-item.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     DetailPageComponent,
     DashboardComponent,
     RegisterComponent,
+    AddNewItemComponent,
   ],
   imports: [
     CommonModule,

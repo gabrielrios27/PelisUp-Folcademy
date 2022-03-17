@@ -7,6 +7,7 @@ import {
   Serie,
   MediaType,
   MoviesSeriesActorsBase,
+  MoviesSeriesActorsUser,
 } from 'src/interfaces/NewUser';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 @Injectable({
@@ -18,6 +19,7 @@ export class MoviesService {
 
   idFilmToShowDetails: number = 0;
   mediaType: MediaType = MediaType.Movie;
+  data: MoviesSeriesActorsUser = {} as MoviesSeriesActorsUser;
 
   constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
@@ -101,18 +103,19 @@ export class MoviesService {
         console.log('se añadio pelicula con id: ', ref.id);
       });
   }
-  getFromFirestore() {
+  getFromFirestore(): MoviesSeriesActorsUser {
     this.firestore
       .collection('peliculas')
       .get()
       .toPromise()
       .then((results: any) => {
-        const data = results.docs.map((doc: any) => ({
+        this.data = results.docs.map((doc: any) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        console.log('datos en la coleccion peliculas: ', data);
+        console.log('datos en la coleccion peliculas: ', this.data);
       });
+    return this.data;
   }
   deleteFromFirestore() {
     this.firestore

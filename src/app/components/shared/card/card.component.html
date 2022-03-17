@@ -14,21 +14,22 @@
     <div class="card__infoContainer">
       <p class="card__movieName">{{ name }}</p>
 
-      <!-- ''''''agregar a mi lista''''''' -->
+      <ng-container *ngIf="isLoged == 'loged'">
+        <!-- ''''''agregar a mi lista''''''' -->
+        <div class="addToList" (click)="addToFirestoreFromCard()">
+          <span class="icons addToList__ico">C</span>
+          <p class="addToList__text">Agregar a mi lista</p>
+        </div>
 
-      <div class="addToList" (click)="addToFirestoreFromCard()">
-        <span class="icons addToList__ico">C</span>
-        <p class="addToList__text">Agregar a mi lista</p>
-      </div>
+        <!-- '''''success - agregado a mi lista'''''' -->
 
-      <!-- '''''success - agregado a mi lista'''''' -->
-
-      <!-- <div class="addToList">
-      <i class="icons addToList__ico addToList__text--success">B</i>
-      <p class="addToList__text addToList__text--success">
-        Agregado a mi lista
-      </p>
-    </div> -->
+        <!-- <div class="addToList">
+        <i class="icons addToList__ico addToList__text--success">B</i>
+        <p class="addToList__text addToList__text--success">
+          Agregado a mi lista
+        </p>
+      </div> -->
+      </ng-container>
     </div>
   </a>
 </div>

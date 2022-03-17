@@ -1,0 +1,67 @@
+<section class="home">
+  <div class="titlesHome">
+    <h1 class="titlesHome__h1">Agregar nuevo item</h1>
+  </div>
+  <app-searcher
+    categorie="películas y series"
+    (buscar)="SearchInParent($event)"
+  ></app-searcher>
+  <div class="categories">
+    <ul class="categories__list">
+      <li
+        [ngClass]="
+          filter == 'Todos' ? 'categories__item--active' : 'categories__item'
+        "
+        (click)="OnClickAll()"
+      >
+        Todos
+      </li>
+      <li
+        [ngClass]="
+          filter == 'Películas'
+            ? 'categories__item--active'
+            : 'categories__item'
+        "
+        (click)="OnClickMovies()"
+      >
+        Películas
+      </li>
+      <li
+        [ngClass]="
+          filter == 'Series' ? 'categories__item--active' : 'categories__item'
+        "
+        (click)="OnClickShows()"
+      >
+        Series
+      </li>
+    </ul>
+  </div>
+  <h3 class="selectedCategorie">
+    {{ filter }}
+    <span class="selectedCategorie__spanQuantity">({{ quantity }})</span>
+  </h3>
+  <div class="cardsConteiner">
+    <ng-container *ngIf="filter == 'Todos'">
+      <app-card
+        *ngFor="let film of moviesSeriesApi_toShow"
+        img="{{ film.poster_path }}"
+        name="{{ film.name || film.title }}"
+        [rating]="film.vote_average"
+        [id]="film.id"
+        [mediaType]="film.media_type"
+        isloged="loged"
+      ></app-card>
+    </ng-container>
+    <ng-container *ngIf="filter == 'Películas' || filter == 'Series'">
+      <app-card
+        *ngFor="let film of moviesSeriesApi_toShow"
+        img="{{ film.poster_path }}"
+        name="{{ film.name || film.title }}"
+        [rating]="film.vote_average"
+        [id]="film.id"
+        [mediaType]="mediaType"
+        isloged="loged"
+      ></app-card>
+    </ng-container>
+  </div>
+</section>

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
   PageMoviesSeriesActors,
   MoviesSeriesActors,
+  MoviesSeriesActorsUser,
 } from 'src/interfaces/NewUser';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-add-new-item',
+  templateUrl: './add-new-item.component.html',
+  styleUrls: ['./add-new-item.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class AddNewItemComponent implements OnInit {
   moviesSeriesApi: MoviesSeriesActors[] = [];
   moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
   moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
@@ -26,11 +26,13 @@ export class HomeComponent implements OnInit {
   twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
+  myListMovie: MoviesSeriesActorsUser = this._moviesService.getFromFirestore();
 
   constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.OnClickAll();
+    console.log(this.myListMovie);
   }
 
   getTrending() {

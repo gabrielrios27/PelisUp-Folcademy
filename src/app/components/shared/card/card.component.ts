@@ -13,6 +13,7 @@ export class CardComponent implements OnInit {
   @Input() rating: number = 6.8;
   @Input() id: number = 0;
   @Input() mediaType: MediaType = MediaType.Tv;
+  @Input() isLoged: string = 'notLoged';
 
   dataFilm: MoviesSeriesActorsBase;
 
@@ -34,7 +35,9 @@ export class CardComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.isLoged);
+  }
   addToFirestoreFromCard() {
     this._moviesService.addToFirestore(this.dataFilm, this.mediaType);
   }

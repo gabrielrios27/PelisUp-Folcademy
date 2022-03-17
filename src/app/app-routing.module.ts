@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddNewItemComponent } from './components/routes/add-new-item/add-new-item.component';
 import { DashboardComponent } from './components/routes/dashboard/dashboard.component';
 import { DetailPageComponent } from './components/routes/detail-page/detail-page.component';
 import { HomeComponent } from './components/routes/home/home.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'addNewItem',
+    component: AddNewItemComponent,
   },
   {
     path: 'peliculas',
