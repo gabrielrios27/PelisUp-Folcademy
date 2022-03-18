@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { first, lastValueFrom, Observable, of as observableOf } from 'rxjs';
+import { MoviesSeriesActorsUser } from 'src/interfaces/NewUser';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,10 @@ export class AuthService {
   user: any;
 
   /*afauth se deja publico porque lo uso en el navbar */
-  constructor(public afauth: AngularFireAuth) {}
+  constructor(
+    public afauth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) {}
 
   async login(email: string, password: string) {
     this.errCode = '';
@@ -55,5 +60,8 @@ export class AuthService {
     this.afauth.signOut();
     this.getUserLogged();
     this.user = null;
+  }
+  addUserToFirestore(userId: any): Promise<any> {
+    return this.firestore.collection('usuarios').add(userId);
   }
 }

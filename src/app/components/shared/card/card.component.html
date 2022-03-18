@@ -1,5 +1,6 @@
 <div class="card">
-  <a [routerLink]="['/', mediaType, id]" class="card__a">
+  <!-- [routerLink]="['/', mediaType, id]" -->
+  <a class="card__a">
     <div class="card__imgContainer">
       <img
         src="https://image.tmdb.org/t/p/w500{{ img }}"
@@ -14,21 +15,122 @@
     <div class="card__infoContainer">
       <p class="card__movieName">{{ name }}</p>
 
-      <ng-container *ngIf="isLoged == 'loged'">
-        <!-- ''''''agregar a mi lista''''''' -->
-        <div class="addToList" (click)="addToFirestoreFromCard()">
+      <!-- ''''''botón agregar a mi lista''''''' -->
+      <ng-container *ngIf="user | async as user">
+        <div
+          class="addToList"
+          (click)="addToFirestoreFromCard()"
+          *ngIf="!isAdded"
+        >
           <span class="icons addToList__ico">C</span>
           <p class="addToList__text">Agregar a mi lista</p>
         </div>
 
         <!-- '''''success - agregado a mi lista'''''' -->
 
-        <!-- <div class="addToList">
-        <i class="icons addToList__ico addToList__text--success">B</i>
-        <p class="addToList__text addToList__text--success">
-          Agregado a mi lista
-        </p>
-      </div> -->
+        <div class="addToList addToList--success" *ngIf="isAdded">
+          <!-- <i class="icons addToList__ico ">B</i> -->
+          <svg
+            class="icons addToList__ico"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22 9V15C22 15.22 22 15.44 21.98 15.65C21.16 14.64 19.91 14 18.5 14C17.44 14 16.46 14.37 15.69 14.99C14.65 15.81 14 17.08 14 18.5C14 19.34 14.24 20.14 14.65 20.82C14.92 21.27 15.26 21.66 15.66 21.98C15.45 22 15.23 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H15C20 2 22 4 22 9Z"
+              stroke="#FFBD6D"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2.52002 7.10999H21.48"
+              stroke="#FFBD6D"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.52002 2.10999V6.96997"
+              stroke="#FFBD6D"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M15.48 2.10999V6.52002"
+              stroke="#FFBD6D"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M23 18.5C23 19.34 22.76 20.14 22.35 20.82C22.11 21.22 21.81 21.58 21.46 21.88C20.67 22.58 19.64 23 18.5 23C17.43 23 16.44 22.62 15.67 21.98H15.66C15.26 21.66 14.92 21.27 14.65 20.82C14.24 20.14 14 19.34 14 18.5C14 17.08 14.65 15.81 15.69 14.99C16.46 14.37 17.44 14 18.5 14C19.91 14 21.16 14.64 21.98 15.65C22.62 16.42 23 17.42 23 18.5Z"
+              stroke="#FFBD6D"
+              stroke-width="1.5"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <!-- <path
+              d="M16.75 18.5L17.86 19.61L20.26 17.39"
+              stroke="#FFBD6D"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /> -->
+            <path
+              id="svg_3"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="#FFBD6D"
+              d="m0.52002,5.10999l18.95998,0"
+            />
+          </svg>
+          <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="#FFBD6D"
+              d="m20,7l0,6c0,0.22 0,0.44 -0.02,0.65c-0.82,-1.01 -2.07,-1.65 -3.48,-1.65c-1.06,0 -2.04,0.37 -2.81,0.99c-1.04,0.82 -1.69,2.09 -1.69,3.51c0,0.84 0.24,1.64 0.65,2.32c0.27,0.45 0.61,0.84 1.01,1.16c-0.21,0.02 -0.43,0.02 -0.66,0.02l-6,0c-5,0 -7,-2 -7,-7l0,-6c0,-5 2,-7 7,-7l6,0c5,0 7,2 7,7z"
+            />
+            <path
+              stroke="#FFBD6D"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              d="m14.55228,16.23902l4.12127,0"
+            />
+            <path
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="#FFBD6D"
+              d="m6.52002,0.10999l0,4.85998"
+            />
+            <path
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="#FFBD6D"
+              d="m13.48,0.10999l0,4.41003"
+            />
+            <!-- <path d="M23 18.5C23 19.34 22.76 20.14 22.35 20.82C22.11 21.22 21.81 21.58 21.46 21.88C20.67 22.58 19.64 23 18.5 23C17.43 23 16.44 22.62 15.67 21.98H15.66C15.26 21.66 14.92 21.27 14.65 20.82C14.24 20.14 14 19.34 14 18.5C14 17.08 14.65 15.81 15.69 14.99C16.46 14.37 17.44 14 18.5 14C19.91 14 21.16 14.64 21.98 15.65C22.62 16.42 23 17.42 23 18.5Z" stroke="#FFBD6D" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> -->
+            <path
+              id="svg_3"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              stroke="#FFBD6D"
+              d="m0.52002,5.10999l18.95998,0"
+            />
+          </svg>
+          <p class="addToList__text">Eliminar de mi lista</p>
+        </div>
       </ng-container>
     </div>
   </a>

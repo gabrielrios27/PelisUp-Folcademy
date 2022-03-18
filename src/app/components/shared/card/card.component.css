@@ -93,6 +93,11 @@
   padding: 0px;
   height: 24px;
   margin: 16px 0 0 0;
+  cursor: pointer;
+}
+.addToList:hover .addToList__ico,
+.addToList:hover .addToList__text {
+  color: var(--Primary-300);
 }
 .addToList__ico {
   /* width: 24px;
@@ -115,6 +120,9 @@
   color: var(--Primary-400);
 }
 .addToList__text--success {
-  color: var(--Success-400);
+  color: var(--Warning-400);
   font-weight: 400;
+}
+.addToList:hover .addToList__text--success {
+  color: var(--Warning-300);
 }

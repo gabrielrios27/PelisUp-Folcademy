@@ -50,12 +50,12 @@ export class RegisterComponent implements OnInit {
     this.invalidForm = false;
     const { email, password } = this.miRegistro.value;
     this.authService.register(email, password).then((res) => {
-      console.log(res);
+      console.log(res?.user);
       this.errCode = this.authService.errCode;
-      if (res) {
+      if (res?.user) {
         /*si el logeo es exitoso navego hacia el dashboard*/
         this.router.navigate(['../dashboard']);
-        this.setLocalStorage(res); /* seteo el usuario en el localstorage*/
+        this.setLocalStorage(res.user); /* seteo el usuario en el localstorage*/
         this.miRegistro.reset();
       }
     });

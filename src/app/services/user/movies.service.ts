@@ -93,9 +93,7 @@ export class MoviesService {
       }
     );
   }
-  addUserToFirestore(userId: MoviesSeriesActorsUser): Promise<any> {
-    return this.firestore.collection('usuarios').add(userId);
-  }
+
   addFilmToFirestore(
     userId: MoviesSeriesActorsUser,
     item: MoviesSeriesActorsBase,

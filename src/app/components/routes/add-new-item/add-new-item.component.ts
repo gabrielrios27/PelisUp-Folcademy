@@ -26,13 +26,11 @@ export class AddNewItemComponent implements OnInit {
   twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
-  myListMovie: MoviesSeriesActorsUser = this._moviesService.getFromFirestore();
 
   constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.OnClickAll();
-    console.log(this.myListMovie);
   }
 
   getTrending() {
