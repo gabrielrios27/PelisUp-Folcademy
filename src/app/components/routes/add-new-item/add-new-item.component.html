@@ -49,7 +49,7 @@
         [rating]="film.vote_average"
         [id]="film.id"
         [mediaType]="film.media_type"
-        isloged="loged"
+        [added]="film.added || false"
       ></app-card>
     </ng-container>
     <ng-container *ngIf="filter == 'Películas' || filter == 'Series'">
@@ -60,7 +60,7 @@
         [rating]="film.vote_average"
         [id]="film.id"
         [mediaType]="mediaType"
-        isloged="loged"
+        [added]="film.added || false"
       ></app-card>
     </ng-container>
   </div>

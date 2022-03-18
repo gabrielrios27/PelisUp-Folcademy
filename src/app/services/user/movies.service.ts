@@ -103,7 +103,10 @@ export class MoviesService {
       .collection('usuarios')
       .doc(`${userId}`)
       .collection(`${mediaType}`)
-      .add(item);
+      .add(item)
+      .then((res) => {
+        return res;
+      });
   }
   getFromFirestore(
     userId: MoviesSeriesActorsUser,

@@ -26,11 +26,18 @@ export class AddNewItemComponent implements OnInit {
   twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
+  userLocStg: any;
+  userJSON: string | null = null;
+  myMovies: any;
+  mySeries: any;
 
   constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.OnClickAll();
+    this.getLocalStorage();
+    this.getMyList(this.myMovies, MediaType.Movie);
+    this.getMyList(this.mySeries, MediaType.Tv);
   }
 
   getTrending() {
@@ -183,6 +190,51 @@ export class AddNewItemComponent implements OnInit {
       this.moviesSeriesApi_toShow = this.moviesSeriesApi_toSearch;
       this.toSearchPrevius =
         this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
+    }
+  }
+  getMyList(array: any, mediaType: MediaType) {
+    this._moviesService
+      .getFromFirestore(this.userLocStg.uid, mediaType)
+      .subscribe(
+        (resp) => {
+          array = [];
+          resp.forEach((element: any) => {
+            array.push({
+              idGlobal: element.payload.doc.id,
+              ...element.payload.doc.data(),
+            });
+          });
+          this.checkMatches();
+        },
+        (error) => {
+          console.log('falló la peticion de mylist', error);
+        }
+      );
+  }
+  getLocalStorage() {
+    /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
+    this.userJSON = localStorage.getItem('Usuario');
+    if (this.userJSON) {
+      this.userLocStg = JSON.parse(this.userJSON);
+    }
+  }
+  checkMatches() {
+    for (let item of this.moviesSeriesApi_toShow) {
+      if (item.name) {
+        for (let serie of this.mySeries) {
+          if (item.name == serie.name) {
+            item.added = true;
+          }
+        }
+      } else if (item.title) {
+        for (let movie of this.myMovies) {
+          if (item.title == movie.title) {
+            item.added = true;
+          } else {
+            item.added = false;
+          }
+        }
+      }
     }
   }
 }

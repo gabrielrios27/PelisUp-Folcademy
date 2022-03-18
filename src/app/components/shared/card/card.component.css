@@ -102,7 +102,7 @@
 .addToList__ico {
   /* width: 24px;
   height: 24px; */
-  font-size: 34px;
+  font-size: 28px;
   line-height: 24px;
   font-weight: 600;
   font-style: normal;
@@ -119,10 +119,19 @@
   letter-spacing: 0.045em; /* el original de figma es 0,02em - se cambio a 0,045 em por que la medida original visualmente no daba los MoviesSeriesActorsados esperados */
   color: var(--Primary-400);
 }
-.addToList__text--success {
-  color: var(--Warning-400);
+.delete__ico {
+  margin-right: 8px;
+}
+.delete__ico path {
+  stroke: var(--Error-500);
+}
+.addToList__text--delete {
+  color: var(--Error-500);
   font-weight: 400;
 }
-.addToList:hover .addToList__text--success {
-  color: var(--Warning-300);
+.addToList:hover .addToList__text--delete {
+  color: var(--Error-400);
+}
+.addToList:hover .delete__ico path {
+  stroke: var(--Error-400);
 }

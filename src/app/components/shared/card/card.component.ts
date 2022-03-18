@@ -15,13 +15,14 @@ export class CardComponent implements OnInit {
   @Input() rating: number = 6.8;
   @Input() id: number = 0;
   @Input() mediaType: MediaType = MediaType.Tv;
-  @Input() isLoged: string = 'notLoged';
+  @Input() added: boolean = false;
 
   dataFilm: MoviesSeriesActorsBase = {} as MoviesSeriesActorsBase;
   user: Observable<any> = this.authService.afauth.user;
   userLocStg: any;
   userJSON: string | null = null;
   isAdded: boolean = false;
+  idFilmAdded: any;
 
   constructor(
     private _moviesService: MoviesService,
@@ -53,7 +54,15 @@ export class CardComponent implements OnInit {
       this.dataFilm,
       this.mediaType
     );
+
     this.isAdded = true;
+  }
+  deleteFromCard() {
+    // this._moviesService.deleteFromFirestore(
+    //   this.userLocStg.uid,
+    //   this.id,
+    //   this.mediaType
+    // );
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/

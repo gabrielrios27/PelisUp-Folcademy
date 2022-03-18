@@ -19,6 +19,7 @@ export interface MoviesSeriesActors extends MoviesSeriesActorsBase {
   original_name?: string;
   origin_country?: string[];
   first_air_date?: Date;
+  added?: boolean;
 }
 export interface MoviesSeriesActorsBase {
   poster_path: string;
