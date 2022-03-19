@@ -18,9 +18,9 @@
       <!-- ''''''botón agregar a mi lista''''''' -->
       <ng-container *ngIf="user | async as user">
         <div
-          class="addToList"
           (click)="addToFirestoreFromCard()"
-          *ngIf="!isAdded && added"
+          class="addToList"
+          *ngIf="!added"
         >
           <span class="icons addToList__ico">C</span>
           <p class="addToList__text">Agregar a mi lista</p>
@@ -28,11 +28,7 @@
 
         <!-- '''''success - agregado a mi lista'''''' -->
 
-        <div
-          class="addToList"
-          *ngIf="isAdded || added"
-          (click)="addToFirestoreFromCard()"
-        >
+        <div (click)="deleteFromCard()" class="addToList" *ngIf="added">
           <!-- <i class="icons addToList__ico ">B</i> -->
           <svg
             class="delete__ico"

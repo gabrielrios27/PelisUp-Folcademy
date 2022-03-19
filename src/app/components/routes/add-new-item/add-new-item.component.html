@@ -50,6 +50,7 @@
         [id]="film.id"
         [mediaType]="film.media_type"
         [added]="film.added || false"
+        idGlobal="{{ film.idGlobal }}"
       ></app-card>
     </ng-container>
     <ng-container *ngIf="filter == 'Películas' || filter == 'Series'">

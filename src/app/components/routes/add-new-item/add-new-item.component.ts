@@ -28,16 +28,14 @@ export class AddNewItemComponent implements OnInit {
   mediaType: MediaType = MediaType.Movie;
   userLocStg: any;
   userJSON: string | null = null;
-  myMovies: any;
-  mySeries: any;
+  myMovies: any[] = [];
+  mySeries: any[] = [];
 
   constructor(private _moviesService: MoviesService) {}
 
   ngOnInit(): void {
-    this.OnClickAll();
     this.getLocalStorage();
-    this.getMyList(this.myMovies, MediaType.Movie);
-    this.getMyList(this.mySeries, MediaType.Tv);
+    this.OnClickAll();
   }
 
   getTrending() {
@@ -51,7 +49,9 @@ export class AddNewItemComponent implements OnInit {
           }
         }
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(this.moviesSeriesApi);
+        this.getMyList(this.myMovies, MediaType.Movie);
+        this.getMyList(this.mySeries, MediaType.Tv);
+        console.log(this.moviesSeriesApi_toShow);
       },
       error: (err) => {
         console.log(err);
@@ -68,7 +68,9 @@ export class AddNewItemComponent implements OnInit {
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(this.moviesSeriesApi);
+        this.getMyList(this.myMovies, MediaType.Movie);
+        this.getMyList(this.mySeries, MediaType.Tv);
+        console.log(this.moviesSeriesApi_toShow);
       },
       error: (err) => {
         console.log(err);
@@ -85,7 +87,9 @@ export class AddNewItemComponent implements OnInit {
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(this.moviesSeriesApi);
+        this.getMyList(this.myMovies, MediaType.Movie);
+        this.getMyList(this.mySeries, MediaType.Tv);
+        console.log(this.moviesSeriesApi_toShow);
       },
       error: (err) => {
         console.log(err);
@@ -192,6 +196,7 @@ export class AddNewItemComponent implements OnInit {
         this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
     }
   }
+  // obtengo los arreglos del firestore y busco coincidencias en el arreglo a mostrar para saber si el item ya esta agregado a firestore
   getMyList(array: any, mediaType: MediaType) {
     this._moviesService
       .getFromFirestore(this.userLocStg.uid, mediaType)
@@ -204,13 +209,15 @@ export class AddNewItemComponent implements OnInit {
               ...element.payload.doc.data(),
             });
           });
-          this.checkMatches();
+          console.log('array de peliculas o series', array);
+          this.checkMatches(array);
         },
         (error) => {
           console.log('falló la peticion de mylist', error);
         }
       );
   }
+  // obtengo del local storage el usuario para usar el user.uid
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
     this.userJSON = localStorage.getItem('Usuario');
@@ -218,20 +225,21 @@ export class AddNewItemComponent implements OnInit {
       this.userLocStg = JSON.parse(this.userJSON);
     }
   }
-  checkMatches() {
+  // busco coincidencias en los arreglos de peliculas(.title) y series(.name), si hay coincidencia se agrega al item added=true
+  checkMatches(array: MoviesSeriesActorsUser[]) {
     for (let item of this.moviesSeriesApi_toShow) {
       if (item.name) {
-        for (let serie of this.mySeries) {
+        for (let serie of array) {
           if (item.name == serie.name) {
             item.added = true;
+            item.idGlobal = serie.idGlobal;
           }
         }
       } else if (item.title) {
-        for (let movie of this.myMovies) {
+        for (let movie of array) {
           if (item.title == movie.title) {
             item.added = true;
-          } else {
-            item.added = false;
+            item.idGlobal = movie.idGlobal;
           }
         }
       }

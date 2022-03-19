@@ -27,9 +27,10 @@ export interface MoviesSeriesActorsBase {
   id: number;
   vote_average: number;
   name?: string;
+  idGlobal?: string;
 }
 export interface MoviesSeriesActorsUser extends MoviesSeriesActorsBase {
-  idUser: string;
+  idGlobal: string;
 }
 export enum MediaType {
   Movie = 'movie',

@@ -16,13 +16,14 @@ export class CardComponent implements OnInit {
   @Input() id: number = 0;
   @Input() mediaType: MediaType = MediaType.Tv;
   @Input() added: boolean = false;
+  @Input() idGlobal: string = '';
 
   dataFilm: MoviesSeriesActorsBase = {} as MoviesSeriesActorsBase;
   user: Observable<any> = this.authService.afauth.user;
   userLocStg: any;
   userJSON: string | null = null;
   isAdded: boolean = false;
-  idFilmAdded: any;
+  idFilmAdded: string = '';
 
   constructor(
     private _moviesService: MoviesService,
@@ -31,8 +32,7 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocalStorage();
-    console.log('user en card:', this.userLocStg);
-    if (this.mediaType === 'tv') {
+    if (this.mediaType === 'movie') {
       this.dataFilm = {
         poster_path: this.img,
         title: this.name,
@@ -49,20 +49,25 @@ export class CardComponent implements OnInit {
     }
   }
   addToFirestoreFromCard() {
-    this._moviesService.addFilmToFirestore(
-      this.userLocStg.uid,
-      this.dataFilm,
-      this.mediaType
-    );
+    this._moviesService
+      .addFilmToFirestore(this.userLocStg.uid, this.dataFilm, this.mediaType)
+      .then((res) => (this.idFilmAdded = res.id))
+      .finally(() => {
+        console.log('respuesta del item añadido: ', this.idFilmAdded);
+      });
 
-    this.isAdded = true;
+    this.added = true;
   }
   deleteFromCard() {
-    // this._moviesService.deleteFromFirestore(
-    //   this.userLocStg.uid,
-    //   this.id,
-    //   this.mediaType
-    // );
+    console.log('borrando');
+
+    this._moviesService.deleteFromFirestore(
+      this.userLocStg.uid,
+      this.idFilmAdded || this.idGlobal,
+      this.mediaType
+    );
+    this.added = false;
+    console.log('added: ', this.isAdded);
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
