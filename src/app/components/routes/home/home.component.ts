@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
@@ -26,13 +29,25 @@ export class HomeComponent implements OnInit {
   twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
+  userLocStg: any;
+  userJSON: string | null = null;
 
-  constructor(private _moviesService: MoviesService) {}
+  constructor(private _moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
     this.OnClickAll();
+    this.getLocalStorage();
+    if (this.userLocStg) {
+      this.router.navigate(['../dashboard']);
+    }
   }
-
+  getLocalStorage() {
+    /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
+    this.userJSON = localStorage.getItem('Usuario');
+    if (this.userJSON) {
+      this.userLocStg = JSON.parse(this.userJSON);
+    }
+  }
   getTrending() {
     this._moviesService.getTrending().subscribe({
       next: (data: PageMoviesSeriesActors) => {

@@ -18,6 +18,7 @@
 </div>
 <!-- lista de anlaces desplegados en pantalla completa al dar click en el boton hamburguesa -->
 <ul
+  *ngIf="user | async as user; else notLoged"
   class="burgerButton__list"
   [ngClass]="
     btnFlag ? 'burgerButton__list--active' : 'burgerButton__list--desactive'
@@ -27,21 +28,57 @@
     <a
       class="burgerButton__link"
       (click)="ToogleBtnFlag()"
-      routerLink="peliculas"
-      >Películas</a
+      routerLink="dashboard"
+      >Dashboard</a
     >
   </li>
   <li class="burgerButton__items">
-    <a class="burgerButton__link" (click)="ToogleBtnFlag()" routerLink="series"
-      >Series</a
+    <a
+      class="burgerButton__link"
+      (click)="ToogleBtnFlag()"
+      routerLink="addNewItem"
+      >Agregar</a
     >
   </li>
   <li class="burgerButton__items">
-    <a class="burgerButton__link" (click)="ToogleBtnFlag()" routerLink="login"
-      >Ingresar</a
+    <a
+      class="burgerButton__link"
+      (click)="ToogleBtnFlag(); logOut()"
+      routerLink="login"
+      >Salir</a
     >
   </li>
 </ul>
+<ng-template #notLoged>
+  <ul
+    class="burgerButton__list"
+    [ngClass]="
+      btnFlag ? 'burgerButton__list--active' : 'burgerButton__list--desactive'
+    "
+  >
+    <li class="burgerButton__items">
+      <a
+        class="burgerButton__link"
+        (click)="ToogleBtnFlag()"
+        routerLink="peliculas"
+        >Películas</a
+      >
+    </li>
+    <li class="burgerButton__items">
+      <a
+        class="burgerButton__link"
+        (click)="ToogleBtnFlag()"
+        routerLink="series"
+        >Series</a
+      >
+    </li>
+    <li class="burgerButton__items">
+      <a class="burgerButton__link" (click)="ToogleBtnFlag()" routerLink="login"
+        >Ingresar</a
+      >
+    </li>
+  </ul>
+</ng-template>
 <!-- fondo purpura del listado de enlaces - aparece con clip-path -->
 <div
   class="burgerButton__backgroundPurple"

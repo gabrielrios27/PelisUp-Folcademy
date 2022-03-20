@@ -21,13 +21,27 @@ export class LoginComponent implements OnInit {
 
   invalidForm: boolean = false;
   errCode: string = '';
+  userLocStg: any;
+  userJSON: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getLocalStorage();
+    if (this.userLocStg) {
+      this.router.navigate(['../dashboard']);
+    }
+  }
+  getLocalStorage() {
+    /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
+    this.userJSON = localStorage.getItem('Usuario');
+    if (this.userJSON) {
+      this.userLocStg = JSON.parse(this.userJSON);
+    }
+  }
 
   OnClickSeePassword() {
     const passwordInput: any = document.getElementById('password');

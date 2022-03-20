@@ -7,6 +7,7 @@
         src="https://image.tmdb.org/t/p/w500{{ img }}"
         alt="Portada de la pelicula {{ name }}"
         class="card__img"
+        [routerLink]="['/', mediaType, id]"
       />
       <div class="ratingButton">
         <span class="icons ratingButton__starIco">G</span>

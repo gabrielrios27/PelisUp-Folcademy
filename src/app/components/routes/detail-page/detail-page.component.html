@@ -8,23 +8,31 @@
   >
     <div class="cover__gradientBackground"></div>
   </div>
+
   <div class="cover__nameContainer">
-    <p class="cover__route">
-      <a routerLink="../../" class="cover__routeLink">PelisUp!</a>
+    <p class="cover__route" *ngIf="user | async as user; else notLoged">
+      <a routerLink="../../dashboard" class="cover__routeLink">Dashboard</a>
       <span class="cover__slash"> / </span>
-      <a
-        *ngIf="mediaType == 'movie'"
-        routerLink="../../peliculas"
-        class="cover__routeLink"
-        >Películas</a
-      >
-      <a
-        *ngIf="mediaType == 'tv'"
-        routerLink="../../series"
-        class="cover__routeLink"
-        >Series</a
-      >
+      <a routerLink="../../addNewItem" class="cover__routeLink">Agregar</a>
     </p>
+    <ng-template #notLoged>
+      <p class="cover__route">
+        <a routerLink="../../" class="cover__routeLink">PelisUp!</a>
+        <span class="cover__slash"> / </span>
+        <a
+          *ngIf="mediaType == 'movie'"
+          routerLink="../../peliculas"
+          class="cover__routeLink"
+          >Películas</a
+        >
+        <a
+          *ngIf="mediaType == 'tv'"
+          routerLink="../../series"
+          class="cover__routeLink"
+          >Series</a
+        >
+      </p>
+    </ng-template>
     <h3 class="cover__name">{{ movieToShow.title || serieToShow.name }}</h3>
   </div>
   <div class="info">

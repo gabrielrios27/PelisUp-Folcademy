@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
@@ -25,11 +26,24 @@ export class SeriesComponent implements OnInit {
   twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Tv;
+  userLocStg: any;
+  userJSON: string | null = null;
 
-  constructor(private _moviesService: MoviesService) {}
+  constructor(private _moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
     this.getSeries();
+    this.getLocalStorage();
+    if (this.userLocStg) {
+      this.router.navigate(['../addNewItem']);
+    }
+  }
+  getLocalStorage() {
+    /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
+    this.userJSON = localStorage.getItem('Usuario');
+    if (this.userJSON) {
+      this.userLocStg = JSON.parse(this.userJSON);
+    }
   }
 
   getSeries() {

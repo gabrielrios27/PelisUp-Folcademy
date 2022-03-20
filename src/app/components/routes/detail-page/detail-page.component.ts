@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import { MediaType, Movie, Serie } from 'src/interfaces/NewUser';
 
@@ -17,10 +19,12 @@ export class DetailPageComponent implements OnInit {
 
   backDropPath: string = '';
   tagline: boolean = false;
+  user: Observable<any> = this.authService.afauth.user;
 
   constructor(
     private _moviesService: MoviesService,
-    private rutaActiva: ActivatedRoute
+    private rutaActiva: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.idFilm = 0;
     this.mediaType = MediaType.Movie;
