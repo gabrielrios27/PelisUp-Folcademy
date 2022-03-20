@@ -6,6 +6,7 @@ import { DetailPageComponent } from './components/routes/detail-page/detail-page
 import { HomeComponent } from './components/routes/home/home.component';
 import { LoginComponent } from './components/routes/login/login.component';
 import { Lost404Component } from './components/routes/lost404/lost404.component';
+import { MyFilmsComponent } from './components/routes/my-films/my-films.component';
 import { PeliculasComponent } from './components/routes/peliculas/peliculas.component';
 import { RegisterComponent } from './components/routes/register/register.component';
 import { SeriesComponent } from './components/routes/series/series.component';
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'series/:mediaType/:id',
     component: DetailPageComponent,
+  },
+  {
+    path: ':categorie',
+    component: MyFilmsComponent,
   },
   {
     path: '**',

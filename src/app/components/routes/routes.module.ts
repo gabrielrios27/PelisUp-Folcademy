@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AddNewItemComponent } from './add-new-item/add-new-item.component';
+import { MyFilmsComponent } from './my-films/my-films.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddNewItemComponent } from './add-new-item/add-new-item.component';
     DashboardComponent,
     RegisterComponent,
     AddNewItemComponent,
+    MyFilmsComponent,
   ],
   imports: [
     CommonModule,

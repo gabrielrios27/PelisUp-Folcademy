@@ -25,6 +25,10 @@
   background: var(--Grey-900);
   opacity: 0.8;
   border-radius: 12px;
+  cursor: pointer;
+}
+.dashboard__films:hover {
+  background: var(--Grey-800);
 }
 .dashboard__quantity {
   font-weight: 600;

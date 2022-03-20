@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   series: any;
   moviesCount: number = 0;
   seriesCount: number = 0;
+
   constructor(
     private authService: AuthService,
     private moviesService: MoviesService
@@ -23,6 +24,7 @@ export class DashboardComponent implements OnInit {
     // this.user = this.authService.getUserLogged(); /*obtengo el usuario desde el servicio*/
     this.getLocalStorage(); /*obtengo el usuario desde el Local Storage*/
     this.countMovies();
+    this.countSeries();
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
@@ -45,7 +47,7 @@ export class DashboardComponent implements OnInit {
       .getFromFirestore(this.user.uid, MediaType.Tv)
       .subscribe((response) => {
         this.series = response;
-        console.log('series de firestore: ', this.movies.length);
+        console.log('series de firestore: ', this.series.length);
         this.seriesCount = this.series.length;
       });
   }

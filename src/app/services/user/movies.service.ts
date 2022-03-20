@@ -124,6 +124,7 @@ export class MoviesService {
     return this.firestore
       .collection(`usuarios/${idUser}/${mediaType}`)
       .doc(id)
-      .delete();
+      .delete()
+      .finally(() => console.log('borrado el id: ', id, mediaType, idUser));
   }
 }
