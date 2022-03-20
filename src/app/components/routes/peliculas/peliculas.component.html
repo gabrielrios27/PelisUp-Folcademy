@@ -1,0 +1,21 @@
+<div class="titles">
+  <p class="titles__appName">PelisUp!</p>
+  <h1 class="titles__categorieName">Películas</h1>
+</div>
+<app-searcher
+  categorie="Películas"
+  (buscar)="SearchInParent($event)"
+></app-searcher>
+
+<p class="quantity">{{ quantity }} items</p>
+<!-- <app-cards-conteiner filterCategorie="pelicula"></app-cards-conteiner> -->
+<div class="cardsConteiner">
+  <app-card
+    *ngFor="let film of moviesSeriesApi_toShow"
+    img="{{ film.poster_path }}"
+    name="{{ film.name || film.title }}"
+    [rating]="film.vote_average"
+    [id]="film.id"
+    [mediaType]="mediaType"
+  ></app-card>
+</div>

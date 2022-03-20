@@ -1,0 +1,38 @@
+.titles__appName {
+  position: relative;
+  margin: 144px 0 0 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--Primary-200);
+}
+.titles__categorieName {
+  display: inline-block;
+  margin: 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 80px;
+  letter-spacing: 0.02em; /*se cambio de -0.02em a +0.02em ya que visualmente queda mas parecido al diseño en figma*/
+  color: var(--Grey-50);
+}
+.quantity {
+  margin: 48px 0 24px 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--Grey-400);
+}
+.cardsConteiner {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  column-gap: 24px;
+}
+@media (max-width: 992px) {
+  .cardsConteiner {
+    justify-content: space-evenly;
+  }
+}

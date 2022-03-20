@@ -1,0 +1,224 @@
+.login {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.login__imgContainer {
+  position: relative;
+  width: 486px;
+  height: 584px;
+  margin-top: 116px;
+}
+.login__imgBackgound {
+  position: relative;
+  width: 24em;
+  height: 35em;
+  left: 0px;
+  top: 0.25em;
+  background: var(--Grey-900);
+  border-radius: 2.25em;
+}
+.login__img {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+.formContainer {
+  width: 100%;
+  max-width: 486px;
+  position: relative;
+  margin-top: 124px;
+}
+.form {
+  width: 100%;
+}
+.form__legend {
+  width: 100%;
+  max-width: 486px;
+  height: 80px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 80px;
+  color: var(--Grey-100);
+  margin: 0px;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 0px;
+  position: relative;
+  width: 100%;
+  max-width: 486px;
+  height: 64px;
+  left: 0;
+  background: var(--Black-10);
+  border: 1px solid var(--Grey-700);
+  box-sizing: border-box;
+  border-radius: 12px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  margin-top: 24px;
+}
+.formInput__ico {
+  font-style: normal;
+  padding: 0px 0px 0px 16px; /*se suma 2px al height y se le da un padding bottom de 2px para corregir alineacion, mas centrada con respecto al input*/
+  font-size: 33px;
+  color: var(--Grey-400);
+  margin-right: 16px;
+}
+.formInput__ico--eye {
+  width: 56px;
+  height: 56px;
+  padding: 16px;
+  top: 20px;
+  position: absolute;
+  top: 2.5px;
+  right: 0px;
+  cursor: pointer;
+  z-index: 10;
+}
+.formInput__containerInput {
+  position: relative;
+  width: 100%;
+  max-width: 374px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 0px;
+}
+.formInput__input {
+  width: 100%;
+  height: 24px;
+  padding: 0px;
+  font-size: 16px;
+  line-height: 24px;
+  background: inherit;
+  background-color: transparent;
+  color: var(--Grey-400);
+  border: 0;
+  outline: none;
+}
+.formInput__text {
+  position: absolute;
+  left: 0px;
+  top: 12px;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--Grey-600);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.formInput__input:focus + .formInput__text,
+.formInput__input:valid ~ .formInput__text {
+  top: 0;
+}
+/* para quitar el color de fondo blanco del autocompletado de chrome */
+.formInput__input:-webkit-autofill,
+.formInput__input:-webkit-autofill:hover,
+.formInput__input:-webkit-autofill:focus,
+.formInput__input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px #0f1627 inset !important;
+}
+/* letra del autocompletado de chrome Grey-400 */
+.formInput__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--Grey-400) !important;
+}
+.form__button {
+  width: 100%;
+  max-width: 486px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--White-100);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  padding: 16px 32px;
+  background: var(--Primary-400);
+  border: 2px solid var(--Primary-400);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.form__err {
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--Warning-600);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  margin-left: 12px;
+}
+.form__noRegister {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--Grey-200);
+  margin: 8px 0px;
+}
+.form__linkToRegister {
+  color: var(--Secondary-400);
+  text-decoration: none;
+}
+.form__divider {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 26px 0px;
+}
+.form__line {
+  width: 44.85%;
+  height: 5px;
+  background: var(--Grey-800);
+  border-radius: 2px;
+}
+.form__letterO {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.02em;
+  color: var(--Grey-100);
+}
+.form__buttonGoogle {
+  width: 100%;
+  max-width: 486px;
+  height: 60px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--Black-100);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 15px;
+  margin: 0px 0px;
+  background: #f9f9f9;
+  border: 2px solid #eeeeee;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.form__btnGoogleImg {
+  width: 40px;
+  margin-right: 15px;
+}
+@media (max-width: 1200px) {
+  .login__imgContainer {
+    display: none;
+    position: relative;
+    width: 486px;
+    height: 584px;
+    top: 116px;
+  }
+  .login {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,104 @@
+<section class="login">
+  <div class="login__imgContainer">
+    <div class="login__imgBackgound"></div>
+    <img src="../../../assets/img/Saly-11.png" alt="" class="login__img" />
+  </div>
+  <div class="formContainer">
+    <form
+      class="form"
+      (ngSubmit)="registerUser()"
+      autocomplete="off"
+      [formGroup]="miRegistro"
+    >
+      <h1 class="form__legend">Registrarse</h1>
+      <label class="formInput" for="email">
+        <i class="icons formInput__ico">F</i>
+        <div class="formInput__containerInput">
+          <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+          <input
+            class="formInput__input"
+            formControlName="email"
+            type="text"
+            autocomplete="off"
+            required
+            id="email"
+          />
+          <span class="formInput__text">Email</span>
+        </div>
+      </label>
+      <div
+        class="form__errContainer"
+        *ngIf="
+          (miRegistro.get('email')?.errors &&
+            miRegistro.get('email')?.dirty &&
+            invalidForm) ||
+          errCode !== ''
+        "
+      >
+        <p
+          class="form__err"
+          *ngIf="miRegistro.get('email')?.hasError('required')"
+        >
+          Debe completar este campo
+        </p>
+        <p class="form__err" *ngIf="miRegistro.get('email')?.hasError('email')">
+          El valor ingresado debe ser un Email
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/email-already-in-use'">
+          El email ingresado ya se encuentra registrado.
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/invalid-email'">
+          El email es invalido.
+        </p>
+      </div>
+      <label class="formInput" for="password">
+        <i class="icons formInput__ico">0</i>
+        <div class="formInput__containerInput">
+          <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+          <input
+            class="formInput__input"
+            formControlName="password"
+            autocomplete="off"
+            type="password"
+            required
+            id="password"
+          />
+          <span class="formInput__text">Contraseña</span>
+        </div>
+
+        <img
+          class="formInput__ico--eye"
+          id="imgEyePassword"
+          src="../../../assets/ico/eye-slash.svg"
+          (click)="OnClickSeePassword()"
+        />
+      </label>
+      <div
+        class="form__errContainer"
+        *ngIf="
+          miRegistro.get('password')?.errors &&
+          miRegistro.get('password')?.dirty &&
+          invalidForm
+        "
+      >
+        <p
+          class="form__err"
+          *ngIf="miRegistro.get('password')?.hasError('required')"
+        >
+          Debe completar este campo
+        </p>
+        <p
+          class="form__err"
+          *ngIf="miRegistro.get('password')?.hasError('minlength')"
+        >
+          La contraseña debe tener al menos 6 caracteres
+        </p>
+      </div>
+      <button class="form__button" type="submit">Registrarse</button>
+      <p class="form__noRegister">
+        ¿Ya tienes Cuenta?
+        <a routerLink="../" class="form__linkToRegister">Ingresar</a>
+      </p>
+    </form>
+  </div>
+</section>

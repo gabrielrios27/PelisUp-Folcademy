@@ -1,0 +1,22 @@
+<section class="home">
+  <div class="titlesHome">
+    <h1 class="titlesHome__h1">{{ categorie }}</h1>
+  </div>
+  <app-searcher
+    categorie="{{ categorie }}"
+    (buscar)="SearchInParent($event)"
+  ></app-searcher>
+
+  <div class="cardsConteiner">
+    <app-card
+      *ngFor="let film of moviesSeries_toShow"
+      img="{{ film.poster_path }}"
+      name="{{ film.name || film.title }}"
+      [rating]="film.vote_average"
+      [id]="film.id"
+      [mediaType]="mediaType"
+      [added]="film.added || true"
+      idGlobal="{{ film.idGlobal }}"
+    ></app-card>
+  </div>
+</section>

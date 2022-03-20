@@ -1,0 +1,31 @@
+<nav>
+  <ul class="navList" *ngIf="user | async as user; else notLoged">
+    <li class="navList__li">
+      <a routerLink="dashboard" class="navList__a">Dashboard</a>
+    </li>
+    <li class="navList__li">
+      <a routerLink="addNewItem" class="navList__a">Agregar</a>
+    </li>
+    <li class="navList__li">
+      <a routerLink="login" (click)="logOut()" class="navList__a"
+        ><span class="icons navList__goOut">9</span>Salir</a
+      >
+    </li>
+  </ul>
+  <ng-template #notLoged>
+    <ul class="navList">
+      <li class="navList__li">
+        <a routerLink="peliculas" class="navList__a">Películas</a>
+      </li>
+      <li class="navList__li">
+        <a routerLink="series" class="navList__a">Series</a>
+      </li>
+      <li class="navList__li">
+        <a routerLink="login" class="navList__a navList__a--padding">
+          Ingresar
+          <span class="icons navList__arrow">5</span>
+        </a>
+      </li>
+    </ul>
+  </ng-template>
+</nav>

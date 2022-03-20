@@ -1,0 +1,101 @@
+<section>
+  <div
+    class="cover"
+    [ngStyle]="{
+      'background-image':
+        'url(https://image.tmdb.org/t/p/original' + backDropPath + ')'
+    }"
+  >
+    <div class="cover__gradientBackground"></div>
+  </div>
+
+  <div class="cover__nameContainer">
+    <p class="cover__route" *ngIf="user | async as user; else notLoged">
+      <a routerLink="../../dashboard" class="cover__routeLink">Dashboard</a>
+      <span class="cover__slash"> / </span>
+      <a routerLink="../../addNewItem" class="cover__routeLink">Agregar</a>
+    </p>
+    <ng-template #notLoged>
+      <p class="cover__route">
+        <a routerLink="../../" class="cover__routeLink">PelisUp!</a>
+        <span class="cover__slash"> / </span>
+        <a
+          *ngIf="mediaType == 'movie'"
+          routerLink="../../peliculas"
+          class="cover__routeLink"
+          >Películas</a
+        >
+        <a
+          *ngIf="mediaType == 'tv'"
+          routerLink="../../series"
+          class="cover__routeLink"
+          >Series</a
+        >
+      </p>
+    </ng-template>
+    <h3 class="cover__name">{{ movieToShow.title || serieToShow.name }}</h3>
+  </div>
+  <div class="info">
+    <img
+      src="https://image.tmdb.org/t/p/w500{{
+        movieToShow.poster_path || serieToShow.poster_path
+      }}"
+      alt="portada de la pelicula {{ movieToShow.title || serieToShow.name }}"
+      class="info__img"
+    />
+    <div class="info__details">
+      <!-- si el tagline viene vacio el h4 no se renderiza y no deja un espacio en blanco  -->
+      <h4 class="info__tagline" *ngIf="tagline">
+        {{ movieToShow.tagline || serieToShow.tagline }}
+      </h4>
+      <p class="info__overview">
+        {{ movieToShow.overview || serieToShow.overview }}
+      </p>
+      <p class="info__rating">
+        <span class="icons info__starIco">G</span>
+        {{ movieToShow.vote_average || serieToShow.vote_average }}
+      </p>
+      <div class="info__dataContainer">
+        <div class="info__movie" *ngIf="mediaType == 'movie'">
+          <p class="info__type">Tipo</p>
+          <p class="info__value">Película</p>
+          <p class="info__type">Fecha de Lanzamiento</p>
+          <p class="info__value">{{ movieToShow.release_date }}</p>
+          <p class="info__type">Duración</p>
+          <p class="info__value">{{ movieToShow.runtime }} min</p>
+        </div>
+        <div class="info__serie" *ngIf="mediaType == 'tv'">
+          <div class="info__seriePart1">
+            <p class="info__type">Tipo</p>
+            <p class="info__value">Serie</p>
+            <p class="info__type">Fecha de Lanzamiento</p>
+            <p class="info__value">{{ serieToShow.first_air_date }}</p>
+            <p class="info__type">N° de Temporadas</p>
+            <p class="info__value">{{ serieToShow.number_of_seasons }}</p>
+            <p class="info__type">Duración por episodio</p>
+            <p class="info__value">{{ serieToShow.episode_run_time }} min</p>
+          </div>
+          <div class="info__seriePart2">
+            <p class="info__type">Estado</p>
+            <p class="info__value">{{ serieToShow.status }}</p>
+            <p class="info__type">Último episodio</p>
+            <p class="info__value">{{ serieToShow.last_air_date }}</p>
+            <p class="info__type">N° de episodios</p>
+            <p class="info__value">{{ serieToShow.number_of_episodes }}</p>
+          </div>
+        </div>
+        <p class="info__type">Genero</p>
+        <p class="info__value">
+          <span *ngFor="let genre of movieToShow.genres; let i = index">
+            {{ genre.name }}
+            <span *ngIf="i < movieToShow.genres.length - 1">, </span>
+          </span>
+          <span *ngFor="let genre of serieToShow.genres; let i = index">
+            {{ genre.name }}
+            <span *ngIf="i < serieToShow.genres.length - 1">, </span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

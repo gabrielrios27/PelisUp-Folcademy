@@ -1,0 +1,142 @@
+<div class="card">
+  <!-- [routerLink]="['/', mediaType, id]" -->
+
+  <a class="card__a" *ngIf="user | async as user; else notLoged">
+    <div class="card__imgContainer">
+      <img
+        src="https://image.tmdb.org/t/p/w500{{ img }}"
+        alt="Portada de la pelicula {{ name }}"
+        class="card__img"
+        [routerLink]="['/', mediaType, id]"
+      />
+      <div class="ratingButton">
+        <span class="icons ratingButton__starIco">G</span>
+        <p class="ratingButton__value">{{ rating }}</p>
+      </div>
+    </div>
+    <div class="card__infoContainer">
+      <p class="card__movieName">{{ name }}</p>
+
+      <!-- ''''''botón agregar a mi lista''''''' -->
+
+      <div (click)="addToFirestoreFromCard()" class="addToList" *ngIf="!added">
+        <span class="icons addToList__ico">C</span>
+        <p class="addToList__text">Agregar a mi lista</p>
+      </div>
+
+      <!-- '''''success - eliminar de mi lista'''''' -->
+
+      <div (click)="deleteFromCard()" class="addToList" *ngIf="added">
+        <svg
+          class="delete__ico"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+        >
+          <rect
+            id="backgroundrect"
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            fill="none"
+            stroke="none"
+          />
+
+          <g class="currentLayer">
+            <title>Layer 1</title>
+            <g>
+              <path
+                d="M22 9V15C22 15.22 22 15.44 21.98 15.65C21.16 14.64 19.91 14 18.5 14C17.44 14 16.46 14.37 15.69 14.99C14.65 15.81 14 17.08 14 18.5C14 19.34 14.24 20.14 14.65 20.82C14.92 21.27 15.26 21.66 15.66 21.98C15.45 22 15.23 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H15C20 2 22 4 22 9Z"
+                stroke="#FFBD6D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_1"
+                class=""
+              />
+              <path
+                d="M2.52002 7.10999H21.48"
+                stroke="#FFBD6D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_2"
+                class=""
+              />
+              <path
+                d="M8.52002 2.10999V6.96997"
+                stroke="#FFBD6D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_3"
+                class=""
+              />
+              <path
+                d="M15.48 2.10999V6.52002"
+                stroke="#FFBD6D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_4"
+                class=""
+              />
+              <path
+                d="M23 18.5C23 19.34 22.76 20.14 22.35 20.82C22.11 21.22 21.81 21.58 21.46 21.88C20.67 22.58 19.64 23 18.5 23C17.43 23 16.44 22.62 15.67 21.98H15.66C15.26 21.66 14.92 21.27 14.65 20.82C14.24 20.14 14 19.34 14 18.5C14 17.08 14.65 15.81 15.69 14.99C16.46 14.37 17.44 14 18.5 14C19.91 14 21.16 14.64 21.98 15.65C22.62 16.42 23 17.42 23 18.5Z"
+                stroke="#FFBD6D"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_5"
+                class=""
+              />
+              <path
+                fill=""
+                fill-opacity="1"
+                stroke="#FFBD6D"
+                stroke-opacity="1"
+                stroke-width="1.5"
+                stroke-dasharray="none"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-dashoffset=""
+                fill-rule="nonzero"
+                opacity="1"
+                marker-start=""
+                marker-mid=""
+                marker-end=""
+                d="M16.616519688032778,18.482595200115046L20.333333784587996,18.482595200115046"
+                id="svg_7"
+                class=""
+              />
+            </g>
+          </g>
+        </svg>
+        <p class="addToList__text addToList__text--delete">
+          Eliminar de mi lista
+        </p>
+      </div>
+    </div>
+  </a>
+  <ng-template #notLoged>
+    <a class="card__a" [routerLink]="['/', mediaType, id]">
+      <div class="card__imgContainer">
+        <img
+          src="https://image.tmdb.org/t/p/w500{{ img }}"
+          alt="Portada de la pelicula {{ name }}"
+          class="card__img"
+        />
+        <div class="ratingButton">
+          <span class="icons ratingButton__starIco">G</span>
+          <p class="ratingButton__value">{{ rating }}</p>
+        </div>
+      </div>
+      <div class="card__infoContainer">
+        <p class="card__movieName">{{ name }}</p>
+      </div>
+    </a>
+  </ng-template>
+</div>

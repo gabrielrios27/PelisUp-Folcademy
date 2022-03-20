@@ -1,0 +1,99 @@
+<!-- boton hamburguesa - lineas -->
+<div class="burgerButton" (click)="ToogleBtnFlag()">
+  <span
+    class="burgerButton__lines"
+    [ngClass]="btnFlag ? 'burgerButton__lines--active' : ''"
+  >
+    <span
+      class="burgerButton__lines burgerButton__lines--top"
+      [ngClass]="btnFlag ? 'burgerButton__lines--topActive' : ''"
+    >
+    </span>
+    <span
+      class="burgerButton__lines burgerButton__lines--bottom"
+      [ngClass]="btnFlag ? 'burgerButton__lines--bottomActive' : ''"
+    >
+    </span>
+  </span>
+</div>
+<!-- lista de anlaces desplegados en pantalla completa al dar click en el boton hamburguesa -->
+<ul
+  *ngIf="user | async as user; else notLoged"
+  class="burgerButton__list"
+  [ngClass]="
+    btnFlag ? 'burgerButton__list--active' : 'burgerButton__list--desactive'
+  "
+>
+  <li class="burgerButton__items">
+    <a
+      class="burgerButton__link"
+      (click)="ToogleBtnFlag()"
+      routerLink="dashboard"
+      >Dashboard</a
+    >
+  </li>
+  <li class="burgerButton__items">
+    <a
+      class="burgerButton__link"
+      (click)="ToogleBtnFlag()"
+      routerLink="addNewItem"
+      >Agregar</a
+    >
+  </li>
+  <li class="burgerButton__items">
+    <a
+      class="burgerButton__link"
+      (click)="ToogleBtnFlag(); logOut()"
+      routerLink="login"
+      >Salir</a
+    >
+  </li>
+</ul>
+<ng-template #notLoged>
+  <ul
+    class="burgerButton__list"
+    [ngClass]="
+      btnFlag ? 'burgerButton__list--active' : 'burgerButton__list--desactive'
+    "
+  >
+    <li class="burgerButton__items">
+      <a
+        class="burgerButton__link"
+        (click)="ToogleBtnFlag()"
+        routerLink="peliculas"
+        >Películas</a
+      >
+    </li>
+    <li class="burgerButton__items">
+      <a
+        class="burgerButton__link"
+        (click)="ToogleBtnFlag()"
+        routerLink="series"
+        >Series</a
+      >
+    </li>
+    <li class="burgerButton__items">
+      <a class="burgerButton__link" (click)="ToogleBtnFlag()" routerLink="login"
+        >Ingresar</a
+      >
+    </li>
+  </ul>
+</ng-template>
+<!-- fondo purpura del listado de enlaces - aparece con clip-path -->
+<div
+  class="burgerButton__backgroundPurple"
+  [ngClass]="
+    btnFlag
+      ? 'burgerButton__backgroundPurple--active'
+      : 'burgerButton__backgroundPurple--desactive'
+  "
+></div>
+<!-- fondo celeste del listado de enlaces - aparece con clip-path -->
+<div
+  class="burgerButton__backgroundBlue"
+  [ngClass]="
+    btnFlag
+      ? 'burgerButton__backgroundBlue--active'
+      : 'burgerButton__backgroundBlue--desactive'
+  "
+></div>

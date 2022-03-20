@@ -1,0 +1,13 @@
+<section class="dashboard">
+  <h2 class="dashboard__welcome">Bienvenido</h2>
+  <div class="dashboard__container">
+    <div class="dashboard__films" [routerLink]="['/', 'Películas']">
+      <h3 class="dashboard__quantity">{{ moviesCount }}</h3>
+      <p class="dashboard__type">Películas</p>
+    </div>
+    <div class="dashboard__films" [routerLink]="['/', 'Series']">
+      <h3 class="dashboard__quantity">{{ seriesCount }}</h3>
+      <p class="dashboard__type">Series</p>
+    </div>
+  </div>
+</section>

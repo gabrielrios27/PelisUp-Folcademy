@@ -1,0 +1,123 @@
+<section class="login">
+  <div class="login__imgContainer">
+    <div class="login__imgBackgound"></div>
+    <img src="../../../assets/img/Saly-11.png" alt="" class="login__img" />
+  </div>
+  <div class="formContainer">
+    <form
+      class="form"
+      (ngSubmit)="logInUser()"
+      autocomplete="off"
+      [formGroup]="miFormulario"
+    >
+      <h1 class="form__legend">Ingresar</h1>
+      <label class="formInput" for="email">
+        <i class="icons formInput__ico">F</i>
+        <div class="formInput__containerInput">
+          <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+          <input
+            class="formInput__input"
+            formControlName="email"
+            type="text"
+            autocomplete="off"
+            required
+            id="email"
+          />
+          <span class="formInput__text">Email</span>
+        </div>
+      </label>
+      <div
+        class="form__errContainer"
+        *ngIf="
+          (miFormulario.get('email')?.errors &&
+            miFormulario.get('email')?.dirty &&
+            invalidForm) ||
+          errCode !== ''
+        "
+      >
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('email')?.hasError('required')"
+        >
+          Debe completar este campo
+        </p>
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('email')?.hasError('email')"
+        >
+          El valor ingresado debe ser un Email
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/user-not-found'">
+          El email ingresado no se encuentra registrado.
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/invalid-email'">
+          El email es invalido.
+        </p>
+      </div>
+      <label class="formInput" for="password">
+        <i class="icons formInput__ico">0</i>
+        <div class="formInput__containerInput">
+          <!-- se coloca required al input ya que si no se coloca considera valido el campo a pesar de estar vacio y la animacion no funciona al hacer focus y escribir -->
+          <input
+            class="formInput__input"
+            formControlName="password"
+            autocomplete="off"
+            type="password"
+            required
+            id="password"
+          />
+          <span class="formInput__text">Contraseña</span>
+        </div>
+
+        <img
+          class="formInput__ico--eye"
+          id="imgEyePassword"
+          src="../../../assets/ico/eye-slash.svg"
+          (click)="OnClickSeePassword()"
+        />
+      </label>
+      <div
+        class="form__errContainer"
+        *ngIf="
+          (miFormulario.get('password')?.errors &&
+            miFormulario.get('password')?.dirty &&
+            invalidForm) ||
+          errCode !== ''
+        "
+      >
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('password')?.hasError('required')"
+        >
+          Debe completar este campo
+        </p>
+        <p
+          class="form__err"
+          *ngIf="miFormulario.get('password')?.hasError('minlength')"
+        >
+          La contraseña debe tener al menos 6 caracteres
+        </p>
+        <p class="form__err" *ngIf="errCode === 'auth/wrong-password'">
+          La contraseña es incorrecta.
+        </p>
+      </div>
+      <button class="form__button" type="submit">Ingresar</button>
+      <p class="form__noRegister">
+        ¿No tienes Cuenta?
+        <a routerLink="register" class="form__linkToRegister">Registrarse</a>
+      </p>
+      <div class="form__divider">
+        <div class="form__line"></div>
+        <h3 class="form__letterO">ó</h3>
+        <div class="form__line"></div>
+      </div>
+    </form>
+    <button class="form__buttonGoogle" (click)="logInWithGoogleUser()">
+      <img
+        src="../../../../assets/ico/googleIcon.jpg"
+        alt=" icono de Google"
+        class="form__btnGoogleImg"
+      />Continuar con Google
+    </button>
+  </div>
+</section>

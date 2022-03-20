@@ -1,0 +1,58 @@
+.lost404 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 0px;
+}
+.lost404__img {
+  width: 400px;
+  /* height: 320px; */
+}
+.lost404__info {
+  margin: 40px 0px 24px 0px;
+  max-width: 588px;
+}
+.lost404__lostYourWay {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 56px;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: var(--Grey-50);
+  margin-bottom: 16px;
+}
+.lost404__oops {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: var(--Grey-300);
+}
+.lost404__button {
+  width: 139px;
+  height: 56px;
+  background: var(--Primary-400);
+  border: 2px solid var(--Primary-400);
+  border-radius: 12px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--White-100);
+  cursor: pointer;
+}
+@media (max-width: 576px) {
+  .lost404__img {
+    width: 250px;
+  }
+  .lost404__lostYourWay {
+    font-size: 36px;
+  }
+  .lost404__oops {
+    font-size: 14px;
+  }
+}

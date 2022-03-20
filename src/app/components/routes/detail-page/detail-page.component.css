@@ -1,0 +1,223 @@
+.cover {
+  width: 100%;
+  height: calc((100vw - 240px) * 40 / 100);
+  position: relative;
+  margin-top: 120px;
+  border-radius: 40px;
+  background-size: cover;
+}
+.cover__gradientBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(54, 44, 146, 0.4) 0%,
+    rgba(18, 98, 151, 0.4) 100%
+  );
+  border-radius: 40px;
+}
+.cover__nameContainer {
+  padding: 40px;
+  position: relative;
+  width: 76.65%; /*para que en pantallas menores a 940px de ancho este contenedor quede centrado a su padre(que tiene la imagen de fondo que esta justo arriba) */
+  max-width: 560px;
+  height: auto;
+  left: 78px;
+  bottom: 72px;
+  background: rgba(32, 40, 62, 0.8);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-radius: 24px;
+}
+.cover__route {
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--Primary-200);
+  display: flex;
+  align-items: center;
+}
+.cover__routeLink {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--Primary-200);
+  text-decoration: none;
+}
+.cover__slash {
+  font-size: 10px;
+  line-height: 10px;
+  margin: 0px 16px;
+}
+.cover__name {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.02em;
+  color: var(--Grey-50);
+  margin-top: 8px;
+}
+.info {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 8px;
+  bottom: 72px;
+}
+.info__img {
+  width: 480px;
+  height: 720px;
+  border-radius: 24px;
+  margin-right: 80px;
+}
+.info__imgW576 {
+  display: none;
+  width: 30%;
+  height: auto;
+  object-fit: contain;
+  object-position: top;
+  border-radius: 12px;
+  margin-right: 0px;
+}
+.info__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 480px;
+}
+.info__tagline {
+  display: block;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.015em;
+  color: var(--Grey-50);
+  margin-bottom: 24px;
+}
+.info__overview {
+  font-size: 20px;
+  line-height: 32px;
+  color: var(--Grey-300);
+  margin-bottom: 24px;
+}
+.info__rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 4px 8px;
+  height: 32px;
+  background: var(--Black-65);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  color: var(--Warning-500);
+}
+.info__starIco {
+  margin-right: 4px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 16px;
+  padding-bottom: 2px;
+  color: var(--Warning-500);
+}
+.info__dataContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.info__movie {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 264px;
+}
+.info__serie {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.info__seriePart1 {
+  width: 50%;
+  min-width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.info__seriePart2 {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.info__type {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--Grey-400);
+  margin-bottom: 8px;
+}
+.info__value {
+  font-size: 20px;
+  line-height: 32px;
+  color: var(--Grey-100);
+  margin-bottom: 24px;
+}
+@media (max-width: 1200px) {
+  .info__img {
+    width: 30%;
+    height: auto;
+    object-fit: contain;
+    object-position: top;
+    border-radius: 12px;
+    margin-right: 60px;
+  }
+  .cover__nameContainer {
+    padding: 30px;
+    max-width: 530px;
+    left: 60px;
+    /* bottom: -67px; */
+    border-radius: 18px;
+  }
+}
+@media (max-width: 768px) {
+  .cover,
+  .cover__gradientBackground {
+    border-radius: 18px;
+    height: calc((100vw - 180px) * 40 / 100);
+  }
+  .cover__nameContainer {
+    padding: 20px;
+    left: 0px;
+    width: 100%;
+    bottom: 0;
+    top: 95%;
+    border-radius: 12px;
+  }
+  .info {
+    bottom: 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .info__img {
+    display: none;
+  }
+  .cover__name {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+@media (max-width: 576px) {
+  .cover,
+  .cover__gradientBackground {
+    border-radius: 18px;
+    height: calc((100vw - 120px) * 50 / 100);
+  }
+}
