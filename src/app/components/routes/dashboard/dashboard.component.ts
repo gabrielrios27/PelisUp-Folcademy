@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import { MediaType } from 'src/interfaces/NewUser';
 
@@ -16,13 +16,12 @@ export class DashboardComponent implements OnInit {
   moviesCount: number = 0;
   seriesCount: number = 0;
 
-  constructor(
-    private authService: AuthService,
-    private moviesService: MoviesService
-  ) {}
+  constructor(private moviesService: MoviesService, private router: Router) {}
   async ngOnInit() {
-    // this.user = this.authService.getUserLogged(); /*obtengo el usuario desde el servicio*/
     this.getLocalStorage(); /*obtengo el usuario desde el Local Storage*/
+    if (!this.user) {
+      this.router.navigate(['../inicio']);
+    }
     this.countMovies();
     this.countSeries();
   }

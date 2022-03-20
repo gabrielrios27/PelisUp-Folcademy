@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
@@ -31,10 +32,13 @@ export class AddNewItemComponent implements OnInit {
   myMovies: any[] = [];
   mySeries: any[] = [];
 
-  constructor(private _moviesService: MoviesService) {}
+  constructor(private _moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
     this.getLocalStorage();
+    if (!this.userLocStg) {
+      this.router.navigate(['../inicio']);
+    }
     this.OnClickAll();
   }
 
