@@ -74,6 +74,7 @@ export class MyFilmsComponent implements OnInit {
             });
           });
           console.log('array de my films', array);
+          this.moviesSeries = array;
           this.moviesSeries_toShow = array;
         },
         (error) => {
