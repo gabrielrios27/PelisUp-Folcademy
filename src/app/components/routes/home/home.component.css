@@ -8,12 +8,6 @@
   margin: 160px 0 48px;
 }
 .titlesHome__h1 {
-  height: 80px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 64px;
-  line-height: 80px;
-  letter-spacing: 0.02em;
   color: var(--Grey-50);
   margin: 0px 0px 16px 0px;
 }

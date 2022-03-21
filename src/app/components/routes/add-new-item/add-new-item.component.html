@@ -42,28 +42,34 @@
   </h3>
   <div class="cardsConteiner">
     <ng-container *ngIf="filter == 'Todos'">
-      <app-card
-        *ngFor="let film of moviesSeriesApi_toShow"
-        img="{{ film.poster_path }}"
-        name="{{ film.name || film.title }}"
-        [rating]="film.vote_average"
-        [id]="film.id"
-        [mediaType]="film.media_type"
-        [added]="film.added || false"
-        idGlobal="{{ film.idGlobal }}"
-      ></app-card>
+      <ng-container *ngFor="let film of moviesSeriesApi_toShow">
+        <!-- Dentro de la app-card se revisa si tiene la dirección de una imagen en poster_path para no mostrar algún ítem sin imagen  -->
+        <app-card
+          *ngIf="film.poster_path"
+          img="{{ film.poster_path }}"
+          name="{{ film.name || film.title }}"
+          [rating]="film.vote_average"
+          [id]="film.id"
+          [mediaType]="film.media_type"
+          [added]="film.added || false"
+          idGlobal="{{ film.idGlobal }}"
+        ></app-card>
+      </ng-container>
     </ng-container>
     <ng-container *ngIf="filter == 'Películas' || filter == 'Series'">
-      <app-card
-        *ngFor="let film of moviesSeriesApi_toShow"
-        img="{{ film.poster_path }}"
-        name="{{ film.name || film.title }}"
-        [rating]="film.vote_average"
-        [id]="film.id"
-        [mediaType]="mediaType"
-        [added]="film.added || false"
-        idGlobal="{{ film.idGlobal }}"
-      ></app-card>
+      <ng-container *ngFor="let film of moviesSeriesApi_toShow">
+        <!-- Dentro de la app-card se revisa si tiene la dirección de una imagen en poster_path para no mostrar algún ítem sin imagen  -->
+        <app-card
+          *ngIf="film.poster_path"
+          img="{{ film.poster_path }}"
+          name="{{ film.name || film.title }}"
+          [rating]="film.vote_average"
+          [id]="film.id"
+          [mediaType]="mediaType"
+          [added]="film.added || false"
+          idGlobal="{{ film.idGlobal }}"
+        ></app-card>
+      </ng-container>
     </ng-container>
   </div>
 </section>

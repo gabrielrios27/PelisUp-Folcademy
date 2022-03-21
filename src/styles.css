@@ -134,3 +134,20 @@ body {
 .icons {
   font-family: Icons;
 }
+h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 80px;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 992px) {
+  h1 {
+    font-size: 54px;
+  }
+}
+@media (max-width: 576px) {
+  h1 {
+    font-size: 50px;
+  }
+}

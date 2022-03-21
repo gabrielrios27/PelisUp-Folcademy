@@ -10,12 +10,15 @@
 <p class="quantity">{{ quantity }} items</p>
 <!-- <app-cards-conteiner filterCategorie="pelicula"></app-cards-conteiner> -->
 <div class="cardsConteiner">
-  <app-card
-    *ngFor="let film of moviesSeriesApi_toShow"
-    img="{{ film.poster_path }}"
-    name="{{ film.name || film.title }}"
-    [rating]="film.vote_average"
-    [id]="film.id"
-    [mediaType]="mediaType"
-  ></app-card>
+  <ng-container *ngFor="let film of moviesSeriesApi_toShow">
+    <!-- Dentro de la app-card se revisa si tiene la dirección de una imagen en poster_path para no mostrar algún ítem sin imagen  -->
+    <app-card
+      *ngIf="film.poster_path"
+      img="{{ film.poster_path }}"
+      name="{{ film.name || film.title }}"
+      [rating]="film.vote_average"
+      [id]="film.id"
+      [mediaType]="mediaType"
+    ></app-card>
+  </ng-container>
 </div>

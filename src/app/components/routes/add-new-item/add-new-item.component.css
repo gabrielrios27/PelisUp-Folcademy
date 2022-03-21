@@ -4,15 +4,9 @@
   align-items: flex-start;
   padding: 0px;
   position: relative;
-
   margin: 160px 0 24px;
 }
 .titlesHome__h1 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 64px;
-  line-height: 80px;
-  letter-spacing: 0.02em;
   color: var(--Grey-50);
 }
 
