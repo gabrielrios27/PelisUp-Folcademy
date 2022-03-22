@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { first, lastValueFrom, Observable, of as observableOf } from 'rxjs';
-import { MoviesSeriesActorsUser } from 'src/interfaces/NewUser';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({

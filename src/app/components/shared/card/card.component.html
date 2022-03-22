@@ -15,18 +15,98 @@
       </div>
     </div>
     <div class="card__infoContainer">
-      <p class="card__movieName">{{ name }}</p>
+      <p class="card__movieName">
+        {{ name }}
+      </p>
 
       <!-- ''''''botón agregar a mi lista''''''' -->
 
       <div (click)="addToFirestoreFromCard()" class="addToList" *ngIf="!added">
-        <span class="icons addToList__ico">C</span>
+        <!-- <span class="icons addToList__ico">C</span> -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          class="addToList__ico"
+        >
+          <rect
+            id="backgroundrect"
+            width="100%"
+            height="100%"
+            x="0"
+            y="0"
+            fill="none"
+            stroke="none"
+          />
+
+          <g class="currentLayer">
+            <title>Layer 1</title>
+            <g class="">
+              <path
+                d="M22.1169590651989,15 V9 C22.1169590651989,4 20.1169590651989,2 15.116959065198898,2 H9.116959065198898 C4.116959065198898,2 2.1169590651988983,4 2.1169590651988983,9 V15 C2.1169590651988983,20 4.116959065198898,22 9.116959065198898,22 H15.116959065198898 C20.1169590651989,22 22.1169590651989,20 22.1169590651989,15 z"
+                stroke="#7b6ef6"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_1"
+                class=""
+              />
+              <path
+                d="M2.51953 7.10999H21.4795"
+                stroke="#7b6ef6"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_2"
+                class=""
+              />
+              <path
+                d="M8.51953 2.10999V6.96999"
+                stroke="#7b6ef6"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_3"
+                class=""
+              />
+              <path
+                d="M12.000000210313797,10.879045159014998 V17.790993324675814 "
+                stroke="#7b6ef6"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class=""
+                id="svg_6"
+              />
+              <path
+                d="M11.818188216130746,10.783903264433928 V18.421214537939914 "
+                stroke="#7b6ef6"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class=""
+                id="svg_7"
+                transform="rotate(90.35836029052734 12.000000000000002,14.598468780517578) "
+              />
+              <path
+                d="M15.4805 2.10999V6.51999"
+                stroke="#7b6ef6"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id="svg_4"
+                class=""
+              />
+            </g>
+          </g>
+        </svg>
         <p class="addToList__text">Agregar a mi lista</p>
       </div>
 
-      <!-- '''''success - eliminar de mi lista'''''' -->
+      <!-- '''''eliminar de mi lista'''''' -->
 
-      <div (click)="deleteFromCard()" class="addToList" *ngIf="added">
+      <div (click)="deleteFromCard()" class="deleteToList" *ngIf="added">
         <svg
           class="delete__ico"
           xmlns="http://www.w3.org/2000/svg"
@@ -115,9 +195,7 @@
             </g>
           </g>
         </svg>
-        <p class="addToList__text addToList__text--delete">
-          Eliminar de mi lista
-        </p>
+        <p class="deleteToList__text">Eliminar de mi lista</p>
       </div>
     </div>
   </a>
@@ -135,7 +213,7 @@
         </div>
       </div>
       <div class="card__infoContainer">
-        <p class="card__movieName">{{ name }}</p>
+        <p class="card__movieName card__movieName--hover">{{ name }}</p>
       </div>
     </a>
   </ng-template>

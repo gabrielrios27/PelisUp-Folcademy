@@ -7,7 +7,7 @@
   width: 282px;
   background: var(--Grey-800-80);
   -webkit-backdrop-filter: blur(80px);
-          backdrop-filter: blur(80px);
+  backdrop-filter: blur(80px);
   border-radius: 12px;
   border: none;
   transition: var(--transition);
@@ -19,9 +19,7 @@
   background: var(--Grey-600-80);
   box-shadow: var(--box-shadow);
 }
-.card:hover .card__movieName {
-  color: var(--Warning-500);
-}
+
 .card__a {
   text-decoration: none;
 }
@@ -51,7 +49,7 @@
   top: 10px;
   background: var(--Black-65);
   -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border-radius: 8px;
 }
 .ratingButton__starIco {
@@ -88,28 +86,39 @@
   color: var(--Grey-50);
   transition: var(--transition);
 }
+.card:hover .card__movieName--hover {
+  color: var(--Warning-500);
+}
 .addToList {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 0px;
-  height: 24px;
+  border-radius: 5px;
+  /* height: 24px; */
   margin: 16px 0 0 0;
   cursor: pointer;
+  transition: var(--transition);
 }
-.addToList:hover .addToList__ico,
+.addToList__ico path {
+  transition: var(--transition);
+}
+.addToList:hover {
+  /* background-color: var(--Grey-700); */
+}
 .addToList:hover .addToList__text {
-  color: var(--Primary-300);
+  color: var(--Success-400);
+}
+.addToList:hover .addToList__ico path {
+  stroke: var(--Success-400);
 }
 .addToList__ico {
-  /* width: 24px;
-  height: 24px; */
   font-size: 28px;
   line-height: 24px;
   font-weight: 600;
   font-style: normal;
-  padding-bottom: 4px;
   color: var(--Primary-400);
   margin-right: 8px;
 }
@@ -119,22 +128,41 @@
   font-size: 16px;
   line-height: 24px;
   margin: 0;
-  letter-spacing: 0.045em; /* el original de figma es 0,02em - se cambio a 0,045 em por que la medida original visualmente no daba los MoviesSeriesActorsados esperados */
+  letter-spacing: 0.045em;
   color: var(--Primary-400);
+  transition: var(--transition);
+}
+.deleteToList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  height: 24px;
+  margin: 16px 0 0 0;
+  cursor: pointer;
 }
 .delete__ico {
   margin-right: 8px;
 }
 .delete__ico path {
-  stroke: var(--Error-500);
-}
-.addToList__text--delete {
-  color: var(--Error-500);
-  font-weight: 400;
-}
-.addToList:hover .addToList__text--delete {
-  color: var(--Error-400);
-}
-.addToList:hover .delete__ico path {
   stroke: var(--Error-400);
+  transition: var(--transition);
+}
+.deleteToList__text {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  letter-spacing: 0.045em;
+  color: var(--Error-400);
+  font-weight: 400;
+  transition: var(--transition);
+}
+
+.deleteToList:hover .deleteToList__text {
+  color: var(--Warning-400);
+}
+.deleteToList:hover .delete__ico path {
+  stroke: var(--Warning-400);
 }
