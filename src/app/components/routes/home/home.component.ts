@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   moviesSeriesApi: MoviesSeriesActors[] = [];
   moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
   moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
+  totalPages: number = 0;
+  numbersPages: number[] = [];
+  pagesToShow: number = 100; /*cantidad de peliculas a mostrar en la paginacion*/
 
   selectedCategorie: string = 'Todos'; /*lo que se escribe en el HTML*/
   filter: string = 'Todos';
@@ -40,6 +43,7 @@ export class HomeComponent implements OnInit {
     if (this.userLocStg) {
       this.router.navigate(['../dashboard']);
     }
+    this.createNumbersPagesArray();
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
@@ -48,10 +52,18 @@ export class HomeComponent implements OnInit {
       this.userLocStg = JSON.parse(this.userJSON);
     }
   }
+  createNumbersPagesArray() {
+    for (let i = 1; i <= this.pagesToShow; i++) {
+      this.numbersPages.push(i);
+    }
+    console.log(this.numbersPages);
+  }
   getTrending() {
     this._moviesService.getTrending().subscribe({
       next: (data: PageMoviesSeriesActors) => {
         let MoviesSeriesActorsApi = data.results;
+        this.totalPages = data.total_pages;
+
         this.moviesSeriesApi = [];
         for (let film of MoviesSeriesActorsApi) {
           if (film.media_type !== 'person') {
@@ -75,6 +87,7 @@ export class HomeComponent implements OnInit {
     this._moviesService.getMovies().subscribe({
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
+        this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         console.log(this.moviesSeriesApi);
       },
@@ -92,6 +105,7 @@ export class HomeComponent implements OnInit {
     this._moviesService.getSeries().subscribe({
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
+        this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         console.log(this.moviesSeriesApi);
       },

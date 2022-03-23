@@ -26,7 +26,8 @@ export class MoviesService {
   getTrending(): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
-      .set('language', 'es');
+      .set('language', 'es')
+      .set('page', '3');
 
     return this._http.get<PageMoviesSeriesActors>(
       this.baseUrl + '/trending/all/week',
