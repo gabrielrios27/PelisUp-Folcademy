@@ -124,37 +124,123 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+  getSearchTrending() {
+    this._moviesService
+      .getSearchTrending(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          let MoviesSeriesActorsApi = data.results;
+          this.totalPages = data.total_pages;
 
+          this.moviesSeriesApi = [];
+          for (let film of MoviesSeriesActorsApi) {
+            if (film.media_type !== 'person') {
+              this.moviesSeriesApi.push(film);
+            }
+          }
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(this.moviesSeriesApi);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          console.log('Request trending complete');
+        },
+      });
+  }
+  getSearchMovies() {
+    this._moviesService
+      .getSearchMovie(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(this.moviesSeriesApi);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          console.log('Request movies complete');
+        },
+      });
+  }
+  getSearchSeries() {
+    this._moviesService
+      .getSearchSerie(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(this.moviesSeriesApi);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          console.log('Request series complete');
+        },
+      });
+  }
   /*para buscar la informacion del input dentro de las cards mostradas en el home*/
   SearchInParent(e: string) {
     /*informacion a buscar, que viene desde el componente searcher*/
-    this.toSearch = e.toUpperCase();
+    this.toSearch = e;
+    console.log(this.toSearch);
 
     /*vacío el arreglo en donde guardaremos las peliculas que coincidan con la busqueda */
     this.moviesSeriesApi_toSearch = [];
-
-    for (let film of this.moviesSeriesApi) {
-      if (film.title) {
-        if (film.title.toUpperCase().includes(this.toSearch)) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
-          this.moviesSeriesApi_toSearch.push(film);
-          this.twoParts = false;
-        }
-      } else if (film.name) {
-        if (film.name.toUpperCase().includes(this.toSearch)) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
-          this.moviesSeriesApi_toSearch.push(film);
-          this.twoParts = false;
-        }
-      }
-    }
     if (e !== '') {
-      /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
-      this.TwoPartsSearch();
+      if (this.filter == 'Todos') {
+        this.getSearchTrending();
+      }
+      if (this.filter == 'Películas') {
+        this.getSearchMovies();
+      }
+      if (this.filter == 'Series') {
+        this.getSearchSeries();
+      }
     } else {
       /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+      if (this.filter == 'Todos') {
+        this.getTrending();
+      }
+      if (this.filter == 'Películas') {
+        this.getMovies();
+      }
+      if (this.filter == 'Series') {
+        this.getSeries();
+      }
     }
+
+    // for (let film of this.moviesSeriesApi) {
+    //   if (film.title) {
+    //     if (film.title.toUpperCase().includes(this.toSearch)) {
+    //       /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
+    //       this.moviesSeriesApi_toSearch.push(film);
+    //       this.twoParts = false;
+    //     }
+    //   } else if (film.name) {
+    //     if (film.name.toUpperCase().includes(this.toSearch)) {
+    //       /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
+    //       this.moviesSeriesApi_toSearch.push(film);
+    //       this.twoParts = false;
+    //     }
+    //   }
+    // }
+    // if (e !== '') {
+    //   /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
+    //   this.TwoPartsSearch();
+    // } else {
+    //   /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
+    //   this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+    // }
     /*se calcula la cantidad de peliculas o series mostradas*/
     this.quantity = this.moviesSeriesApi_toShow.length;
   }

@@ -60,6 +60,59 @@ export class MoviesService {
       }
     );
   }
+  getSearchTrending(
+    page: number,
+    toSearch: string
+  ): Observable<PageMoviesSeriesActors> {
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es')
+      .set('query', toSearch)
+      .set('page', page.toString());
+
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/trending/search/multi',
+      {
+        params: params,
+      }
+    );
+  }
+  getSearchMovie(
+    page: number,
+    toSearch: string
+  ): Observable<PageMoviesSeriesActors> {
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es')
+      .set('query', toSearch)
+      .set('page', page.toString())
+      .set('include_adult', false);
+
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/trending/search/movie',
+      {
+        params: params,
+      }
+    );
+  }
+  getSearchSerie(
+    page: number,
+    toSearch: string
+  ): Observable<PageMoviesSeriesActors> {
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es')
+      .set('page', page.toString())
+      .set('query', toSearch)
+      .set('include_adult', false);
+
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/trending/search/tv',
+      {
+        params: params,
+      }
+    );
+  }
   setIdFilmToShowDetails(id: number, media_type: MediaType) {
     this.idFilmToShowDetails = id;
     this.mediaType = media_type;
