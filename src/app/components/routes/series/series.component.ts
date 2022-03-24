@@ -16,6 +16,11 @@ export class SeriesComponent implements OnInit {
   moviesSeriesApi: MoviesSeriesActors[] = [];
   moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
   moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
+  totalPages: number = 0; /*numero total de paginas que se obtienen de la API*/
+  numbersPages: number[] =
+    []; /*arreglo de numeros del 1 al pagesToShow, si se quieren mostrar todas entonces en createNumbersPagesArray() cambiar pagesToShow por totalPages*/
+  pagesToShow: number = 100; /*cantidad de peliculas a mostrar en la paginación*/
+  pageSelected: number = 1;
 
   selectedCategorie: string = 'Películas'; /*lo que se escribe en el HTML*/
   filter: string = 'Películas';
@@ -37,6 +42,7 @@ export class SeriesComponent implements OnInit {
     if (this.userLocStg) {
       this.router.navigate(['../addNewItem']);
     }
+    this.createNumbersPagesArray();
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
@@ -45,9 +51,14 @@ export class SeriesComponent implements OnInit {
       this.userLocStg = JSON.parse(this.userJSON);
     }
   }
-
+  createNumbersPagesArray() {
+    for (let i = 1; i <= this.pagesToShow; i++) {
+      this.numbersPages.push(i);
+    }
+    console.log(this.numbersPages);
+  }
   getSeries() {
-    this._moviesService.getSeries().subscribe({
+    this._moviesService.getSeries(this.pageSelected).subscribe({
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
@@ -134,5 +145,9 @@ export class SeriesComponent implements OnInit {
       this.toSearchPrevius =
         this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
     }
+  }
+  onClickPage(page: number) {
+    this.pageSelected = page;
+    this.getSeries();
   }
 }

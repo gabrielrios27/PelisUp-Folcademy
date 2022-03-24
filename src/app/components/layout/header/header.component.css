@@ -5,7 +5,8 @@
   left: 0px;
   top: 0px;
   background: var(--Grey-900-80);
-  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+          backdrop-filter: blur(40px);
   z-index: 100;
 }
 .header__container {
@@ -67,7 +68,7 @@ app-burger-button {
 }
 @media (max-width: 768px) {
   .header__container {
-    padding: 16px 90px;
+    padding: 16px 80px;
   }
   app-navbar {
     display: none;
@@ -78,6 +79,6 @@ app-burger-button {
 }
 @media (max-width: 576px) {
   .header__container {
-    padding: 16px 60px;
+    padding: 16px 40px;
   }
 }
