@@ -22,6 +22,9 @@ export class AddNewItemComponent implements OnInit {
     []; /*arreglo de numeros del 1 al pagesToShow, si se quieren mostrar todas entonces en createNumbersPagesArray() cambiar pagesToShow por totalPages*/
   pagesToShow: number = 100; /*cantidad de peliculas a mostrar en la paginación*/
   pageSelected: number = 1;
+  arrowPagination: number = 1;
+  translatePaginationNumber: number = 0;
+  translatePaginationString: string = '0px';
 
   selectedCategorie: string = 'Todos'; /*lo que se escribe en el HTML*/
   filter: string = 'Todos';
@@ -270,6 +273,21 @@ export class AddNewItemComponent implements OnInit {
     }
     if (this.filter == 'Series') {
       this.getSeries();
+    }
+  }
+  onClickRightArrowPagination() {
+    if (this.arrowPagination < 17) {
+      this.translatePaginationNumber = this.arrowPagination * -205;
+      this.translatePaginationString = `${this.translatePaginationNumber}px`;
+      this.arrowPagination++;
+    }
+  }
+  onClickLeftArrowPagination() {
+    if (this.arrowPagination > 0) {
+      this.arrowPagination--;
+      this.translatePaginationNumber = this.translatePaginationNumber + 205;
+      this.translatePaginationString = `${this.translatePaginationNumber}px`;
+      console.log('tranlatePagination: ', this.translatePaginationNumber);
     }
   }
 }
