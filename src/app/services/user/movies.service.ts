@@ -71,7 +71,7 @@ export class MoviesService {
       .set('page', page.toString());
 
     return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/trending/search/multi',
+      this.baseUrl + '/search/multi',
       {
         params: params,
       }
@@ -89,7 +89,7 @@ export class MoviesService {
       .set('include_adult', false);
 
     return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/trending/search/movie',
+      this.baseUrl + '/search/movie',
       {
         params: params,
       }
@@ -106,12 +106,9 @@ export class MoviesService {
       .set('query', toSearch)
       .set('include_adult', false);
 
-    return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/trending/search/tv',
-      {
-        params: params,
-      }
-    );
+    return this._http.get<PageMoviesSeriesActors>(this.baseUrl + '/search/tv', {
+      params: params,
+    });
   }
   setIdFilmToShowDetails(id: number, media_type: MediaType) {
     this.idFilmToShowDetails = id;
