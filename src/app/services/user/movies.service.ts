@@ -23,11 +23,11 @@ export class MoviesService {
 
   constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
-  getTrending(): Observable<PageMoviesSeriesActors> {
+  getTrending(page: number): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
       .set('language', 'es')
-      .set('page', '3');
+      .set('page', page.toString());
 
     return this._http.get<PageMoviesSeriesActors>(
       this.baseUrl + '/trending/all/week',
@@ -36,11 +36,11 @@ export class MoviesService {
       }
     );
   }
-  getMovies(): Observable<PageMoviesSeriesActors> {
+  getMovies(page: number): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
-      .set('language', 'es');
-
+      .set('language', 'es')
+      .set('page', page.toString());
     return this._http.get<PageMoviesSeriesActors>(
       this.baseUrl + '/movie/popular',
       {
@@ -48,17 +48,67 @@ export class MoviesService {
       }
     );
   }
-  getSeries(): Observable<PageMoviesSeriesActors> {
+  getSeries(page: number): Observable<PageMoviesSeriesActors> {
     let params = new HttpParams()
       .set('api_key', this.api_key)
-      .set('language', 'es');
-
+      .set('language', 'es')
+      .set('page', page.toString());
     return this._http.get<PageMoviesSeriesActors>(
       this.baseUrl + '/tv/popular',
       {
         params: params,
       }
     );
+  }
+  getSearchTrending(
+    page: number,
+    toSearch: string
+  ): Observable<PageMoviesSeriesActors> {
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es')
+      .set('query', toSearch)
+      .set('page', page.toString());
+
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/search/multi',
+      {
+        params: params,
+      }
+    );
+  }
+  getSearchMovie(
+    page: number,
+    toSearch: string
+  ): Observable<PageMoviesSeriesActors> {
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es')
+      .set('query', toSearch)
+      .set('page', page.toString())
+      .set('include_adult', false);
+
+    return this._http.get<PageMoviesSeriesActors>(
+      this.baseUrl + '/search/movie',
+      {
+        params: params,
+      }
+    );
+  }
+  getSearchSerie(
+    page: number,
+    toSearch: string
+  ): Observable<PageMoviesSeriesActors> {
+    let params = new HttpParams()
+      .set('api_key', this.api_key)
+      .set('language', 'es')
+      .set('page', page.toString())
+      .set('query', toSearch)
+      .set('include_adult', false);
+
+    return this._http.get<PageMoviesSeriesActors>(this.baseUrl + '/search/tv', {
+      params: params,
+    });
   }
   setIdFilmToShowDetails(id: number, media_type: MediaType) {
     this.idFilmToShowDetails = id;

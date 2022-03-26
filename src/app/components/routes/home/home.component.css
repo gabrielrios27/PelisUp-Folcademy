@@ -28,6 +28,7 @@
   padding: 8px;
   margin-top: 56px;
   background: var(--Black-20);
+  -webkit-backdrop-filter: blur(80px);
   backdrop-filter: blur(80px);
   border-radius: 12px;
 }
@@ -94,6 +95,7 @@
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  -moz-column-gap: 24px;
   column-gap: 24px;
 }
 .pagination {
@@ -101,18 +103,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 .pagination__container {
   padding: 3px;
   overflow-x: hidden;
-  width: 573px;
+  max-width: 573px;
+  width: 100%;
 }
 .pagination__arrow {
   padding: 4px 11px;
   cursor: pointer;
+  flex-shrink: 0;
+}
+.pagination__arrow:hover path {
+  fill: var(--Warning-400);
 }
 .pagination__numbers {
+  position: relative;
   display: flex;
+  transition: var(--transition);
 }
 .pagination__cell {
   flex-shrink: 0;
@@ -124,19 +134,24 @@
   color: var(--Grey-500);
   padding: 5px 10px;
   text-align: center;
-  /* border: solid 1px var(--Grey-600); */
   box-shadow: 0 0 3px #61697f50;
   border-radius: 3px;
   cursor: pointer;
 }
 .pagination__cell:hover {
-  /* background-color: #ffbd6d07; */
+  color: var(--Warning-400);
+  box-shadow: 0 0 4px #ffbd6da2;
+}
+.pagination__cellActive {
   color: var(--Warning-400);
   box-shadow: 0 0 4px #ffbd6da2;
 }
 @media (max-width: 992px) {
   .cardsConteiner {
     justify-content: space-evenly;
+  }
+  .pagination__cell {
+    width: 37px;
   }
 }
 @media (max-width: 576px) {
@@ -160,5 +175,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+  }
+  .pagination__arrow {
+    padding: 4px;
+  }
+  .pagination__cell {
+    width: 34px;
+    font-size: 13px;
+    line-height: 23px;
+    padding: 5px 9px;
   }
 }

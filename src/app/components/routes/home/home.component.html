@@ -7,6 +7,7 @@
     categorie="películas y series"
     (buscar)="SearchInParent($event)"
   ></app-searcher>
+
   <div class="categories">
     <ul class="categories__list">
       <li
@@ -71,9 +72,11 @@
   </div>
   <!-- <div class="pagination">
     <svg
+      *ngIf="toSearch == ''"
+      (click)="onClickLeftArrowPagination()"
       class="pagination__arrow"
-      width="49"
-      height="36"
+      width="44"
+      height="33"
       viewBox="0 0 29 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -84,16 +87,29 @@
       />
     </svg>
     <div class="pagination__container">
-      <div class="pagination__numbers">
-        <p class="pagination__cell" *ngFor="let number of numbersPages">
-          {{ number }}
-        </p>
+      <div
+        class="pagination__numbers"
+        [ngStyle]="{
+          left: arrowPagination > 1 ? translatePaginationString : '0px'
+        }"
+      >
+        <ng-container *ngFor="let number of numbersPages">
+          <p
+            class="pagination__cell"
+            [ngClass]="number == pageSelected ? 'pagination__cellActive' : ''"
+            (click)="onClickPage(number)"
+          >
+            {{ number }}
+          </p>
+        </ng-container>
       </div>
     </div>
     <svg
+      *ngIf="toSearch == ''"
+      (click)="onClickRightArrowPagination()"
       class="pagination__arrow"
-      width="49"
-      height="36"
+      width="44"
+      height="33"
       viewBox="0 0 29 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
