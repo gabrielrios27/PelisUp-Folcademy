@@ -45,7 +45,6 @@ export class PeliculasComponent implements OnInit {
     if (this.userLocStg) {
       this.router.navigate(['../addNewItem']);
     }
-    this.createNumbersPagesArray();
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
@@ -55,57 +54,72 @@ export class PeliculasComponent implements OnInit {
     }
   }
   createNumbersPagesArray() {
-    for (let i = 1; i <= this.pagesToShow; i++) {
-      this.numbersPages.push(i);
+    this.numbersPages = [];
+    if (this.totalPages > this.pagesToShow) {
+      for (let i = 1; i <= this.pagesToShow; i++) {
+        this.numbersPages.push(i);
+      }
+    } else {
+      for (let i = 1; i <= this.totalPages; i++) {
+        this.numbersPages.push(i);
+      }
     }
-    console.log(this.numbersPages);
   }
   getMovies() {
     this._moviesService.getMovies(this.pageSelected).subscribe({
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
+        this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(this.moviesSeriesApi);
+        console.log(data);
       },
       error: (err) => {
         console.log(err);
       },
       complete: () => {
         this.CountQuantity();
+        this.createNumbersPagesArray();
         console.log('Request movies complete');
       },
     });
   }
-
+  getSearchMovies() {
+    this._moviesService
+      .getSearchMovie(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          this.createNumbersPagesArray();
+          console.log('Request movies to search complete');
+        },
+      });
+  }
   /*para buscar la informacion del input dentro de las cards mostradas en el home*/
   SearchInParent(e: string) {
     /*informacion a buscar, que viene desde el componente searcher*/
     this.toSearch = e.toUpperCase();
-
+    // lo siguiente se hace para volver la paginación a la pagina 1 cada vez que se busca algo
+    this.arrowPagination = 1;
+    this.translatePaginationNumber = 0;
+    this.translatePaginationString = '0px';
+    this.pageSelected = 1;
     /*vacío el arreglo en donde guardaremos las peliculas que coincidan con la busqueda */
     this.moviesSeriesApi_toSearch = [];
 
-    for (let film of this.moviesSeriesApi) {
-      if (film.title) {
-        if (film.title.toUpperCase().includes(this.toSearch)) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
-          this.moviesSeriesApi_toSearch.push(film);
-          this.twoParts = false;
-        }
-      } else if (film.name) {
-        if (film.name.toUpperCase().includes(this.toSearch)) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
-          this.moviesSeriesApi_toSearch.push(film);
-          this.twoParts = false;
-        }
-      }
-    }
     if (e !== '') {
-      /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
-      this.TwoPartsSearch();
-    } else {
-      /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+      this.getSearchMovies();
+    } else if (e == '') {
+      /*si el input de busqueda esta vacio se muestra el arreglo de todas las peliculas*/
+      this.getMovies();
     }
     /*se calcula la cantidad de peliculas o series mostradas*/
     this.CountQuantity();
@@ -116,43 +130,14 @@ export class PeliculasComponent implements OnInit {
     this.quantity = this.moviesSeriesApi_toShow.length;
   }
   /*TwoPartsSearch: cuando no hay coincidencias con lo escrito en el input entonces este valor(del input,toSearch) se divide en dos desde la ultima coincidencia y se buscan ambas partes en el arreglo de peliculas y series */
-  TwoPartsSearch() {
-    if (this.moviesSeriesApi_toSearch.length == 0 || this.twoParts) {
-      this.twoParts = true;
-      let toSearchPreviusLength = this.toSearchPrevius.length;
-      let toSearchOne: string = this.toSearchPrevius;
-      let toSearchTwo: string = this.toSearch.substring(toSearchPreviusLength);
 
-      for (let film of this.moviesSeriesApi) {
-        if (film.title) {
-          if (
-            film.title.toUpperCase().includes(toSearchOne) &&
-            film.title.toUpperCase().includes(toSearchTwo)
-          ) {
-            /*si la pelicula incluye las cadenas de texto a buscar entonces se guarda en el arreglo */
-            this.moviesSeriesApi_toSearch.push(film);
-          }
-        } else if (film.name) {
-          if (
-            film.name.toUpperCase().includes(toSearchOne) &&
-            film.name.toUpperCase().includes(toSearchTwo)
-          ) {
-            /*si la pelicula incluye las cadenas de texto a buscar entonces se guarda en el arreglo */
-            this.moviesSeriesApi_toSearch.push(film);
-          }
-        }
-      }
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi_toSearch;
-    } else {
-      this.twoParts = false;
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi_toSearch;
-      this.toSearchPrevius =
-        this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
-    }
-  }
   onClickPage(page: number) {
     this.pageSelected = page;
-    this.getMovies();
+    if (this.toSearch == '') {
+      this.getMovies();
+    } else {
+      this.getSearchMovies();
+    }
   }
   onClickRightArrowPagination() {
     if (this.arrowPagination < 17) {

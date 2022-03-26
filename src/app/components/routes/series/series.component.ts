@@ -45,7 +45,6 @@ export class SeriesComponent implements OnInit {
     if (this.userLocStg) {
       this.router.navigate(['../addNewItem']);
     }
-    this.createNumbersPagesArray();
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
@@ -99,7 +98,7 @@ export class SeriesComponent implements OnInit {
         complete: () => {
           this.CountQuantity();
           this.createNumbersPagesArray();
-          console.log('Request series complete');
+          console.log('Request series to search complete');
         },
       });
   }

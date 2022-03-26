@@ -74,6 +74,7 @@
   </div>
   <div class="pagination">
     <svg
+      *ngIf="toSearch == ''"
       (click)="onClickLeftArrowPagination()"
       class="pagination__arrow"
       width="44"
@@ -106,6 +107,7 @@
       </div>
     </div>
     <svg
+      *ngIf="toSearch == ''"
       (click)="onClickRightArrowPagination()"
       class="pagination__arrow"
       width="44"

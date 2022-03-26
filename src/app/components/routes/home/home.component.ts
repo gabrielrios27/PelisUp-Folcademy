@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
         complete: () => {
           this.CountQuantity();
           this.createNumbersPagesArray();
-          console.log('Request trending complete');
+          console.log('Request trending to search complete');
         },
       });
   }
@@ -176,7 +176,7 @@ export class HomeComponent implements OnInit {
         complete: () => {
           this.CountQuantity();
           this.createNumbersPagesArray();
-          console.log('Request movies complete');
+          console.log('Request movies to search complete');
         },
       });
   }
@@ -196,7 +196,7 @@ export class HomeComponent implements OnInit {
         complete: () => {
           this.CountQuantity();
           this.createNumbersPagesArray();
-          console.log('Request series complete');
+          console.log('Request series to search complete');
         },
       });
   }

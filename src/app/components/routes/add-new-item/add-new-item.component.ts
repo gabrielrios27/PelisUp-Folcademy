@@ -48,18 +48,24 @@ export class AddNewItemComponent implements OnInit {
       this.router.navigate(['../inicio']);
     }
     this.OnClickAll();
-    this.createNumbersPagesArray();
   }
   createNumbersPagesArray() {
-    for (let i = 1; i <= this.pagesToShow; i++) {
-      this.numbersPages.push(i);
+    this.numbersPages = [];
+    if (this.totalPages > this.pagesToShow) {
+      for (let i = 1; i <= this.pagesToShow; i++) {
+        this.numbersPages.push(i);
+      }
+    } else {
+      for (let i = 1; i <= this.totalPages; i++) {
+        this.numbersPages.push(i);
+      }
     }
-    console.log(this.numbersPages);
   }
   getTrending() {
     this._moviesService.getTrending(this.pageSelected).subscribe({
       next: (data: PageMoviesSeriesActors) => {
         let MoviesSeriesActorsApi = data.results;
+        this.totalPages = data.total_pages;
         this.moviesSeriesApi = [];
         for (let film of MoviesSeriesActorsApi) {
           if (film.media_type !== 'person') {
@@ -76,6 +82,7 @@ export class AddNewItemComponent implements OnInit {
       },
       complete: () => {
         this.CountQuantity();
+        this.createNumbersPagesArray();
         this.ReWriteAtFilterChange(this.toSearch);
         console.log('Request trending complete');
       },
@@ -85,6 +92,7 @@ export class AddNewItemComponent implements OnInit {
     this._moviesService.getMovies(this.pageSelected).subscribe({
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
+        this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         this.getMyList(this.myMovies, MediaType.Movie);
         this.getMyList(this.mySeries, MediaType.Tv);
@@ -95,6 +103,7 @@ export class AddNewItemComponent implements OnInit {
       },
       complete: () => {
         this.CountQuantity();
+        this.createNumbersPagesArray();
         this.ReWriteAtFilterChange(this.toSearch);
         console.log('Request movies complete');
       },
@@ -104,6 +113,7 @@ export class AddNewItemComponent implements OnInit {
     this._moviesService.getSeries(this.pageSelected).subscribe({
       next: (data: PageMoviesSeriesActors) => {
         this.moviesSeriesApi = data.results;
+        this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         this.getMyList(this.myMovies, MediaType.Movie);
         this.getMyList(this.mySeries, MediaType.Tv);
@@ -114,41 +124,114 @@ export class AddNewItemComponent implements OnInit {
       },
       complete: () => {
         this.CountQuantity();
+        this.createNumbersPagesArray();
         this.ReWriteAtFilterChange(this.toSearch);
         console.log('Request series complete');
       },
     });
   }
+  getSearchTrending() {
+    this._moviesService
+      .getSearchTrending(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          let MoviesSeriesActorsApi = data.results;
+          this.totalPages = data.total_pages;
 
+          this.moviesSeriesApi = [];
+          for (let film of MoviesSeriesActorsApi) {
+            if (film.media_type !== 'person') {
+              this.moviesSeriesApi.push(film);
+            }
+          }
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          this.createNumbersPagesArray();
+          console.log('Request trending to search complete');
+        },
+      });
+  }
+  getSearchMovies() {
+    this._moviesService
+      .getSearchMovie(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          this.createNumbersPagesArray();
+          console.log('Request movies to search complete');
+        },
+      });
+  }
+  getSearchSeries() {
+    this._moviesService
+      .getSearchSerie(this.pageSelected, this.toSearch)
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          this.createNumbersPagesArray();
+          console.log('Request series to search complete');
+        },
+      });
+  }
   /*para buscar la informacion del input dentro de las cards mostradas en el home*/
   SearchInParent(e: string) {
     /*informacion a buscar, que viene desde el componente searcher*/
-    this.toSearch = e.toUpperCase();
+    this.toSearch = e;
+    console.log(this.toSearch);
+
+    // lo siguiente se hace para volver la paginación a la pagina 1 cada vez que se busca algo
+    this.arrowPagination = 1;
+    this.translatePaginationNumber = 0;
+    this.translatePaginationString = '0px';
+    this.pageSelected = 1;
 
     /*vacío el arreglo en donde guardaremos las peliculas que coincidan con la busqueda */
     this.moviesSeriesApi_toSearch = [];
-
-    for (let film of this.moviesSeriesApi) {
-      if (film.title) {
-        if (film.title.toUpperCase().includes(this.toSearch)) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
-          this.moviesSeriesApi_toSearch.push(film);
-          this.twoParts = false;
-        }
-      } else if (film.name) {
-        if (film.name.toUpperCase().includes(this.toSearch)) {
-          /*si la pelicula incluye la cadena de texto a buscar entonces se guarda en el nuevo arreglo */
-          this.moviesSeriesApi_toSearch.push(film);
-          this.twoParts = false;
-        }
-      }
-    }
     if (e !== '') {
-      /*si el input no esta vacio se muestra el arreglo de peliculas que coinciden con la busqueda*/
-      this.TwoPartsSearch();
+      if (this.filter == 'Todos') {
+        this.getSearchTrending();
+      }
+      if (this.filter == 'Películas') {
+        this.getSearchMovies();
+      }
+      if (this.filter == 'Series') {
+        this.getSearchSeries();
+      }
     } else {
-      /*si el input esta vacio se muestra el arreglo de todas las peliculas*/
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+      /*si el input de busqueda esta vacio se muestra el arreglo de todas las peliculas*/
+      if (this.filter == 'Todos') {
+        this.getTrending();
+      }
+      if (this.filter == 'Películas') {
+        this.getMovies();
+      }
+      if (this.filter == 'Series') {
+        this.getSeries();
+      }
     }
     /*se calcula la cantidad de peliculas o series mostradas*/
     this.quantity = this.moviesSeriesApi_toShow.length;
@@ -179,41 +262,7 @@ export class AddNewItemComponent implements OnInit {
   CountQuantity() {
     this.quantity = this.moviesSeriesApi_toShow.length;
   }
-  /*TwoPartsSearch: cuando no hay coincidencias con lo escrito en el input entonces este valor(del input,toSearch) se divide en dos desde la ultima coincidencia y se buscan ambas partes en el arreglo de peliculas y series */
-  TwoPartsSearch() {
-    if (this.moviesSeriesApi_toSearch.length == 0 || this.twoParts) {
-      this.twoParts = true;
-      let toSearchPreviusLength = this.toSearchPrevius.length;
-      let toSearchOne: string = this.toSearchPrevius;
-      let toSearchTwo: string = this.toSearch.substring(toSearchPreviusLength);
 
-      for (let film of this.moviesSeriesApi) {
-        if (film.title) {
-          if (
-            film.title.toUpperCase().includes(toSearchOne) &&
-            film.title.toUpperCase().includes(toSearchTwo)
-          ) {
-            /*si la pelicula incluye las cadenas de texto a buscar entonces se guarda en el arreglo */
-            this.moviesSeriesApi_toSearch.push(film);
-          }
-        } else if (film.name) {
-          if (
-            film.name.toUpperCase().includes(toSearchOne) &&
-            film.name.toUpperCase().includes(toSearchTwo)
-          ) {
-            /*si la pelicula incluye las cadenas de texto a buscar entonces se guarda en el arreglo */
-            this.moviesSeriesApi_toSearch.push(film);
-          }
-        }
-      }
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi_toSearch;
-    } else {
-      this.twoParts = false;
-      this.moviesSeriesApi_toShow = this.moviesSeriesApi_toSearch;
-      this.toSearchPrevius =
-        this.toSearch; /*se guarda la ultima palabra buscada con la que hubo coincidencias */
-    }
-  }
   // obtengo los arreglos del firestore y busco coincidencias en el arreglo a mostrar para saber si el item ya esta agregado a firestore
   getMyList(array: any, mediaType: MediaType) {
     this._moviesService
@@ -265,14 +314,26 @@ export class AddNewItemComponent implements OnInit {
   }
   onClickPage(page: number) {
     this.pageSelected = page;
-    if (this.filter == 'Todos') {
-      this.getTrending();
-    }
-    if (this.filter == 'Películas') {
-      this.getMovies();
-    }
-    if (this.filter == 'Series') {
-      this.getSeries();
+    if (this.toSearch == '') {
+      if (this.filter == 'Todos') {
+        this.getTrending();
+      }
+      if (this.filter == 'Películas') {
+        this.getMovies();
+      }
+      if (this.filter == 'Series') {
+        this.getSeries();
+      }
+    } else {
+      if (this.filter == 'Todos') {
+        this.getSearchTrending();
+      }
+      if (this.filter == 'Películas') {
+        this.getSearchMovies();
+      }
+      if (this.filter == 'Series') {
+        this.getSearchSeries();
+      }
     }
   }
   onClickRightArrowPagination() {
