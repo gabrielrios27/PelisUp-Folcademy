@@ -23,7 +23,6 @@ export class AuthService {
     try {
       return await this.afauth.signInWithEmailAndPassword(email, password);
     } catch (err: any) {
-      console.log(err.code);
       this.errCode = err.code;
       return null;
     }
@@ -34,7 +33,6 @@ export class AuthService {
     try {
       return await this.afauth.createUserWithEmailAndPassword(email, password);
     } catch (err: any) {
-      console.log('error en el login: ', err);
       this.errCode = err.code;
       return null;
     }
@@ -46,13 +44,11 @@ export class AuthService {
         new firebase.auth.GoogleAuthProvider()
       );
     } catch (err) {
-      console.log('error en el login: ', err);
       return null;
     }
   }
   getUserLogged(): Observable<any> {
     this.user = lastValueFrom(this.afauth.authState.pipe(first()));
-    console.log(this.user);
     return this.user;
   }
   logOut() {

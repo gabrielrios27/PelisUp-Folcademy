@@ -75,7 +75,6 @@ export class AddNewItemComponent implements OnInit {
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         this.getMyList(this.myMovies, MediaType.Movie);
         this.getMyList(this.mySeries, MediaType.Tv);
-        console.log(this.moviesSeriesApi_toShow);
       },
       error: (err) => {
         console.log(err);
@@ -96,7 +95,6 @@ export class AddNewItemComponent implements OnInit {
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         this.getMyList(this.myMovies, MediaType.Movie);
         this.getMyList(this.mySeries, MediaType.Tv);
-        console.log(this.moviesSeriesApi_toShow);
       },
       error: (err) => {
         console.log(err);
@@ -117,7 +115,6 @@ export class AddNewItemComponent implements OnInit {
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
         this.getMyList(this.myMovies, MediaType.Movie);
         this.getMyList(this.mySeries, MediaType.Tv);
-        console.log(this.moviesSeriesApi_toShow);
       },
       error: (err) => {
         console.log(err);
@@ -145,7 +142,6 @@ export class AddNewItemComponent implements OnInit {
             }
           }
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -165,7 +161,6 @@ export class AddNewItemComponent implements OnInit {
           this.moviesSeriesApi = data.results;
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -185,7 +180,6 @@ export class AddNewItemComponent implements OnInit {
           this.moviesSeriesApi = data.results;
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -201,7 +195,6 @@ export class AddNewItemComponent implements OnInit {
   SearchInParent(e: string) {
     /*informacion a buscar, que viene desde el componente searcher*/
     this.toSearch = e;
-    console.log(this.toSearch);
 
     // lo siguiente se hace para volver la paginación a la pagina 1 cada vez que se busca algo
     this.arrowPagination = 1;
@@ -276,7 +269,6 @@ export class AddNewItemComponent implements OnInit {
               ...element.payload.doc.data(),
             });
           });
-          console.log('array de peliculas o series', array);
           this.checkMatches(array);
         },
         (error) => {
@@ -348,7 +340,6 @@ export class AddNewItemComponent implements OnInit {
       this.arrowPagination--;
       this.translatePaginationNumber = this.translatePaginationNumber + 205;
       this.translatePaginationString = `${this.translatePaginationNumber}px`;
-      console.log('tranlatePagination: ', this.translatePaginationNumber);
     }
   }
 }

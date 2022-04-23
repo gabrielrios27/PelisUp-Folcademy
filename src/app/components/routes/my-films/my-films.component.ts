@@ -52,7 +52,6 @@ export class MyFilmsComponent implements OnInit {
     if (categorieSelected) {
       this.categorie = categorieSelected;
     }
-    console.log('la categoria elegida es: ', this.categorie);
     if (this.categorie == 'Películas') {
       this.mediaType = MediaType.Movie;
     } else {
@@ -73,7 +72,6 @@ export class MyFilmsComponent implements OnInit {
               ...element.payload.doc.data(),
             });
           });
-          console.log('array de my films', array);
           this.moviesSeries = array;
           this.moviesSeries_toShow = array;
         },

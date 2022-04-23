@@ -12,6 +12,23 @@
       >
     </li>
   </ul>
+  <div class="darkMode" (click)="toggleDarkMode()">
+    <div class="darkMode__container">
+      <div
+        class="darkModeButton"
+        [ngClass]="darkMode ? '' : 'darkModeButton--false'"
+      >
+        <div
+          class="darkMode__purpleBall"
+          [ngClass]="darkMode ? '' : 'darkMode__purpleBall--false'"
+        ></div>
+        <div
+          class="darkMode__blueBall"
+          [ngClass]="darkMode ? '' : 'darkMode__blueBall--false'"
+        ></div>
+      </div>
+    </div>
+  </div>
   <ng-template #notLoged>
     <ul class="navList">
       <li class="navList__li">

@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
     this.invalidForm = false;
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password).then((res) => {
-      console.log('res.user: ', res?.user);
       if (res?.user) {
         /*si el logeo es exitoso navego hacia el dashboard*/
         this.router.navigate(['../dashboard']);
@@ -77,7 +76,6 @@ export class LoginComponent implements OnInit {
   }
   logInWithGoogleUser() {
     this.authService.loginWithGoogle().then((res) => {
-      console.log(res?.user);
       if (res?.user) {
         /*si el logeo es exitoso navego hacia el dashboard*/
         this.router.navigate(['../dashboard']);

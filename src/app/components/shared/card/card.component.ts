@@ -59,15 +59,12 @@ export class CardComponent implements OnInit {
     this.added = true;
   }
   deleteFromCard() {
-    console.log('borrando');
-
     this._moviesService.deleteFromFirestore(
       this.userLocStg.uid,
       this.idFilmAdded || this.idGlobal,
       this.mediaType
     );
     this.added = false;
-    console.log('added: ', this.isAdded);
   }
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/

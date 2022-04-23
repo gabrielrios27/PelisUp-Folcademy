@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { DarkModeService } from 'src/app/services/user/dark-mode.service';
 
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
@@ -41,7 +42,6 @@ export class HomeComponent implements OnInit {
   userJSON: string | null = null;
 
   constructor(private _moviesService: MoviesService, private router: Router) {}
-
   ngOnInit(): void {
     this.OnClickAll();
     this.getLocalStorage();
@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     }
     this.createNumbersPagesArray();
   }
+
   getLocalStorage() {
     /*Si hay en el local storage un usuario logeado lo guarda en 'user'*/
     this.userJSON = localStorage.getItem('Usuario');
@@ -82,7 +83,6 @@ export class HomeComponent implements OnInit {
           }
         }
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(data);
       },
       error: (err) => {
         console.log(err);
@@ -101,7 +101,6 @@ export class HomeComponent implements OnInit {
         this.moviesSeriesApi = data.results;
         this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(data);
       },
       error: (err) => {
         console.log(err);
@@ -120,7 +119,6 @@ export class HomeComponent implements OnInit {
         this.moviesSeriesApi = data.results;
         this.totalPages = data.total_pages;
         this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        console.log(data);
       },
       error: (err) => {
         console.log(err);
@@ -148,7 +146,6 @@ export class HomeComponent implements OnInit {
             }
           }
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -168,7 +165,6 @@ export class HomeComponent implements OnInit {
           this.moviesSeriesApi = data.results;
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -188,7 +184,6 @@ export class HomeComponent implements OnInit {
           this.moviesSeriesApi = data.results;
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -204,7 +199,6 @@ export class HomeComponent implements OnInit {
   SearchInParent(e: string) {
     /*informacion a buscar, que viene desde el componente searcher*/
     this.toSearch = e;
-    console.log(this.toSearch);
 
     // lo siguiente se hace para volver la paginación a la pagina 1 cada vez que se busca algo
     this.arrowPagination = 1;

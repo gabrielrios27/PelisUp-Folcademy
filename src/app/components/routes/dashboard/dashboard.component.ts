@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
       .getFromFirestore(this.user.uid, MediaType.Movie)
       .subscribe((response) => {
         this.movies = response;
-        console.log('peliculas de firestore: ', this.movies.length);
         this.moviesCount = this.movies.length;
       });
   }
@@ -46,7 +45,6 @@ export class DashboardComponent implements OnInit {
       .getFromFirestore(this.user.uid, MediaType.Tv)
       .subscribe((response) => {
         this.series = response;
-        console.log('series de firestore: ', this.series.length);
         this.seriesCount = this.series.length;
       });
   }

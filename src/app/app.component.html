@@ -1,5 +1,11 @@
-<app-header></app-header>
-<section class="pages">
-  <router-outlet></router-outlet>
-</section>
-<app-footer></app-footer>
+<div
+  [ngClass]="
+    (_darkModeSvc.darkModeSubject | async) ? 'themeDark' : 'themeLight'
+  "
+>
+  <app-header></app-header>
+  <section class="pages">
+    <router-outlet></router-outlet>
+  </section>
+  <app-footer></app-footer>
+</div>

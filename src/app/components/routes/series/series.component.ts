@@ -90,7 +90,6 @@ export class SeriesComponent implements OnInit {
           this.moviesSeriesApi = data.results;
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-          console.log(data);
         },
         error: (err) => {
           console.log(err);
@@ -151,7 +150,6 @@ export class SeriesComponent implements OnInit {
       this.arrowPagination--;
       this.translatePaginationNumber = this.translatePaginationNumber + 205;
       this.translatePaginationString = `${this.translatePaginationNumber}px`;
-      console.log('tranlatePagination: ', this.translatePaginationNumber);
     }
   }
 }

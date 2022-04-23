@@ -15,13 +15,10 @@ export class BurgerButtonComponent implements OnInit {
   ngOnInit(): void {}
   ToogleBtnFlag() {
     this.btnFlag = !this.btnFlag;
-    console.log('toggle: ' + this.btnFlag);
   }
   logOut() {
-    console.log(this.user);
     this.authService.logOut();
     this.removeLocalStorage();
-    console.log(this.user);
   }
 
   removeLocalStorage() {
