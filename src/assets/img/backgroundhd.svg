@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="-1983.608 -153.565 1795.557 2966.019" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="filter0_f_5803_39" x="-226" y="-19" width="1188" height="1045" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="175" result="effect1_foregroundBlur_5803_39"/>
+    </filter>
+    <filter id="filter0_f_5803_38" x="0.283203" y="-216.717" width="1040.92" height="1040.92" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="175" result="effect1_foregroundBlur_5803_38"/>
+    </filter>
+    <filter id="filter0_f_5803_36" x="0.799805" y="0.799377" width="1040.92" height="1040.92" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="175" result="effect1_foregroundBlur_5803_36"/>
+    </filter>
+    <filter id="filter0_f_5803_34" x="0" y="0" width="1188" height="1045" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="175" result="effect1_foregroundBlur_5803_34"/>
+    </filter>
+    <filter id="filter0_f_5803_37" x="0.630371" y="0.630798" width="1102.22" height="1102.22" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="175" result="effect1_foregroundBlur_5803_37"/>
+    </filter>
+  </defs>
+  <g filter="url(#filter0_f_5803_39)" transform="matrix(1, 0, 0, 1, -1894.486816, 90.153389)">
+    <path d="M263.838 426.626C218.071 403.817 223.15 342.379 173.024 332.277C86.695 314.88 132.526 479.618 173.024 557.837C251.223 708.874 653.791 721.769 608.45 557.837C589.303 488.609 561.529 431.916 491.532 415.875C440.717 404.23 413.797 447.687 361.672 446.813C322.667 446.158 298.755 444.028 263.838 426.626Z" fill="#0C4265"/>
+  </g>
+  <g filter="url(#filter0_f_5803_38)" transform="matrix(1, 0, 0, 1, -1105.498779, -8.237312)">
+    <ellipse cx="520.743" cy="303.743" rx="200.84" ry="133.281" transform="rotate(-135 520.743 303.743)" fill="#251E62"/>
+  </g>
+  <g filter="url(#filter0_f_5803_36)" transform="matrix(1, 0, 0, 1, -1652.423828, 929.026428)">
+    <ellipse cx="521.26" cy="521.259" rx="200.84" ry="133.281" transform="rotate(-135 521.26 521.259)" fill="#492C66"/>
+  </g>
+  <g filter="url(#filter0_f_5803_34)" transform="matrix(1, 0, 0, 1, -1139.324097, 758.793396)">
+    <path d="M489.838 445.626C444.071 422.817 449.15 361.379 399.024 351.277C312.695 333.88 358.526 498.618 399.024 576.837C477.223 727.874 879.791 740.769 834.45 576.837C815.303 507.609 787.529 450.916 717.532 434.875C666.717 423.23 639.797 466.687 587.672 465.813C548.667 465.158 524.755 463.028 489.838 445.626Z" fill="#02523A"/>
+  </g>
+  <g opacity="0.4" filter="url(#filter0_f_5803_37)" transform="matrix(1, 0, 0, 1, -1389.984131, 1681.54126)">
+    <ellipse cx="551.74" cy="551.741" rx="236.953" ry="157.246" transform="rotate(-135 551.74 551.741)" fill="#1EA5FC"/>
+  </g>
+  <g filter="url(#filter0_f_5803_39)" transform="matrix(1, 0, 0, 1, -1831.514893, 1876.24231)">
+    <path d="M263.838 426.626C218.071 403.817 223.15 342.379 173.024 332.277C86.695 314.88 132.526 479.618 173.024 557.837C251.223 708.874 653.791 721.769 608.45 557.837C589.303 488.609 561.529 431.916 491.532 415.875C440.717 404.23 413.797 447.687 361.672 446.813C322.667 446.158 298.755 444.028 263.838 426.626Z" fill="#0C4265"/>
+  </g>
+</svg>
