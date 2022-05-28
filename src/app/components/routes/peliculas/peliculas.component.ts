@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
@@ -12,7 +13,7 @@ import {
   templateUrl: './peliculas.component.html',
   styleUrls: ['./peliculas.component.css'],
 })
-export class PeliculasComponent implements OnInit {
+export class PeliculasComponent implements OnInit, OnDestroy {
   moviesSeriesApi: MoviesSeriesActors[] = [];
   moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
   moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
@@ -25,17 +26,16 @@ export class PeliculasComponent implements OnInit {
   translatePaginationNumber: number = 0;
   translatePaginationString: string = '0px';
 
-  selectedCategorie: string = 'Películas'; /*lo que se escribe en el HTML*/
   filter: string = 'Películas';
 
   toSearch: string = '';
-  toSearchPrevius: string = '';
   quantity: number = 0;
-  twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
   userLocStg: any;
   userJSON: string | null = null;
+  // suscripciones
+  onDestroy$: Subject<boolean> = new Subject();
 
   constructor(private _moviesService: MoviesService, private router: Router) {}
 
@@ -66,25 +66,29 @@ export class PeliculasComponent implements OnInit {
     }
   }
   getMovies() {
-    this._moviesService.getMovies(this.pageSelected).subscribe({
-      next: (data: PageMoviesSeriesActors) => {
-        this.moviesSeriesApi = data.results;
-        this.totalPages = data.total_pages;
-        this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        this.CountQuantity();
-        this.createNumbersPagesArray();
-        console.log('Request movies complete');
-      },
-    });
+    this._moviesService
+      .getType(this.pageSelected, 'Películas')
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          this.createNumbersPagesArray();
+          console.log('Request movies complete');
+        },
+      });
   }
   getSearchMovies() {
     this._moviesService
-      .getSearchMovie(this.pageSelected, this.toSearch)
+      .getSearchType(this.pageSelected, this.toSearch, 'Películas')
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe({
         next: (data: PageMoviesSeriesActors) => {
           this.moviesSeriesApi = data.results;
@@ -150,5 +154,8 @@ export class PeliculasComponent implements OnInit {
       this.translatePaginationNumber = this.translatePaginationNumber + 205;
       this.translatePaginationString = `${this.translatePaginationNumber}px`;
     }
+  }
+  ngOnDestroy() {
+    this.onDestroy$.next(true);
   }
 }

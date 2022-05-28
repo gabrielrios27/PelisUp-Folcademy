@@ -14,7 +14,7 @@
         [ngClass]="
           filter == 'Todos' ? 'categories__item--active' : 'categories__item'
         "
-        (click)="OnClickAll()"
+        (click)="OnClickType('Todos')"
       >
         Todos
       </li>
@@ -24,7 +24,7 @@
             ? 'categories__item--active'
             : 'categories__item'
         "
-        (click)="OnClickMovies()"
+        (click)="OnClickType('Películas')"
       >
         Películas
       </li>
@@ -32,7 +32,7 @@
         [ngClass]="
           filter == 'Series' ? 'categories__item--active' : 'categories__item'
         "
-        (click)="OnClickShows()"
+        (click)="OnClickType('Series')"
       >
         Series
       </li>
