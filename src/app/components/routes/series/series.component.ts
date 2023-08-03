@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
@@ -25,18 +26,16 @@ export class SeriesComponent implements OnInit {
   translatePaginationNumber: number = 0;
   translatePaginationString: string = '0px';
 
-  selectedCategorie: string = 'Películas'; /*lo que se escribe en el HTML*/
   filter: string = 'Películas';
 
   toSearch: string = '';
-  toSearchPrevius: string = '';
   quantity: number = 0;
-  twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Tv;
   userLocStg: any;
   userJSON: string | null = null;
-
+  // suscripciones
+  onDestroy$: Subject<boolean> = new Subject();
   constructor(private _moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
@@ -66,25 +65,29 @@ export class SeriesComponent implements OnInit {
     }
   }
   getSeries() {
-    this._moviesService.getSeries(this.pageSelected).subscribe({
-      next: (data: PageMoviesSeriesActors) => {
-        this.moviesSeriesApi = data.results;
-        this.totalPages = data.total_pages;
-        this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        this.CountQuantity();
-        this.createNumbersPagesArray();
-        console.log('Request series complete');
-      },
-    });
+    this._moviesService
+      .getType(this.pageSelected, 'Series')
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe({
+        next: (data: PageMoviesSeriesActors) => {
+          this.moviesSeriesApi = data.results;
+          this.totalPages = data.total_pages;
+          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.CountQuantity();
+          this.createNumbersPagesArray();
+          console.log('Request series complete');
+        },
+      });
   }
   getSearchSeries() {
     this._moviesService
-      .getSearchSerie(this.pageSelected, this.toSearch)
+      .getSearchType(this.pageSelected, this.toSearch, 'Series')
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe({
         next: (data: PageMoviesSeriesActors) => {
           this.moviesSeriesApi = data.results;
@@ -151,5 +154,8 @@ export class SeriesComponent implements OnInit {
       this.translatePaginationNumber = this.translatePaginationNumber + 205;
       this.translatePaginationString = `${this.translatePaginationNumber}px`;
     }
+  }
+  ngOnDestroy() {
+    this.onDestroy$.next(true);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { first, lastValueFrom, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import {
   Movie,
   PageMoviesSeriesActors,
@@ -16,6 +16,10 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class MoviesService {
   api_key: string = '0167913abe154169ea9d85e3e8a3e7da';
   baseUrl: string = 'https://api.themoviedb.org/3';
+  headers = new HttpHeaders().set(
+    'Authorization',
+    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMTY3OTEzYWJlMTU0MTY5ZWE5ZDg1ZTNlOGEzZTdkYSIsInN1YiI6IjYyMTU0ZWRhMGU0ZmM4MDA0NDExNjZlMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8-i63xqhXGI5bCPXp0dWpPktcxIJt_CUToTH5Sneyc8'
+  ); //token para la autorización de la API de TMBD version 4
 
   idFilmToShowDetails: number = 0;
   mediaType: MediaType = MediaType.Movie;
@@ -23,90 +27,54 @@ export class MoviesService {
 
   constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
-  getTrending(page: number): Observable<PageMoviesSeriesActors> {
+  getType(page: number, type: string): Observable<PageMoviesSeriesActors> {
+    let subUrl: string = '/trending/all/week';
+    if (type === 'Todos') {
+      subUrl = '/trending/all/week';
+    } else if (type === 'Películas') {
+      subUrl = '/movie/popular';
+    } else if (type === 'Series') {
+      subUrl = '/tv/popular';
+    } else {
+      console.log(
+        'error en la petición en service, type solo puede ser: Todos, Películas o Series'
+      );
+    }
+
     let params = new HttpParams()
-      .set('api_key', this.api_key)
       .set('language', 'es')
       .set('page', page.toString());
 
-    return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/trending/all/week',
-      {
-        params: params,
-      }
-    );
+    return this._http.get<PageMoviesSeriesActors>(this.baseUrl + subUrl, {
+      headers: this.headers,
+      params: params,
+    });
   }
-  getMovies(page: number): Observable<PageMoviesSeriesActors> {
-    let params = new HttpParams()
-      .set('api_key', this.api_key)
-      .set('language', 'es')
-      .set('page', page.toString());
-    return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/movie/popular',
-      {
-        params: params,
-      }
-    );
-  }
-  getSeries(page: number): Observable<PageMoviesSeriesActors> {
-    let params = new HttpParams()
-      .set('api_key', this.api_key)
-      .set('language', 'es')
-      .set('page', page.toString());
-    return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/tv/popular',
-      {
-        params: params,
-      }
-    );
-  }
-  getSearchTrending(
+  getSearchType(
     page: number,
-    toSearch: string
+    toSearch: string,
+    type: string
   ): Observable<PageMoviesSeriesActors> {
+    let subUrl: string = '/search/multi';
+    if (type === 'Todos') {
+      subUrl = '/search/multi';
+    } else if (type === 'Películas') {
+      subUrl = '/search/movie';
+    } else if (type === 'Series') {
+      subUrl = '/search/tv';
+    } else {
+      console.log(
+        'error en la petición de busqueda en service, type solo puede ser Todos, Películas o Series'
+      );
+    }
     let params = new HttpParams()
-      .set('api_key', this.api_key)
-      .set('language', 'es')
-      .set('query', toSearch)
-      .set('page', page.toString());
-
-    return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/search/multi',
-      {
-        params: params,
-      }
-    );
-  }
-  getSearchMovie(
-    page: number,
-    toSearch: string
-  ): Observable<PageMoviesSeriesActors> {
-    let params = new HttpParams()
-      .set('api_key', this.api_key)
       .set('language', 'es')
       .set('query', toSearch)
       .set('page', page.toString())
       .set('include_adult', false);
 
-    return this._http.get<PageMoviesSeriesActors>(
-      this.baseUrl + '/search/movie',
-      {
-        params: params,
-      }
-    );
-  }
-  getSearchSerie(
-    page: number,
-    toSearch: string
-  ): Observable<PageMoviesSeriesActors> {
-    let params = new HttpParams()
-      .set('api_key', this.api_key)
-      .set('language', 'es')
-      .set('page', page.toString())
-      .set('query', toSearch)
-      .set('include_adult', false);
-
-    return this._http.get<PageMoviesSeriesActors>(this.baseUrl + '/search/tv', {
+    return this._http.get<PageMoviesSeriesActors>(this.baseUrl + subUrl, {
+      headers: this.headers,
       params: params,
     });
   }
@@ -120,26 +88,25 @@ export class MoviesService {
   getMediaTypeFilmToShowDetails(): MediaType {
     return this.mediaType;
   }
+
   getMovieById(): Observable<Movie> {
-    let params = new HttpParams()
-      .set('api_key', this.api_key)
-      .set('language', 'es');
+    let params = new HttpParams().set('language', 'es');
 
     return this._http.get<Movie>(
       this.baseUrl + '/movie/' + this.idFilmToShowDetails,
       {
+        headers: this.headers,
         params: params,
       }
     );
   }
   getSerieById(): Observable<Serie> {
-    let params = new HttpParams()
-      .set('api_key', this.api_key)
-      .set('language', 'es');
+    let params = new HttpParams().set('language', 'es');
 
     return this._http.get<Serie>(
       this.baseUrl + '/tv/' + this.idFilmToShowDetails,
       {
+        headers: this.headers,
         params: params,
       }
     );
@@ -166,7 +133,6 @@ export class MoviesService {
       .collection(`${mediaType}`)
       .snapshotChanges();
   }
-
   deleteFromFirestore(
     idUser: string,
     id: string,

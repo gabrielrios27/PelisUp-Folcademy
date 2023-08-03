@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { DarkModeService } from 'src/app/services/user/dark-mode.service';
-
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { MoviesService } from 'src/app/services/user/movies.service';
 import {
   MediaType,
@@ -16,7 +13,7 @@ import {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   moviesSeriesApi: MoviesSeriesActors[] = [];
   moviesSeriesApi_toSearch: MoviesSeriesActors[] = [];
   moviesSeriesApi_toShow: MoviesSeriesActors[] = [];
@@ -33,17 +30,17 @@ export class HomeComponent implements OnInit {
   filter: string = 'Todos';
 
   toSearch: string = '';
-  toSearchPrevius: string = '';
   quantity: number = 0;
-  twoParts: Boolean = false;
 
   mediaType: MediaType = MediaType.Movie;
   userLocStg: any;
   userJSON: string | null = null;
+  // suscripciones
+  onDestroy$: Subject<boolean> = new Subject();
 
   constructor(private _moviesService: MoviesService, private router: Router) {}
   ngOnInit(): void {
-    this.OnClickAll();
+    this.OnClickType('Todos');
     this.getLocalStorage();
     if (this.userLocStg) {
       this.router.navigate(['../dashboard']);
@@ -70,101 +67,30 @@ export class HomeComponent implements OnInit {
       }
     }
   }
-  getTrending() {
-    this._moviesService.getTrending(this.pageSelected).subscribe({
-      next: (data: PageMoviesSeriesActors) => {
-        let MoviesSeriesActorsApi = data.results;
-        this.totalPages = data.total_pages;
-
-        this.moviesSeriesApi = [];
-        for (let film of MoviesSeriesActorsApi) {
-          if (film.media_type !== 'person') {
-            this.moviesSeriesApi.push(film);
-          }
-        }
-        this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        this.CountQuantity();
-        this.createNumbersPagesArray();
-        this.ReWriteAtFilterChange(this.toSearch);
-        console.log('Request trending complete');
-      },
-    });
-  }
-  getMovies() {
-    this._moviesService.getMovies(this.pageSelected).subscribe({
-      next: (data: PageMoviesSeriesActors) => {
-        this.moviesSeriesApi = data.results;
-        this.totalPages = data.total_pages;
-        this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        this.CountQuantity();
-        this.createNumbersPagesArray();
-        this.ReWriteAtFilterChange(this.toSearch);
-        console.log('Request movies complete');
-      },
-    });
-  }
-  getSeries() {
-    this._moviesService.getSeries(this.pageSelected).subscribe({
-      next: (data: PageMoviesSeriesActors) => {
-        this.moviesSeriesApi = data.results;
-        this.totalPages = data.total_pages;
-        this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        this.CountQuantity();
-        this.createNumbersPagesArray();
-        this.ReWriteAtFilterChange(this.toSearch);
-        console.log('Request series complete');
-      },
-    });
-  }
-  getSearchTrending() {
+  getType(type: string) {
     this._moviesService
-      .getSearchTrending(this.pageSelected, this.toSearch)
+      .getType(this.pageSelected, type)
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe({
         next: (data: PageMoviesSeriesActors) => {
-          let MoviesSeriesActorsApi = data.results;
-          this.totalPages = data.total_pages;
-
-          this.moviesSeriesApi = [];
-          for (let film of MoviesSeriesActorsApi) {
-            if (film.media_type !== 'person') {
-              this.moviesSeriesApi.push(film);
+          if (type === 'Todos') {
+            let MoviesSeriesActorsApi = data.results;
+            this.moviesSeriesApi = [];
+            for (let film of MoviesSeriesActorsApi) {
+              if (film.media_type !== 'person') {
+                this.moviesSeriesApi.push(film);
+              }
             }
+          } else if (type === 'Películas' || type === 'Series') {
+            this.moviesSeriesApi = data.results;
+          } else {
+            console.log(
+              'error en la petición en home, type solo puede ser Todos, Películas o Series'
+            );
           }
-          this.moviesSeriesApi_toShow = this.moviesSeriesApi;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete: () => {
-          this.CountQuantity();
-          this.createNumbersPagesArray();
-          console.log('Request trending to search complete');
-        },
-      });
-  }
-  getSearchMovies() {
-    this._moviesService
-      .getSearchMovie(this.pageSelected, this.toSearch)
-      .subscribe({
-        next: (data: PageMoviesSeriesActors) => {
-          this.moviesSeriesApi = data.results;
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(this.moviesSeriesApi_toShow);
         },
         error: (err) => {
           console.log(err);
@@ -172,18 +98,36 @@ export class HomeComponent implements OnInit {
         complete: () => {
           this.CountQuantity();
           this.createNumbersPagesArray();
-          console.log('Request movies to search complete');
+          // this.ReWriteAtFilterChange(this.toSearch);
+          console.log('Request trending complete');
         },
       });
   }
-  getSearchSeries() {
+
+  getSearchType(type: string) {
     this._moviesService
-      .getSearchSerie(this.pageSelected, this.toSearch)
+      .getSearchType(this.pageSelected, this.toSearch, type)
+      .pipe(takeUntil(this.onDestroy$))
       .subscribe({
         next: (data: PageMoviesSeriesActors) => {
-          this.moviesSeriesApi = data.results;
+          if (type === 'Todos') {
+            let MoviesSeriesActorsApi = data.results;
+            this.moviesSeriesApi = [];
+            for (let film of MoviesSeriesActorsApi) {
+              if (film.media_type !== 'person') {
+                this.moviesSeriesApi.push(film);
+              }
+            }
+          } else if (type === 'Películas' || type === 'Series') {
+            this.moviesSeriesApi = data.results;
+          } else {
+            console.log(
+              'error en la petición en home, type solo puede ser Todos, Películas o Series'
+            );
+          }
           this.totalPages = data.total_pages;
           this.moviesSeriesApi_toShow = this.moviesSeriesApi;
+          console.log(this.moviesSeriesApi_toShow);
         },
         error: (err) => {
           console.log(err);
@@ -191,10 +135,11 @@ export class HomeComponent implements OnInit {
         complete: () => {
           this.CountQuantity();
           this.createNumbersPagesArray();
-          console.log('Request series to search complete');
+          console.log(`Request ${type} complete`);
         },
       });
   }
+
   /*para buscar la informacion del input dentro de las cards mostradas en el home*/
   SearchInParent(e: string) {
     /*informacion a buscar, que viene desde el componente searcher*/
@@ -209,80 +154,31 @@ export class HomeComponent implements OnInit {
     /*vacío el arreglo en donde guardaremos las peliculas que coincidan con la busqueda */
     this.moviesSeriesApi_toSearch = [];
     if (e !== '') {
-      if (this.filter == 'Todos') {
-        this.getSearchTrending();
-      }
-      if (this.filter == 'Películas') {
-        this.getSearchMovies();
-      }
-      if (this.filter == 'Series') {
-        this.getSearchSeries();
-      }
+      this.getSearchType(this.filter);
     } else {
       /*si el input de busqueda esta vacio se muestra el arreglo de todas las peliculas*/
-      if (this.filter == 'Todos') {
-        this.getTrending();
-      }
-      if (this.filter == 'Películas') {
-        this.getMovies();
-      }
-      if (this.filter == 'Series') {
-        this.getSeries();
-      }
+      this.getType(this.filter);
     }
     /*se calcula la cantidad de peliculas o series mostradas*/
     this.quantity = this.moviesSeriesApi_toShow.length;
   }
-  ReWriteAtFilterChange(toSearch: string) {
-    let toSearchPart: string = '';
-    for (let i = 0; i < toSearch.length; i++) {
-      toSearchPart = toSearchPart.concat(toSearch[i]);
-      this.SearchInParent(toSearchPart);
-    }
+
+  OnClickType(type: string) {
+    this.filter = type;
+    this.SearchInParent(this.toSearch);
   }
 
-  OnClickAll() {
-    this.getTrending();
-    this.filter = 'Todos';
-  }
-  OnClickMovies() {
-    this.getMovies();
-    this.filter = 'Películas';
-    this.mediaType = MediaType.Movie;
-  }
-  OnClickShows() {
-    this.getSeries();
-    this.filter = 'Series';
-    this.mediaType = MediaType.Tv;
-  }
   /*CountQuantity: se calcula la cantidad de peliculas o series mostradas*/
   CountQuantity() {
     this.quantity = this.moviesSeriesApi_toShow.length;
   }
-  /*TwoPartsSearch: cuando no hay coincidencias con lo escrito en el input entonces este valor(del input,toSearch) se divide en dos desde la ultima coincidencia y se buscan ambas partes en el arreglo de peliculas y series */
 
   onClickPage(page: number) {
     this.pageSelected = page;
     if (this.toSearch == '') {
-      if (this.filter == 'Todos') {
-        this.getTrending();
-      }
-      if (this.filter == 'Películas') {
-        this.getMovies();
-      }
-      if (this.filter == 'Series') {
-        this.getSeries();
-      }
+      this.getType(this.filter);
     } else {
-      if (this.filter == 'Todos') {
-        this.getSearchTrending();
-      }
-      if (this.filter == 'Películas') {
-        this.getSearchMovies();
-      }
-      if (this.filter == 'Series') {
-        this.getSearchSeries();
-      }
+      this.getSearchType(this.filter);
     }
   }
   onClickRightArrowPagination() {
@@ -298,5 +194,8 @@ export class HomeComponent implements OnInit {
       this.translatePaginationNumber = this.translatePaginationNumber + 205;
       this.translatePaginationString = `${this.translatePaginationNumber}px`;
     }
+  }
+  ngOnDestroy() {
+    this.onDestroy$.next(true);
   }
 }
